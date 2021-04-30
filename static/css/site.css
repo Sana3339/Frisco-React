@@ -1,0 +1,11 @@
+.jobcard {
+  border-radius: 1px;
+  border: 1px solid black;
+  width: 12em;
+  height: 5em;
+  margin: 1em;
+  padding: 2em;
+  display: inline-block;
+}
+
+
