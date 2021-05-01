@@ -32,10 +32,10 @@ function DeleteJobBox() {
       method: 'POST',
       body: JSON.stringify(jobID)
     })
-    .then(response = response.json())
+    .then(response => response.json())
     .then(data => {
-      if (data === "Success") {
-        alert("Job deleted")
+      if (data) {
+        alert("Job Deleted");
       }
     });
    }
@@ -115,6 +115,8 @@ function JobsList(props) {
 
   const [jobList, setJobList] = React.useState(["loading..."]);
 
+  
+
   React.useEffect(() => {
     fetch("/api/jobs.json")
     .then(response => response.json())
@@ -144,7 +146,6 @@ function JobsList(props) {
   );
 }
 
-
 function Login(props) {
   return (
     <div>
@@ -156,6 +157,26 @@ function Login(props) {
     </div>
   )
 }
+
+// function JobsListContainer(){
+
+//   const [jobList, setJobList]
+  
+//   function addLastJob(job_id, job_name, company) {
+//     const newJob = {job_id, job_name, company};
+//     const currentJobs = [...jobList];
+//     setJobList([...currentJobs, newJob]);
+//   }
+
+//   return (
+//         <React.Fragment>
+//         <SearchBox />
+//         <DeleteJobBox />
+//         <JobsList />
+//         </React.Fragment>
+//   );
+
+// }
 
 function App() {
   return (
