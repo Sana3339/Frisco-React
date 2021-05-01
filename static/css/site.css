@@ -4,8 +4,12 @@
   width: 12em;
   height: 5em;
   margin: 1em;
-  padding: 2em;
+  padding: 3em;
   display: inline-block;
+}
+
+#search-box{
+  display: block;
 }
 
 

@@ -22,10 +22,12 @@ def show_jobs():
     all_jobs_list = []
 
     for job in jobs:
+        job_id = job.job_id
         job_name = job.job_name
         company = job.company
 
         job_dict = {
+            'job_id': job_id,
             'job_name': job_name,
             'company': company
             }
@@ -35,25 +37,46 @@ def show_jobs():
     return jsonify(all_jobs_list)
 
 
-@app.route("/add-job", methods=["POST"])
+@app.route("/api/add-job", methods=["POST"])
 def add_job():
     """Add a new job to the database."""
 
-    job_name = request.get_json().get("job_name")
-    company = request.get_json().get("company")
+    data = request.get_json(force=True) 
 
-    new_job = Job(job_name=job_name, company=company)
-    db.session.add(new_job)
-    db.session.commit()
+    job_name = data['job_name']
+    company = data['company']
 
-    db.session.refresh(new_job)
-    return {
-        "success": True,
-        "jobAdded": {
-            "Position": new_job.job_name,
-            "Company": new_job.company
-        },
-    }
+    crud.create_job(job_name, company)
+    
+    return jsonify("Success")
+
+@app.route("/api/get-job-id")
+def get_job_id(job_name, company):
+
+    job_id = crud.get_job_id
+
+    return jsonify(job_id)
+
+@app.route("/api/delete-job", methods=["POST"])
+def delete_job():
+    """Delete job from database."""
+
+    job_id = request.get_json(force=True) 
+
+    crud.delete_job(job_id)
+
+    return jsonify("Success")
+
+@app.route("/api/login", methods=["POST"])
+def handle_login():
+
+    data - request.get_json(force=True)
+
+    email = data['email']
+    password = data['password']
+
+    #need to query db to see if user is in db
+
 
 
 if __name__ == '__main__':
