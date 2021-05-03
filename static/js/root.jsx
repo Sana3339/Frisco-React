@@ -26,13 +26,24 @@ function MapView(props){
       const gMap = new window.google.maps.Map(ref.current, options);
       setMap(gMap);
       const addMarkers = () => {
+        const infoWindow = new google.maps.InfoWindow({
+          content: "Hello, Im an info window!"
+          });
+        
         const marker = new window.google.maps.Marker({
           position:{lat:37.7618, lng:-122.4432},
           animation: google.maps.Animation.DROP,
           map:gMap
         });
+
+        marker.addListener("click", () => {
+          infoWindow.open(gMap,marker)
+        });
       }
-      addMarkers();
+        
+        console.log("Marker is adding");
+        addMarkers();
+        
       }
 
       const script = document.createElement("script");
