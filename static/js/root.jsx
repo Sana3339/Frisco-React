@@ -5,13 +5,65 @@ const Prompt = ReactRouterDOM.Prompt;
 const Switch = ReactRouterDOM.Switch;
 const Redirect = ReactRouterDOM.Redirect;
 
+function MapView(){
+  const options = {
+    zoom:12.2,
+    center:{lat:37.7618, lng:-122.4432}
+    };
+  const ref = React.useRef();
+  const [map, setMap] = React.useState("");
+
+  React.useEffect(() => {
+    const onLoad = () => {
+      const gMap = new window.google.maps.Map(ref.current, options);
+      setMap(gMap);
+      }
+
+      const script = document.createElement("script");
+      script.type = "text/javascript";
+      if (script.readyState) {
+        script.onreadystatechange = function() {
+          if (script.readyState === "loaded" || script.readyState === "complete") {
+            script.onreadystatechange = null;
+            onLoad();
+          }
+        };
+      } else {
+        script.onload = () => onLoad();
+      }
+
+      script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyABrkGgdfKYcuUmSE_VZ9cgThiFKHkfYiQ";
+
+      document.getElementsByTagName("head")[0].appendChild(script);
+      console.log("Script is adding")
+    }, []);
+
+    return (
+      <div
+      style={{ height: "60vh", margin: "1em 0", borderRadius: "0.5em" }}
+      {...{ref}}>
+      </div>
+    );
+  }
+
+
 
 function Homepage() {
-  return <div> Welcome to my site </div>
+  return (
+    <React.Fragment>
+      Welcome to my site
+    </React.Fragment>
+  );
+    
 }
 
 function About() {
-  return (<div> A tiny react demo site </div>)
+  return (
+    <React.Fragment>
+      Map
+      <MapView />
+    </React.Fragment>
+  );
 }
 
 function SearchBox() {
