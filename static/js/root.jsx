@@ -5,7 +5,15 @@ const Prompt = ReactRouterDOM.Prompt;
 const Switch = ReactRouterDOM.Switch;
 const Redirect = ReactRouterDOM.Redirect;
 
-function MapView(){
+function Homepage() {
+  return (
+    <React.Fragment>
+      This is the homepage
+    </React.Fragment>
+  );   
+}
+
+function MapView(props){
   const options = {
     zoom:12.2,
     center:{lat:37.7618, lng:-122.4432}
@@ -17,6 +25,14 @@ function MapView(){
     const onLoad = () => {
       const gMap = new window.google.maps.Map(ref.current, options);
       setMap(gMap);
+      const addMarkers = () => {
+        const marker = new window.google.maps.Marker({
+          position:{lat:37.7618, lng:-122.4432},
+          animation: google.maps.Animation.DROP,
+          map:gMap
+        });
+      }
+      addMarkers();
       }
 
       const script = document.createElement("script");
@@ -35,33 +51,28 @@ function MapView(){
       script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyABrkGgdfKYcuUmSE_VZ9cgThiFKHkfYiQ";
 
       document.getElementsByTagName("head")[0].appendChild(script);
-      console.log("Script is adding")
+      console.log("Script is adding");
     }, []);
 
+      
+
     return (
-      <div
-      style={{ height: "60vh", margin: "1em 0", borderRadius: "0.5em" }}
-      {...{ref}}>
-      </div>
+      <React.Fragment>
+        <div
+        style={{ height: "500px", width:"60%" }}
+        {...{ref}}>
+        </div>
+      </React.Fragment>
     );
   }
 
 
+function MapContainer() {
 
-function Homepage() {
-  return (
-    <React.Fragment>
-      Welcome to my site
-    </React.Fragment>
-  );
-    
-}
-
-function About() {
   return (
     <React.Fragment>
       Map
-      <MapView />
+      <MapView  />
     </React.Fragment>
   );
 }
@@ -180,6 +191,7 @@ function JobsList(props) {
       for (const job of data) {
         jobList.unshift(
           <JobListItem 
+            key={job.job_id}
             job_id={job.job_id}
             job_name={job.job_name}
             company={job.company}
@@ -216,12 +228,12 @@ function App() {
     <Router>
       <div>
         <nav>
-          <u1>
+          <ul>
             <li>
               <Link to="/"> Home </Link>
             </li>
             <li>
-              <Link to="/about"> About </Link>
+              <Link to="/map"> Map Container </Link>
             </li>
             <li>
               <Link to="/login"> Login </Link>
@@ -232,22 +244,22 @@ function App() {
             <li>
               <Link to="/add-job"> Add Job </Link>
             </li>
-          </u1>
+          </ul>
         </nav>
         <Switch>
-        <Route path="/login">
+        <Route exact path="/login">
             <Login />
           </Route>
-          <Route path="/about">
-            <About />
+          <Route exact path="/map">
+            <MapContainer />
           </Route>       
-          <Route path="/jobs">
+          <Route exact path="/jobs">
             <JobsList />
           </Route>   
-          <Route path="/add-job">
+          <Route exact path="/add-job">
             <AddJob />
           </Route>   
-          <Route path="/">
+          <Route exact path="/">
             <Homepage />
           </Route>
         </Switch>
