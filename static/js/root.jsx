@@ -5,6 +5,7 @@ const Prompt = ReactRouterDOM.Prompt;
 const Switch = ReactRouterDOM.Switch;
 const Redirect = ReactRouterDOM.Redirect;
 
+
 function Homepage() {
   return <div> Welcome to my site </div>
 }
@@ -41,14 +42,14 @@ function DeleteJobBox() {
    }
   
   return (
-    <form>
+    <form action="/jobs">
         Job ID to Delete:
         <input 
           type="text" 
           onChange={(event) => setjobID(event.target.value)}
           value={jobID}
         />
-        <button type="button" onClick={deleteJob}> Delete </button>
+        <button type="submit" onClick={deleteJob}> Delete </button>
     </form> 
   );
 }
@@ -85,7 +86,7 @@ function AddJob(props) {
   }
 
   return (
-    <form>
+    <form action="/jobs">
       <p>
         Position:
         <input 
@@ -101,7 +102,7 @@ function AddJob(props) {
           onChange={(event) => setCompany(event.target.value)}
           value={company}
         />
-        <button type="button" onClick={addNewJob}> Add Job </button>
+        <button type="submit" onClick={addNewJob}> Add Job </button>
       </p>
     </form>
   )
@@ -125,7 +126,7 @@ function JobsList(props) {
       const jobList = []
       
       for (const job of data) {
-        jobList.push(
+        jobList.unshift(
           <JobListItem 
             job_id={job.job_id}
             job_name={job.job_name}
@@ -157,26 +158,6 @@ function Login(props) {
     </div>
   )
 }
-
-// function JobsListContainer(){
-
-//   const [jobList, setJobList]
-  
-//   function addLastJob(job_id, job_name, company) {
-//     const newJob = {job_id, job_name, company};
-//     const currentJobs = [...jobList];
-//     setJobList([...currentJobs, newJob]);
-//   }
-
-//   return (
-//         <React.Fragment>
-//         <SearchBox />
-//         <DeleteJobBox />
-//         <JobsList />
-//         </React.Fragment>
-//   );
-
-// }
 
 function App() {
   return (

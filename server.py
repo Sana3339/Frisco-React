@@ -9,8 +9,9 @@ app = Flask(__name__)
 app.secret_key = "dev"
 
 
-@app.route("/")
-def root():
+@app.route("/", defaults={"path": ""})
+@app.route("/<path:path>")
+def catch_all(path):
 
     return render_template("root.html")
 
