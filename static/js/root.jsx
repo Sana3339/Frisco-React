@@ -31,10 +31,8 @@ function MapView(props){
 
       for (const neighborhood of data) {
         const markerDetails = {
-          name: neighborhood.name,
           coords: {lat:neighborhood.latitude, lng:neighborhood.longitude},
-          short_desc: neighborhood.short_desc,
-          neighborhood_id: neighborhood.neighborhood_id
+          windowContent: neighborhood.short_desc,
         };
         markerList.push(markerDetails);
        }
@@ -42,54 +40,67 @@ function MapView(props){
       })
   }, []);
 
-    console.log(markerList)
-
-  const markers = [
-    {
-      coords: {lat:37.7389, lng:-122.4152},
-      windowContent: "Hey!"
-    },
-    {
-      coords: {lat:37.7609, lng:-122.435},
-      windowContent: `<div style='float:right'><img src='/static/img/castro1.jpeg' width="120" height="120" vertical-align="middle"></div>
-                      <div style='float:left; height:130px; width:180px;'>
-                      The <b>Castro</b> was one of the first gay neighborhoods in the US.
-                      It's currently among the most prominent symbols of lesbian, gay,
-                      bisexual and transgender (LGBT) activism and events in the world.
-                      <a href="/neighborhood/castro">Click here to learn more.</a>.`
-    }
-  ]
-  
+  // const markers = [
+  //   {
+  //     coords: {lat:37.7389, lng:-122.4152},
+  //     windowContent: "Hey!"
+  //   },
+  //   {
+  //     coords: {lat:37.7609, lng:-122.435},
+  //     windowContent: `<div style='float:right'><img src='/static/img/castro1.jpeg' width="120" height="120" vertical-align="middle"></div>
+  //                     <div style='float:left; height:130px; width:180px;'>
+  //                     The <b>Castro</b> was one of the first gay neighborhoods in the US.
+  //                     It's currently among the most prominent symbols of lesbian, gay,
+  //                     bisexual and transgender (LGBT) activism and events in the world.
+  //                     <a href="/neighborhood/castro">Click here to learn more.</a>.`
+  //   }
+  // ]
 
   React.useEffect(() => {
     const onLoad = () => {
       const gMap = new window.google.maps.Map(ref.current, options);
       setMap(gMap);
 
+      const addMarkers = () => 
+        fetch("/api/neighborhood-details.json")
+        .then(response => response.json())
+        .then((data) => {
+
+        const markerList = [];
+
+        for (const neighborhood of data) {
+          const markerDetails = {
+            coords: {lat:neighborhood.latitude, lng:neighborhood.longitude},
+            windowContent: neighborhood.short_desc,
+          };
+          markerList.push(markerDetails);
+         }
+         setMarkerList(markerList);
       
-      const addMarkers = () => {
-        for (const aMarker of markers) {
+          console.log(markerList);
+          
+          for (const aMarker of markerList) {
 
-        const infoWindow = new google.maps.InfoWindow({
-          content: aMarker.windowContent
-          });
-        
-        const marker = new window.google.maps.Marker({
-          position:aMarker.coords,
-          animation: google.maps.Animation.DROP,
-          map:gMap
-          });
+          const infoWindow = new google.maps.InfoWindow({
+            content: aMarker.windowContent
+            });
+          
+          const marker = new window.google.maps.Marker({
+            position:aMarker.coords,
+            animation: google.maps.Animation.DROP,
+            map:gMap
+            });
 
-        marker.addListener("click", () => {
-          infoWindow.open(gMap,marker)
-          });
-          marker.addListener("dblclick", () => {
-            infoWindow.close(gMap,marker)
-          });
+          marker.addListener("click", () => {
+            infoWindow.open(gMap,marker)
+            });
+            marker.addListener("dblclick", () => {
+              infoWindow.close(gMap,marker)
+            });
         }
-       }
-        addMarkers();
-      }
+      })
+     addMarkers();
+    }
 
       const script = document.createElement("script");
       script.type = "text/javascript";
