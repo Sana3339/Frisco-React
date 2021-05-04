@@ -109,7 +109,37 @@ def get_neighborhood_details():
 
     return jsonify(all_neighborhood_details)
 
+@app.route('/api/neighborhood/<neighborhood_id>')
+def show_neighborhood(neighborhood_id):
+    """Show SF neighborhood details"""
 
+    neighborhood = crud.get_neighborhood_by_id(neighborhood_id)
+
+    name = neighborhood.name
+    long_desc = neighborhood.long_desc
+    median_home_price = neighborhood.median_home_price
+    sq_ft_price = neighborhood.sq_ft_price
+    median_rental = neighborhood.median_rent
+    walk_score = neighborhood.walk_score
+    transit_score = neighborhood.transit_score
+    #neighborhood_images = crud.create_list_of_neighborhood_images(neighborhood_id)
+    
+    #restaurant_data = show_restaurant_details(neighborhood_id)
+
+    neighborhood_obj = {
+        'neighborhood_id': neighborhood_id,
+        'name': name,
+        'long_desc': long_desc,
+        'median_home_price': median_home_price,
+        'sq_ft_price': sq_ft_price,
+        'median_rental': median_rental,
+        'walk_score': walk_score,
+        'transit_score': transit_score
+        #restaurant_data=restaurant_data,
+        #images=neighborhood_images
+    }
+
+    return jsonify(neighborhood_obj)
 
 
 

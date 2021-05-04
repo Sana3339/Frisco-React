@@ -67,6 +67,13 @@ def get_all_neighborhoods():
 
     return neighborhoods
 
+def get_neighborhood_by_id(neighborhood_id):
+    """Provided a neighborhood_id, return the neighborhood object."""
+
+    neighborhood = Neighborhood.query.get(neighborhood_id)
+
+    return neighborhood
+
 
 if __name__ == '__main__':
     from server import app

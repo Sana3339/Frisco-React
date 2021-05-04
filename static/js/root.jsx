@@ -4,6 +4,7 @@ const Link = ReactRouterDOM.Link;
 const Prompt = ReactRouterDOM.Prompt;
 const Switch = ReactRouterDOM.Switch;
 const Redirect = ReactRouterDOM.Redirect;
+const useHistory = ReactRouterDOM.useHistory;
 
 function Homepage() {
   return (
@@ -21,6 +22,7 @@ function MapView(props){
   const ref = React.useRef();
   const [map, setMap] = React.useState("");
   const [markerList, setMarkerList] = React.useState("");
+  let history = useHistory();
 
   React.useEffect(() => {
     fetch("/api/neighborhood-details.json")
@@ -56,14 +58,15 @@ function MapView(props){
           const markerDetails = {
             coords: {lat:neighborhood.latitude, lng:neighborhood.longitude},
             windowContent: neighborhood.short_desc,
+            neighborhood_id: neighborhood.neighborhood_id
           };
           markerList.push(markerDetails);
          }
          setMarkerList(markerList);
-      
-          console.log(markerList);
           
           for (const aMarker of markerList) {
+
+            //console.log(aMarker.neighborhood_id);
 
           const infoWindow = new google.maps.InfoWindow({
             content: aMarker.windowContent
@@ -75,12 +78,16 @@ function MapView(props){
             map:gMap
             });
 
-          marker.addListener("click", () => {
-            infoWindow.open(gMap,marker)
-            });
             marker.addListener("dblclick", () => {
-              infoWindow.close(gMap,marker)
-            });
+              history.push(`/neighborhood/${aMarker.neighborhood_id}`);
+              console.log(aMarker.neighborhood_id);
+            })
+            marker.addListener("click", () => {
+              infoWindow.open(gMap,marker)
+              });
+          //   marker.addListener("dblclick", () => {
+          //     infoWindow.close(gMap,marker)
+          //   });
         }
       })
      addMarkers();
@@ -105,7 +112,7 @@ function MapView(props){
       console.log("Script is adding");
     }, []);
 
-      
+    //const neighborhood_id = "marina";
 
     return (
       <React.Fragment>
@@ -117,6 +124,8 @@ function MapView(props){
     );
   }
 
+  //<Link to={`/neighborhood/${neighborhood_id}`}> Neighborhood Details </Link>
+
 
 function MapContainer() {
 
@@ -127,6 +136,17 @@ function MapContainer() {
     </React.Fragment>
   );
 }
+
+function Neighborhood() {
+  let {neighborhood_id} = ReactRouterDOM.useParams();
+
+  return(
+    <React.Fragment>
+      Neighborhoood component is here {neighborhood_id} 
+    </React.Fragment>
+  );
+}
+
 
 function SearchBox() {
   return (
@@ -275,6 +295,9 @@ function Login(props) {
 }
 
 function App() {
+
+  //const neighborhood_id = "test";
+
   return (
     <Router>
       <div>
@@ -286,6 +309,9 @@ function App() {
             <li>
               <Link to="/map"> Map Container </Link>
             </li>
+            {/* <li>
+              <Link to={`/neighborhood/${neighborhood_id}`}> Neighborhood Details </Link>
+            </li> */}
             <li>
               <Link to="/login"> Login </Link>
             </li>
@@ -298,23 +324,26 @@ function App() {
           </ul>
         </nav>
         <Switch>
-        <Route exact path="/login">
-            <Login />
-          </Route>
-          <Route exact path="/map">
-            <MapContainer />
-          </Route>       
-          <Route exact path="/jobs">
-            <JobsList />
-          </Route>   
-          <Route exact path="/add-job">
-            <AddJob />
-          </Route>   
-          <Route exact path="/">
-            <Homepage />
-          </Route>
-        </Switch>
-      </div>
+          <Route exact path="/login">
+              <Login />
+            </Route>
+            <Route path="/neighborhood/:neighborhood_id">
+              <Neighborhood />
+            </Route>
+            <Route exact path="/map">
+              <MapContainer />
+            </Route>       
+            <Route exact path="/jobs">
+              <JobsList />
+            </Route>   
+            <Route exact path="/add-job">
+              <AddJob />
+            </Route>   
+            <Route exact path="/">
+              <Homepage />
+            </Route>
+          </Switch>
+        </div>
     </Router>
   );
 }
