@@ -5,6 +5,30 @@ from datetime import datetime
 
 db = SQLAlchemy()
 
+class Neighborhood(db.Model):
+    """A neighborhood."""
+
+    __tablename__='neighborhoods'
+
+    neighborhood_id = db.Column(db.String, primary_key=True)
+    name = db.Column(db.String, nullable=False, unique=True)
+    latitude = db.Column(db.Float, nullable=False, unique=True)
+    longitude = db.Column(db.Float, nullable=False, unique=True)
+    short_desc = db.Column(db.Text, nullable=False)
+    long_desc = db.Column(db.Text, nullable=False)
+    median_rent = db.Column(db.Integer, nullable=False)
+    median_home_price = db.Column(db.Integer, nullable=False)
+    sq_ft_price = db.Column(db.Integer, nullable=True)
+    walk_score = db.Column(db.Integer, nullable=True)
+    transit_score = db.Column(db.Integer, nullable=True)
+    images = db.Column(db.Text, nullable=True)
+
+    def __repr__(self):
+
+        return f'<id={self.neighborhood_id} name={self.name}>'
+
+
+
 class Job(db.Model):
     """A job application."""
 

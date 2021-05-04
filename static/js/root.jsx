@@ -20,12 +20,31 @@ function MapView(props){
     };
   const ref = React.useRef();
   const [map, setMap] = React.useState("");
+  const [markerList, setMarkerList] = React.useState("");
+
+  React.useEffect(() => {
+    fetch("/api/neighborhood-details.json")
+    .then(response => response.json())
+    .then((data) => {
+
+      const markerList = [];
+
+      for (const neighborhood of data) {
+        const markerDetails = {
+          name: neighborhood.name,
+          coords: {lat:neighborhood.latitude, lng:neighborhood.longitude},
+          short_desc: neighborhood.short_desc,
+          neighborhood_id: neighborhood.neighborhood_id
+        };
+        markerList.push(markerDetails);
+       }
+       setMarkerList(markerList)
+      })
+  }, []);
+
+    console.log(markerList)
 
   const markers = [
-    {
-      coords: {lat:37.7618, lng:-122.4432},
-      windowContent: "Hello!"
-    },
     {
       coords: {lat:37.7389, lng:-122.4152},
       windowContent: "Hey!"
@@ -48,7 +67,6 @@ function MapView(props){
       setMap(gMap);
 
       
-      
       const addMarkers = () => {
         for (const aMarker of markers) {
 
@@ -69,11 +87,8 @@ function MapView(props){
             infoWindow.close(gMap,marker)
           });
         }
-      }
-        
-        console.log("Marker is adding");
+       }
         addMarkers();
-        
       }
 
       const script = document.createElement("script");
