@@ -40,22 +40,6 @@ function MapView(props){
       })
   }, []);
 
-  // const markers = [
-  //   {
-  //     coords: {lat:37.7389, lng:-122.4152},
-  //     windowContent: "Hey!"
-  //   },
-  //   {
-  //     coords: {lat:37.7609, lng:-122.435},
-  //     windowContent: `<div style='float:right'><img src='/static/img/castro1.jpeg' width="120" height="120" vertical-align="middle"></div>
-  //                     <div style='float:left; height:130px; width:180px;'>
-  //                     The <b>Castro</b> was one of the first gay neighborhoods in the US.
-  //                     It's currently among the most prominent symbols of lesbian, gay,
-  //                     bisexual and transgender (LGBT) activism and events in the world.
-  //                     <a href="/neighborhood/castro">Click here to learn more.</a>.`
-  //   }
-  // ]
-
   React.useEffect(() => {
     const onLoad = () => {
       const gMap = new window.google.maps.Map(ref.current, options);
