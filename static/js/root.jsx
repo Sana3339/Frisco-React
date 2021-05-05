@@ -138,28 +138,41 @@ function MapContainer() {
 }
 
 function Neighborhood() {
+  const [name, setName] = React.useState("");
   const [desc, setDesc] = React.useState('');
+  const [medianHomePrice, setMedianHomePrice] = React.useState();
+  const [medianRental, setMedianRental] = React.useState();
+  const [sqFtPrice, setSqFtPrice] = React.useState();
+  const [walkScore, setWalkScore] = React.useState();
+  const [transitScore, setTransitScore] = React.useState();
   let {neighborhood_id} = ReactRouterDOM.useParams();
 
 
-  let testDesc = "Beautiful neighborhood";
   React.useEffect(() => {
-    fetch("/api/neighborhood/marina")
+    fetch(`/api/neighborhood/${neighborhood_id}`)
     .then(response => response.json())
     .then((data) => {
-        const long_desc = data.long_desc
-        setDesc(long_desc);
+        setName(data.name);
+        setDesc(data.long_desc);
+        setMedianHomePrice(data.median_home_price);
+        setMedianRental(data.median_rental);
+        setSqFtPrice(data.sq_ft_price);
+        setTransitScore(data.transit_score);
+        setWalkScore(data.walk_score);
     });
   }, [])
-
-    console.log("Desc is:", desc);
 
 
   return(
     <React.Fragment>
-      Neighborhoood component is here: {neighborhood_id}
+      <p><b>{name}</b></p>
       <p>{desc} </p>
-      
+      <p>Median Home Price: ${medianHomePrice}</p>
+      <p>Median Rental Price: ${medianRental}</p>
+      <p>Sq Ft Price: ${sqFtPrice}</p>
+      <p>Transit Score: {transitScore}</p>
+      <p>Walk Score: {walkScore}</p>
+    
     </React.Fragment>
   );
 }
