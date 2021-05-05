@@ -177,13 +177,45 @@ function Neighborhood() {
   );
 }
 
+function RestaurantListItem(props) {
+  return(
+    <div className="restaurant-list">
+      <p><b>{props.name}</b></p>
+      <p>Address: {props.address}</p>
+      <p>Rating: {props.rating}</p>
+    </div>
+  );
+}
+
 function Restaurants(props) {
 
-  console.log("I'm the neighborhood id from inside Restaurant component", props.neighborhood_id);
+  const [restaurantList, setRestaurantList] = React.useState([" loading..."]);
+
+  React.useEffect(() => {
+    fetch(`/api/restaurants/${props.neighborhood_id}`)
+    .then(response => response.json())
+    .then((data) => {
+        const restaurantFetchList = []
+
+        for (const restaurant of data) {
+          console.log(restaurant.name);
+          restaurantFetchList.push(
+            <RestaurantListItem
+              key={restaurant.place_id}
+              name={restaurant.name}
+              address={restaurant.address}
+              rating={restaurant.rating}
+            />
+          );
+        }
+        setRestaurantList(restaurantFetchList);
+    })
+  }, [])
 
   return(
     <React.Fragment>
-        I'm a list of restaurants
+      Restaurants
+        {restaurantList}
     </React.Fragment>
   );
 }

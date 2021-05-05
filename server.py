@@ -127,7 +127,7 @@ def show_neighborhood(neighborhood_id):
     transit_score = neighborhood.transit_score
     #neighborhood_images = crud.create_list_of_neighborhood_images(neighborhood_id)
     
-    restaurant_data = show_restaurant_details(neighborhood_id)
+    #restaurant_data = show_restaurant_details(neighborhood_id)
 
     neighborhood_obj = {
         'neighborhood_id': neighborhood_id,
@@ -138,7 +138,7 @@ def show_neighborhood(neighborhood_id):
         'median_rental': median_rental,
         'walk_score': walk_score,
         'transit_score': transit_score,
-        'restaurant_data':restaurant_data,
+        #'restaurant_data':restaurant_data,
         #images=neighborhood_images
     }
 
@@ -169,11 +169,13 @@ def show_restaurant_details(neighborhood_id):
             name = data[i]['name']
             address = data[i]['formatted_address']
             rating = data[i]['rating']
+            place_id = data[i]['place_id']
 
             rest_dict = {
                 'name': name,
                 'address': address,
-                'rating': rating
+                'rating': rating,
+                'place_id': place_id
             }
 
             restaurant_list.append(rest_dict)
@@ -192,7 +194,7 @@ def show_restaurant_details(neighborhood_id):
     # #     website = get_restaurant_website(place_id)
     # #     limited_data[i]["website"] = website
 
-    return restaurant_list
+    return jsonify(restaurant_list)
 
 
 if __name__ == '__main__':
