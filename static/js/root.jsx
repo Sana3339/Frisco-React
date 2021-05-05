@@ -17,7 +17,7 @@ function Homepage() {
 function MapView(props){
   const options = {
     zoom:12.2,
-    center:{lat:37.7618, lng:-122.4432}
+    center:{lat:37.7822, lng:-122.4342}
     };
   const ref = React.useRef();
   const [map, setMap] = React.useState("");
@@ -131,18 +131,35 @@ function MapContainer() {
 
   return (
     <React.Fragment>
-      Map
+      Click on a marker to learn more about the neighborhood
       <MapView  />
     </React.Fragment>
   );
 }
 
 function Neighborhood() {
+  const [desc, setDesc] = React.useState('');
   let {neighborhood_id} = ReactRouterDOM.useParams();
+
+
+  let testDesc = "Beautiful neighborhood";
+  React.useEffect(() => {
+    fetch("/api/neighborhood/marina")
+    .then(response => response.json())
+    .then((data) => {
+        const long_desc = data.long_desc
+        setDesc(long_desc);
+    });
+  }, [])
+
+    console.log("Desc is:", desc);
+
 
   return(
     <React.Fragment>
-      Neighborhoood component is here {neighborhood_id} 
+      Neighborhoood component is here: {neighborhood_id}
+      <p>{desc} </p>
+      
     </React.Fragment>
   );
 }
