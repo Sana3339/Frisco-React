@@ -170,13 +170,23 @@ function Neighborhood() {
       <p>Median Home Price: ${medianHomePrice}</p>
       <p>Median Rental Price: ${medianRental}</p>
       <p>Sq Ft Price: ${sqFtPrice}</p>
-      <p>Transit Score: {transitScore}</p>
       <p>Walk Score: {walkScore}</p>
-    
+      <p>Transit Score: {transitScore}</p>
+      <Restaurants neighborhood_id={neighborhood_id} />
     </React.Fragment>
   );
 }
 
+function Restaurants(props) {
+
+  console.log("I'm the neighborhood id from inside Restaurant component", props.neighborhood_id);
+
+  return(
+    <React.Fragment>
+        I'm a list of restaurants
+    </React.Fragment>
+  );
+}
 
 function SearchBox() {
   return (

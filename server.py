@@ -1,4 +1,5 @@
 from flask import (Flask, render_template, request, flash, session, redirect, jsonify)
+import requests
 from model import connect_to_db
 from datetime import datetime
 import os
@@ -7,6 +8,8 @@ import json
 
 app = Flask(__name__)
 app.secret_key = "dev"
+
+GOOG_API_KEY = os.environ['GOOGLE_API_KEY']
 
 
 @app.route("/", defaults={"path": ""})
@@ -124,7 +127,7 @@ def show_neighborhood(neighborhood_id):
     transit_score = neighborhood.transit_score
     #neighborhood_images = crud.create_list_of_neighborhood_images(neighborhood_id)
     
-    #restaurant_data = show_restaurant_details(neighborhood_id)
+    restaurant_data = show_restaurant_details(neighborhood_id)
 
     neighborhood_obj = {
         'neighborhood_id': neighborhood_id,
@@ -134,13 +137,62 @@ def show_neighborhood(neighborhood_id):
         'sq_ft_price': sq_ft_price,
         'median_rental': median_rental,
         'walk_score': walk_score,
-        'transit_score': transit_score
-        #restaurant_data=restaurant_data,
+        'transit_score': transit_score,
+        'restaurant_data':restaurant_data,
         #images=neighborhood_images
     }
 
     return jsonify(neighborhood_obj)
 
+@app.route('/api/restaurants/<neighborhood_id>')
+def show_restaurant_details(neighborhood_id):
+    """Show a list of restaurants for a given neighborhood_id"""
+
+    neighborhood = crud.get_neighborhood_by_id(neighborhood_id)
+    neighborhood_name = neighborhood.name
+
+    payload = {"query": f"restaurants in {neighborhood_name} in San Francisco",
+                "key": GOOG_API_KEY}
+
+    res = requests.get('https://maps.googleapis.com/maps/api/place/textsearch/json', params=payload)
+
+    search_results = res.json()
+    data = search_results["results"]
+
+    restaurant_list = []
+
+
+    for i, restaurant in enumerate(data):
+        if i < 5:
+            rest_dict = {}
+            
+            name = data[i]['name']
+            address = data[i]['formatted_address']
+            rating = data[i]['rating']
+
+            rest_dict = {
+                'name': name,
+                'address': address,
+                'rating': rating
+            }
+
+            restaurant_list.append(rest_dict)
+        
+
+    #I'm creating an empty list to limit the API search results to 5. 
+    #This limitation allows us to do a separate API call and add the website to our search results
+    #If you don't limit it, you will get a 'key error' for the 'website' field and the page won't load
+    # limited_data = []
+
+    # for i in range(5):
+    #     limited_data.append(data[i])    
+    
+    # # for i in range(5):
+    # #     place_id = search_results["results"][i].get("place_id")
+    # #     website = get_restaurant_website(place_id)
+    # #     limited_data[i]["website"] = website
+
+    return restaurant_list
 
 
 if __name__ == '__main__':
