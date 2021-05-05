@@ -460,3 +460,45 @@ for neighborhood in neighborhoods:
     crud.create_neighborhood(neighborhood_id, name, latitude, longitude, 
         short_desc, long_desc, median_rent, median_home_price, sq_ft_price, walk_score, transit_score, images)
                                        
+
+#Create fake users with which to seed the db
+
+for n in range(10):
+    email = f'user{n}@test.com' 
+    password = 'test'
+
+    crud.create_user(email, password)
+
+
+#Create fake postings with which to seed the db
+
+postings = [
+    {
+    'neighborhood_id': 'marina',
+    'user_email': 'user1@test.com',
+    'date': datetime.now(),
+    'title': 'Beautiful room by the Palace of Fine Arts',
+    'desc': 'Gorgeous panoramic views.  Youll be living in a house with 2 other girls.',
+    'contact_info': 'Call 415-222-3333'
+    },
+    {
+    'neighborhood_id': 'mission',
+    'user_email': 'user2@test.com',
+    'date': datetime.now(),
+    'title': 'Room available immediately in 2b/2b',
+    'desc': 'Great location right by Valencia street with lots of restaurants',
+    'contact_info': 'Email user2@test.com',
+    }
+]
+
+for posting in postings:
+
+    neighborhood_id = posting['neighborhood_id']
+    user_email = posting['user_email']
+    date = posting['date']
+    title = posting['title']
+    desc = posting['desc']
+    contact_info = posting['contact_info']
+
+    crud.create_posting(neighborhood_id, user_email, date, title, desc, contact_info)
+

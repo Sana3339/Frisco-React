@@ -173,12 +173,13 @@ function Neighborhood() {
       <p>Walk Score: {walkScore}</p>
       <p>Transit Score: {transitScore}</p>
       <Restaurants neighborhood_id={neighborhood_id} />
+      <p><Link to={`/housing/${neighborhood_id}`}> Find {name} housing </Link></p>
+      
     </React.Fragment>
   );
 }
 
 function RestaurantListItem(props) {
-  
 
   return(
     <div className="restaurant-list">
@@ -201,7 +202,6 @@ function Restaurants(props) {
         const restaurantFetchList = []
 
         for (const restaurant of data) {
-          console.log(restaurant.name);
           restaurantFetchList.push(
             <RestaurantListItem
               key={restaurant.place_id}
@@ -220,6 +220,51 @@ function Restaurants(props) {
     <React.Fragment>
       Restaurants
         {restaurantList}
+    </React.Fragment>
+  );
+}
+
+function FindHousing(props) {
+
+  let {neighborhood_id} = ReactRouterDOM.useParams();
+  const [postList, setPostList] = React.useState(["loading..."]);
+
+  React.useEffect(() => {
+    fetch(`/api/housing/${neighborhood_id}`)
+      .then(response => response.json())
+      .then((data) => {
+        const postFetchList = []
+
+        for (const posting of data) {
+          postFetchList.push(
+            <PostListItem
+              key={posting.posting_id}
+              date={posting.date}
+              title={posting.title}
+              desc={posting.desc}
+              contact_info={posting.contact_info}
+            />
+           );
+          }
+        setPostList(postFetchList);
+      })
+  }, [])
+
+  return(
+    <React.Fragment>
+      {postList}
+    </React.Fragment>
+  );
+}
+
+function PostListItem(props){
+
+  return(
+    <React.Fragment>
+      <p>{props.date}</p>
+      <p>{props.title}</p>
+      <p>{props.desc}</p>
+      <p>{props.contact_info}</p>     
     </React.Fragment>
   );
 }
@@ -372,8 +417,6 @@ function Login(props) {
 
 function App() {
 
-  //const neighborhood_id = "test";
-
   return (
     <Router>
       <div>
@@ -385,9 +428,6 @@ function App() {
             <li>
               <Link to="/map"> Map Container </Link>
             </li>
-            {/* <li>
-              <Link to={`/neighborhood/${neighborhood_id}`}> Neighborhood Details </Link>
-            </li> */}
             <li>
               <Link to="/login"> Login </Link>
             </li>
@@ -405,6 +445,9 @@ function App() {
             </Route>
             <Route path="/neighborhood/:neighborhood_id">
               <Neighborhood />
+            </Route>
+            <Route path="/housing/:neighborhood_id">
+              <FindHousing />
             </Route>
             <Route exact path="/map">
               <MapContainer />

@@ -27,6 +27,38 @@ class Neighborhood(db.Model):
 
         return f'<id={self.neighborhood_id} name={self.name}>'
 
+class Posting(db.Model):
+    """A posting for housing available in a neighborhood."""
+
+    __tablename__ = 'postings'
+
+    posting_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    neighborhood_id = db.Column(db.String, db.ForeignKey('neighborhoods.neighborhood_id'))
+    user_email = db.Column(db.String, db.ForeignKey('users.email'))
+    date = db.Column(db.DateTime, nullable=False)
+    title = db.Column(db.Text, nullable=False)
+    desc = db.Column(db.Text, nullable=False)
+    contact_info = db.Column(db.Text, nullable=False)
+
+    neighborhood = db.relationship( 'Neighborhood', backref='postings')
+    user = db.relationship('User', backref='postings')
+
+    def __repr__(self):
+
+        return f'<id={self.posting_id} title={self.title}, backref={self.neighborhood_id} user={self.user_email}>'
+
+
+class User(db.Model):
+    """A user."""
+
+    __tablename__ = 'users'
+
+    email = db.Column(db.String, primary_key=True, nullable=False)
+    password = db.Column(db.String, nullable=False)
+
+    def __repr__(self):
+
+        return f'<email={self.email} password={self.password}>'
 
 
 class Job(db.Model):

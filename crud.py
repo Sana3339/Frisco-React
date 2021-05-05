@@ -1,6 +1,6 @@
 """CRUD operations."""
 
-from model import db, connect_to_db, Job, Neighborhood
+from model import db, connect_to_db, Job, Neighborhood, Posting, User
 
 def create_job(job_name, company):
     """Create a job application"""
@@ -73,6 +73,33 @@ def get_neighborhood_by_id(neighborhood_id):
     neighborhood = Neighborhood.query.get(neighborhood_id)
 
     return neighborhood
+
+def create_posting(neighborhood_id, email, date, title, desc, contact_info):
+    
+    posting = Posting(neighborhood_id=neighborhood_id,
+                        user_email=email,
+                        date=date,
+                        title=title,
+                        desc=desc,
+                        contact_info=contact_info,
+                        )
+
+    db.session.add(posting)
+    db.session.commit()
+
+def create_user(email, password):
+    """Create a new user in the database."""
+
+    user = User(email=email, password=password)
+
+    db.session.add(user)
+    db.session.commit()
+
+def get_postings(neighborhood_id):
+
+    postings = Posting.query.filter_by(neighborhood_id=neighborhood_id).all()
+    
+    return postings
 
 
 if __name__ == '__main__':
