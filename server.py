@@ -144,6 +144,25 @@ def show_neighborhood(neighborhood_id):
 
     return jsonify(neighborhood_obj)
 
+@app.route('/api/website.json/<place_id>')
+def get_restaurant_website(place_id):
+    """Send restaurant id to Google Places Search API to get restaurant website link."""
+    
+    payload = {"key": GOOG_API_KEY,
+                "place_id": place_id,
+                "fields": "website" }
+
+    res = requests.get('https://maps.googleapis.com/maps/api/place/details/json', params=payload)
+
+    converted_res = res.json()
+    result = converted_res["result"]
+    if result.get('website')!=None:
+        website = converted_res["result"]["website"]
+    else:
+        website = ""
+    
+    return website
+
 @app.route('/api/restaurants/<neighborhood_id>')
 def show_restaurant_details(neighborhood_id):
     """Show a list of restaurants for a given neighborhood_id"""
@@ -170,11 +189,13 @@ def show_restaurant_details(neighborhood_id):
             address = data[i]['formatted_address']
             rating = data[i]['rating']
             place_id = data[i]['place_id']
+            website = get_restaurant_website(place_id)
 
             rest_dict = {
                 'name': name,
                 'address': address,
                 'rating': rating,
+                'website': website,
                 'place_id': place_id
             }
 

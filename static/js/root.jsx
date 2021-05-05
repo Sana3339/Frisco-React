@@ -178,11 +178,14 @@ function Neighborhood() {
 }
 
 function RestaurantListItem(props) {
+  
+
   return(
     <div className="restaurant-list">
       <p><b>{props.name}</b></p>
       <p>Address: {props.address}</p>
       <p>Rating: {props.rating}</p>
+      <a href={props.website}>Website</a>
     </div>
   );
 }
@@ -205,6 +208,7 @@ function Restaurants(props) {
               name={restaurant.name}
               address={restaurant.address}
               rating={restaurant.rating}
+              website={restaurant.website}
             />
           );
         }
