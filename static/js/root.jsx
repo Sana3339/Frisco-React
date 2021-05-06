@@ -374,7 +374,7 @@ function JobsList(props) {
   
 
   React.useEffect(() => {
-    fetch("/api/jobs.json")
+    fetch('/api/jobs.json')
     .then(response => response.json())
     .then((data) => {
       
@@ -403,19 +403,179 @@ function JobsList(props) {
   );
 }
 
+function CreateUser() {
+
+  let history = useHistory();
+
+  const[email, setEmail] = React.useState('');
+  const[password, setPassword] = React.useState('');
+
+  const createNewUser = () => {
+    const user = {'email': email, 'password': password}
+    fetch('/api/create-user', {
+      method: 'POST',
+      body: JSON.stringify(user),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.message === "Error - user already exists. Please log in.") {
+        alert(data.message);
+        history.push('/login');
+      } else {
+        alert(data.message);
+        localStorage.setItem('logged_in_user', data.email);
+        history.push('/profile');
+      }
+    })
+  }
+
+  return(
+    <React.Fragment>
+      Create Account
+      <form>
+        <p>
+          Email:
+          <input
+            type="text"
+            onChange={(event) => setEmail(event.target.value)}
+            value={email}
+          />
+        </p>
+        <p>
+          Password:
+          <input
+            type="text"
+            onChange={(event) => setPassword(event.target.value)}
+            value={password}
+          />
+          <button type="button" onClick={createNewUser}>Submit</button>
+        </p>
+      </form>
+    </React.Fragment>
+  );
+}
+
 function Login(props) {
+
+  let history = useHistory();
+
+  const [email,setEmail] = React.useState();
+  const [password,setPassword] = React.useState();
+
+  const loginUser = () => {
+    const user = {'email': email, 'password': password}
+    fetch("/api/handle-login", {
+      method: 'POST',
+      body: JSON.stringify(user),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.message === "No account exists for that email. Please create an account.") {
+        alert(data.message);
+        history.push('/create-user');
+      } else if (data.message === "Incorrect password.") {
+          alert(data.message);
+          history.push('/login')
+      } else if (data.message === "You are now logged in.") {
+          alert(data.message);
+          localStorage.setItem('logged_in_user', data.email);
+          history.push('/profile')
+        }
+      }
+    )
+  }
+
   return (
-    <div>
-      Username:
-      <input type="text"></input>
+    <React.Fragment>
+      Login
+    <form>
+      <p>
+      Email:
+      <input 
+        type="text"
+        onChange={(event) => setEmail(event.target.value)}
+        value={email}
+        />
+      </p>
+      <p>
       Password:
-      <input type="text"></input>
-      <button> Login </button> 
-    </div>
-  )
+      <input 
+        type="text"
+        onChange={(event) => setPassword(event.target.value)}
+        value={password}
+        />
+        <button type="button" onClick={loginUser}> Login </button> 
+      </p>
+    </form>
+    </React.Fragment>
+  );
+}
+
+function UserProfile() {
+
+  let history = useHistory();
+  const [postList, setPostList] = React.useState(["loading..."]);
+
+  const email = localStorage.getItem('logged_in_user')
+  console.log(email);
+
+  React.useEffect(() => { 
+    fetch('/api/get-user-postings', {
+      method: 'POST',
+      body: JSON.stringify(email),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then((data) => {
+      const postFetchList = []
+
+        for (const posting of data) {
+          postFetchList.push(
+            <PostListItem
+              key={posting.posting_id}
+              date={posting.date}
+              title={posting.title}
+              desc={posting.desc}
+              contact_info={posting.contact_info}
+            />
+           );
+          }
+       setPostList(postFetchList);   
+     })
+    }, []);
+
+  const handleLogout = () => {
+    if (!localStorage.getItem('logged_in_user')) {
+      alert("User isn't logged in");
+      history.push("/");
+    } else {
+        localStorage.removeItem('logged_in_user');
+        alert("Log out successful.");
+        history.push("/");
+      }
+    }
+
+  return (
+    <React.Fragment>
+      <button type="button" onClick={handleLogout}> Logout </button>
+       {postList}
+    </React.Fragment>
+  );
 }
 
 function App() {
+
+  let history = useHistory();
+
+  
 
   return (
     <Router>
@@ -432,6 +592,12 @@ function App() {
               <Link to="/login"> Login </Link>
             </li>
             <li>
+              <Link to="/create-user"> Create Account </Link>
+            </li>
+            <li>
+              <Link to="/profile"> Profile </Link>
+            </li>
+            <li>
               <Link to="/jobs"> Jobs </Link>
             </li>
             <li>
@@ -443,11 +609,17 @@ function App() {
           <Route exact path="/login">
               <Login />
             </Route>
+            <Route exact path="/create-user">
+              <CreateUser />
+            </Route>
             <Route path="/neighborhood/:neighborhood_id">
               <Neighborhood />
             </Route>
             <Route path="/housing/:neighborhood_id">
               <FindHousing />
+            </Route>
+            <Route path="/profile">
+              <UserProfile />
             </Route>
             <Route exact path="/map">
               <MapContainer />

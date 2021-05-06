@@ -238,6 +238,68 @@ def show_housing_posts(neighborhood_id):
 
     return jsonify(posting_list)
 
+@app.route('/api/create-user',methods=["POST"])
+def create_user():
+    """Create a new user."""
+
+    data = request.get_json()
+
+    email = data.get('email')
+    password = data.get('password')
+
+    user = crud.get_user_by_email(email)
+
+    if user != None:
+        return jsonify ({'message': "Error - user already exists. Please log in."})
+
+    else:
+        new_user = crud.create_user(email, password)
+
+        return jsonify({'message': "Account created. You are logged in."})
+
+@app.route('/api/handle-login', methods=["POST"])
+def login_user():
+    """Check if login credentials are correct, and if so, log in user."""
+
+    data = request.get_json()
+
+    email = data.get('email')
+    password = data.get('password')
+
+    user = crud.get_user_by_email(email)
+
+    if user == None:
+        return jsonify({'message': "No account exists for that email. Please create an account."})
+
+    if user != None:
+        if user.password != password:
+            return jsonify({'message': "Incorrect password."})
+        else:
+            return jsonify({'message': "You are now logged in.",
+                            'email': email})
+
+   
+@app.route('/api/get-user-postings', methods=["POST"])
+def get_user_postings():
+
+    email = request.get_json()
+
+    postings = crud.get_postings_by_user(email)
+
+    posting_list = []
+
+    for posting in postings:
+        post_dict = {
+            'date': posting.date,
+            'title': posting.title,
+            'desc': posting.desc,
+            'contact_info': posting.contact_info,
+            'posting_id': posting.posting_id
+        }
+
+        posting_list.append(post_dict)
+
+    return jsonify(posting_list)
 
 if __name__ == '__main__':
     connect_to_db(app)

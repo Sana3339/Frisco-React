@@ -101,6 +101,14 @@ def get_postings(neighborhood_id):
     
     return postings
 
+def get_user_by_email(email):
+
+    return User.query.filter(User.email == email).first()
+
+def get_postings_by_user(email):
+
+    return Posting.query.filter(Posting.user_email == email).all()
+
 
 if __name__ == '__main__':
     from server import app
