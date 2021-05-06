@@ -14,7 +14,7 @@ function Homepage() {
   );   
 }
 
-function MapView(props){
+function MapView(){
   const options = {
     zoom:12.2,
     center:{lat:37.7822, lng:-122.4342}
@@ -116,6 +116,7 @@ function MapView(props){
 
     return (
       <React.Fragment>
+        Click on a marker to learn more about the neighborhood
         <div
         style={{ height: "500px", width:"60%" }}
         {...{ref}}>
@@ -127,14 +128,108 @@ function MapView(props){
   //<Link to={`/neighborhood/${neighborhood_id}`}> Neighborhood Details </Link>
 
 
-function MapContainer() {
+function MapHousing() {
+  const options = {
+    zoom:12.2,
+    center:{lat:37.7822, lng:-122.4342}
+    };
+  const ref = React.useRef();
+  const [map, setMap] = React.useState("");
+  const [markerList, setMarkerList] = React.useState("");
+  let history = useHistory();
+
+  React.useEffect(() => {
+    fetch("/api/neighborhood-details.json")
+    .then(response => response.json())
+    .then((data) => {
+
+      const markerList = [];
+
+      for (const neighborhood of data) {
+        const markerDetails = {
+          coords: {lat:neighborhood.latitude, lng:neighborhood.longitude},
+          windowContent: neighborhood.name,
+        };
+        markerList.push(markerDetails);
+       }
+       setMarkerList(markerList)
+      })
+  }, []);
+
+  React.useEffect(() => {
+    const onLoad = () => {
+      const gMap = new window.google.maps.Map(ref.current, options);
+      setMap(gMap);
+
+      const addMarkers = () => 
+        fetch("/api/neighborhood-details.json")
+        .then(response => response.json())
+        .then((data) => {
+
+        const markerList = [];
+
+        for (const neighborhood of data) {
+          const markerDetails = {
+            coords: {lat:neighborhood.latitude, lng:neighborhood.longitude},
+            windowContent: neighborhood.name,
+            neighborhood_id: neighborhood.neighborhood_id
+          };
+          markerList.push(markerDetails);
+         }
+         setMarkerList(markerList);
+          
+          for (const aMarker of markerList) {
+
+          const infoWindow = new google.maps.InfoWindow({
+            content: aMarker.windowContent
+            });
+          
+          const marker = new window.google.maps.Marker({
+            position:aMarker.coords,
+            animation: google.maps.Animation.DROP,
+            map:gMap
+            });
+
+            marker.addListener("click", () => {
+              history.push(`/post/${aMarker.neighborhood_id}`);
+              console.log(aMarker.neighborhood_id);
+            })
+            marker.addListener("mouseover", () => {
+              infoWindow.open(gMap,marker)
+              });
+        }
+      })
+     addMarkers();
+    }
+
+      const script = document.createElement("script");
+      script.type = "text/javascript";
+      if (script.readyState) {
+        script.onreadystatechange = function() {
+          if (script.readyState === "loaded" || script.readyState === "complete") {
+            script.onreadystatechange = null;
+            onLoad();
+          }
+        };
+      } else {
+        script.onload = () => onLoad();
+      }
+
+      script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyABrkGgdfKYcuUmSE_VZ9cgThiFKHkfYiQ";
+
+      document.getElementsByTagName("head")[0].appendChild(script);
+      console.log("Script is adding");
+    }, []);
 
   return (
     <React.Fragment>
-      Click on a marker to learn more about the neighborhood
-      <MapView  />
-    </React.Fragment>
-  );
+    Click on a marker closest to the housing you'd like to post
+      <div
+      style={{ height: "500px", width:"60%" }}
+      {...{ref}}>
+    </div>
+  </React.Fragment>
+);
 }
 
 function Neighborhood() {
@@ -253,6 +348,17 @@ function FindHousing(props) {
   return(
     <React.Fragment>
       {postList}
+    </React.Fragment>
+  );
+}
+
+function PostHousing() {
+
+  let {neighborhood_id} = ReactRouterDOM.useParams();
+
+  return (
+    <React.Fragment>
+      Housing will be posted here for {neighborhood_id}
     </React.Fragment>
   );
 }
@@ -447,7 +553,7 @@ function CreateUser() {
         <p>
           Password:
           <input
-            type="text"
+            type="password"
             onChange={(event) => setPassword(event.target.value)}
             value={password}
           />
@@ -500,15 +606,15 @@ function Login(props) {
       <input 
         type="text"
         onChange={(event) => setEmail(event.target.value)}
-        value={email}
+        value={email || ''}
         />
       </p>
       <p>
       Password:
       <input 
-        type="text"
+        type="password"
         onChange={(event) => setPassword(event.target.value)}
-        value={password}
+        value={password || ''}
         />
         <button type="button" onClick={loginUser}> Login </button> 
       </p>
@@ -598,6 +704,9 @@ function App() {
               <Link to="/profile"> Profile </Link>
             </li>
             <li>
+              <Link to="/post-housing"> Post Housing </Link>
+            </li>
+            <li>
               <Link to="/jobs"> Jobs </Link>
             </li>
             <li>
@@ -618,11 +727,17 @@ function App() {
             <Route path="/housing/:neighborhood_id">
               <FindHousing />
             </Route>
-            <Route path="/profile">
+            <Route path="/post/:neighborhood_id">
+              <PostHousing />
+            </Route>
+            <Route exact path="/profile">
               <UserProfile />
             </Route>
+            <Route exact path="/post-housing">
+              <MapHousing />
+            </Route>
             <Route exact path="/map">
-              <MapContainer />
+              <MapView />
             </Route>       
             <Route exact path="/jobs">
               <JobsList />
