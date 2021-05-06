@@ -218,7 +218,7 @@ def show_restaurant_details(neighborhood_id):
     return jsonify(restaurant_list)
 
 @app.route('/api/housing/<neighborhood_id>')
-def show_housing_posts(neighborhood_id):
+def show_housing_postings(neighborhood_id):
     """Show housing posted for a neighborhood."""
 
     postings = crud.get_postings(neighborhood_id)
@@ -300,6 +300,22 @@ def get_user_postings():
         posting_list.append(post_dict)
 
     return jsonify(posting_list)
+
+@app.route('/api/create-posting', methods=["POST"])
+def create_posting():
+
+    data = request.get_json()
+
+    neighborhood_id = data.get('neighborhood_id')
+    email = data.get('email')
+    date = datetime.now()
+    title = data.get('title')
+    desc = data.get('desc')
+    contact_info = data.get('contact_info')
+
+    crud.create_posting(neighborhood_id, email, date, title, desc, contact_info)
+
+    return jsonify("Success")
 
 if __name__ == '__main__':
     connect_to_db(app)

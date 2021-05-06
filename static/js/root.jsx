@@ -192,7 +192,6 @@ function MapHousing() {
 
             marker.addListener("click", () => {
               history.push(`/post/${aMarker.neighborhood_id}`);
-              console.log(aMarker.neighborhood_id);
             })
             marker.addListener("mouseover", () => {
               infoWindow.open(gMap,marker)
@@ -355,10 +354,59 @@ function FindHousing(props) {
 function PostHousing() {
 
   let {neighborhood_id} = ReactRouterDOM.useParams();
+  const email = localStorage.getItem('logged_in_user');
+
+  const[title, setTitle] = React.useState('');
+  const[desc, setDesc] = React.useState('');
+  const[contact_info, setContact_info] = React.useState('');
+
+  const createNewPost = () => {
+    const post = {
+      'neighborhood_id': neighborhood_id,
+      'email': email,
+      'title': title,
+      'desc': desc,
+      'contact_info': contact_info
+      }
+    fetch('/api/create-posting', {
+      method: 'POST',
+      body: JSON.stringify(post),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+  }
+  
 
   return (
     <React.Fragment>
-      Housing will be posted here for {neighborhood_id}
+      <form action="/profile">
+        <p>
+          Title:
+          <input
+            type="text"
+            onChange={(event) => setTitle(event.target.value)}
+            value={title}
+            />
+        </p>
+        <p>
+          Description:
+          <input
+            type="textarea"
+            onChange={(event) => setDesc(event.target.value)}
+            value={desc}
+          />
+        </p>
+        <p>
+          Contact Info:
+          <input
+            type="text"
+            onChange={(event) => setContact_info(event.target.value)}
+            value={contact_info}
+          />
+        </p>
+        <button type="submit" onClick={createNewPost}> Add Posting </button>
+      </form>
     </React.Fragment>
   );
 }
@@ -629,7 +677,8 @@ function UserProfile() {
   const [postList, setPostList] = React.useState(["loading..."]);
 
   const email = localStorage.getItem('logged_in_user')
-  console.log(email);
+  const email_list = email.split("@")
+  const username = email_list[0];
 
   React.useEffect(() => { 
     fetch('/api/get-user-postings', {
@@ -671,6 +720,7 @@ function UserProfile() {
 
   return (
     <React.Fragment>
+      <b>Welcome {username}!</b>
       <button type="button" onClick={handleLogout}> Logout </button>
        {postList}
     </React.Fragment>
