@@ -673,7 +673,7 @@ function Login(props) {
 
 function UserProfile() {
 
-  let history = useHistory();
+//  let history = useHistory();
   const [postList, setPostList] = React.useState(["loading..."]);
 
   const email = localStorage.getItem('logged_in_user')
@@ -707,6 +707,30 @@ function UserProfile() {
      })
     }, []);
 
+  // const handleLogout = () => {
+  //   if (!localStorage.getItem('logged_in_user')) {
+  //     alert("User isn't logged in");
+  //     history.push("/");
+  //   } else {
+  //       localStorage.removeItem('logged_in_user');
+  //       alert("Log out successful.");
+  //       history.push("/");
+  //     }
+  //   }
+
+  return (
+    <React.Fragment>
+      <b>Welcome {username}!</b>
+      <Logout />
+       {postList}
+    </React.Fragment>
+  );
+}
+
+function Logout() {
+
+  let history = useHistory();
+
   const handleLogout = () => {
     if (!localStorage.getItem('logged_in_user')) {
       alert("User isn't logged in");
@@ -718,12 +742,8 @@ function UserProfile() {
       }
     }
 
-  return (
-    <React.Fragment>
-      <b>Welcome {username}!</b>
-      <button type="button" onClick={handleLogout}> Logout </button>
-       {postList}
-    </React.Fragment>
+  return(
+    <button type="button" onClick={handleLogout}> Logout </button>
   );
 }
 
@@ -748,6 +768,9 @@ function App() {
               <Link to="/login"> Login </Link>
             </li>
             <li>
+              <Link to="/logout"> Logout </Link>
+            </li>
+            <li>
               <Link to="/create-user"> Create Account </Link>
             </li>
             <li>
@@ -767,6 +790,9 @@ function App() {
         <Switch>
           <Route exact path="/login">
               <Login />
+            </Route>
+            <Route exact path="/logout">
+              <Logout />
             </Route>
             <Route exact path="/create-user">
               <CreateUser />
