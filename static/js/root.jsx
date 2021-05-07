@@ -612,7 +612,25 @@ function CreateUser() {
   );
 }
 
+function PrivateRoute({ children, ...rest }) {
+  return (
+    <Route {...rest} render={({ location }) => {
+      return localStorage.getItem('logged_in_user') !== null
+      ? children
+      : <Redirect to={{
+        pathname: "/login",
+        state: { from: location }
+      }} />
+    }} />
+  )
+}
+
 function Login(props) {
+
+  console.log(localStorage.getItem('logged_in_user'));
+  if (localStorage.getItem('logged_in_user') !== null) {
+    console.log("We have a user!")
+  }
 
   let history = useHistory();
 
@@ -647,7 +665,11 @@ function Login(props) {
 
   return (
     <React.Fragment>
-      Login
+      
+
+      <p><b>Login</b></p>
+
+      You must be logged in to post housing.
     <form>
       <p>
       Email:
@@ -806,12 +828,12 @@ function App() {
             <Route path="/post/:neighborhood_id">
               <PostHousing />
             </Route>
-            <Route exact path="/profile">
+            <PrivateRoute exact path="/profile">
               <UserProfile />
-            </Route>
-            <Route exact path="/post-housing">
+            </PrivateRoute>
+            <PrivateRoute exact path="/post-housing">
               <MapHousing />
-            </Route>
+            </PrivateRoute>
             <Route exact path="/map">
               <MapView />
             </Route>       
