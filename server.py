@@ -317,6 +317,17 @@ def create_posting():
 
     return jsonify("Success")
 
+@app.route("/api/delete-posting", methods=["POST"])
+def delete_posting():
+    """Delete posting from database and from user's profile."""
+
+    posting_id = request.get_json(force=True)
+    print("POSTING ID IS:", posting_id)
+
+    crud.delete_posting(posting_id)
+
+    return jsonify("Success")
+
 if __name__ == '__main__':
     connect_to_db(app)
     app.run(host='0.0.0.0', debug=True)

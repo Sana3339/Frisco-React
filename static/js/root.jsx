@@ -8,9 +8,16 @@ const useHistory = ReactRouterDOM.useHistory;
 const useLocation = ReactRouterDOM.useLocation;
 
 function Homepage() {
+  let history = useHistory();
+  
+  const redirectToMapPage = () => {
+    history.push('/map');
+  }
+
   return (
     <React.Fragment>
-      This is the homepage
+      <p>Which San Francisco neighborhood should you live in?</p>
+      <button type="submit" onClick={redirectToMapPage}> Enter </button>
     </React.Fragment>
   );   
 }
@@ -372,7 +379,7 @@ function PostHousing() {
 
   let {neighborhood_id} = ReactRouterDOM.useParams();
   const email = localStorage.getItem('logged_in_user');
-  
+
   const [neighborhoodName, setNeighborhoodName] = React.useState(["loading..."]);
   const[title, setTitle] = React.useState('');
   const[desc, setDesc] = React.useState('');
@@ -446,8 +453,48 @@ function PostListItem(props){
       <p>{props.date}</p>
       <p>{props.title}</p>
       <p>{props.desc}</p>
-      <p>{props.contact_info}</p>     
+      <p>{props.contact_info}</p>   
     </React.Fragment>
+  );
+}
+
+//This is a copy of the PostListItem component above but it includes delete functionality.
+//These are different components bc a post should only be able to be deleted by the user who created it
+//from their user profile page
+function PostListItemWithDelete(props){
+
+  return(
+    <React.Fragment>
+      <p>{props.date}</p>
+      <p>{props.title}</p>
+      <p>{props.desc}</p>
+      <p>{props.contact_info}</p>   
+      <DeletePosting posting_id={props.posting_id}/>  
+    </React.Fragment>
+  );
+}
+
+function DeletePosting(props) {  
+
+  console.log("In DeletePosting, posting_id is:", props.posting_id)
+
+  const deletePosting = () => {
+    fetch('/api/delete-posting', {
+      method: 'POST',
+      body: JSON.stringify(props.posting_id)
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data) {
+        alert("Posting Deleted");
+      }
+    });
+   }
+
+  return (
+    <form action="/profile">
+      <button type="submit" onClick={deletePosting}>Delete</button>
+    </form>
   );
 }
 
@@ -757,9 +804,11 @@ function UserProfile() {
       const postFetchList = []
 
         for (const posting of data) {
+          console.log("posting_id is:", posting.posting_id);
           postFetchList.push(
-            <PostListItem
+            <PostListItemWithDelete
               key={posting.posting_id}
+              posting_id={posting.posting_id}
               date={posting.date}
               title={posting.title}
               desc={posting.desc}
@@ -771,21 +820,19 @@ function UserProfile() {
      })
     }, []);
 
-  // const handleLogout = () => {
-  //   if (!localStorage.getItem('logged_in_user')) {
-  //     alert("User isn't logged in");
-  //     history.push("/");
-  //   } else {
-  //       localStorage.removeItem('logged_in_user');
-  //       alert("Log out successful.");
-  //       history.push("/");
-  //     }
-  //   }
+    const postHousingButton = () => {
+      history.push("/post-housing");
+    }
+
+    let history = useHistory();
 
   return (
     <React.Fragment>
       <b>Welcome {username}!</b>
+      <p>
       <Logout />
+      <button type="button" onClick={postHousingButton}> PostHousing </button>
+      </p>
        {postList}
     </React.Fragment>
   );

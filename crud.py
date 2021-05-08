@@ -109,6 +109,12 @@ def get_postings_by_user(email):
 
     return Posting.query.filter(Posting.user_email == email).all()
 
+def delete_posting(posting_id):
+
+    posting = Posting.query.get(posting_id)
+    if posting is not None:
+        db.session.delete(posting)
+        db.session.commit()
 
 if __name__ == '__main__':
     from server import app
