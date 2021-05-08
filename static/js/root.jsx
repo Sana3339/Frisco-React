@@ -5,6 +5,7 @@ const Prompt = ReactRouterDOM.Prompt;
 const Switch = ReactRouterDOM.Switch;
 const Redirect = ReactRouterDOM.Redirect;
 const useHistory = ReactRouterDOM.useHistory;
+const useLocation = ReactRouterDOM.useLocation;
 
 function Homepage() {
   return (
@@ -633,6 +634,9 @@ function Login(props) {
   }
 
   let history = useHistory();
+  const { state } = ReactRouterDOM.useLocation();
+
+  const [redirectToReferrer, setredirectToReferrer] = React.useState(false)
 
   const [email,setEmail] = React.useState();
   const [password,setPassword] = React.useState();
@@ -657,11 +661,21 @@ function Login(props) {
       } else if (data.message === "You are now logged in.") {
           alert(data.message);
           localStorage.setItem('logged_in_user', data.email);
-          history.push('/profile')
+         // history.push('/profile')
+         setredirectToReferrer(true);
         }
       }
-    )
+    ) 
   }
+
+  if (redirectToReferrer === true) {
+    if (state) {
+      return <Redirect to={state.from}/>
+    } else {
+      return <Redirect to="/"/>
+   }
+  }
+  
 
   return (
     <React.Fragment>
