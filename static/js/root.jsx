@@ -208,7 +208,7 @@ function MapHousing() {
         script.onreadystatechange = function() {
           if (script.readyState === "loaded" || script.readyState === "complete") {
             script.onreadystatechange = null;
-            onLoad();
+     //       onLoad();
           }
         };
       } else {
@@ -269,6 +269,7 @@ function Neighborhood() {
       <p>Transit Score: {transitScore}</p>
       <Restaurants neighborhood_id={neighborhood_id} />
       <p><Link to={`/housing/${neighborhood_id}`}> Find {name} housing </Link></p>
+      <p><Link to={`/post/${neighborhood_id}`}> Post {name} housing </Link></p>
       
     </React.Fragment>
   );
@@ -323,7 +324,18 @@ function FindHousing(props) {
 
   let {neighborhood_id} = ReactRouterDOM.useParams();
   const [postList, setPostList] = React.useState(["loading..."]);
+  const [neighborhoodName, setNeighborhoodName] = React.useState(["loading..."]);
 
+     //Get neighborhood name based on neighborhood_id
+  React.useEffect(() => {
+    fetch(`/api/neighborhood/${neighborhood_id}`)
+      .then(response => response.json())
+      .then((data) => {
+        setNeighborhoodName(data.name);
+      })
+    }, [])
+  
+  
   React.useEffect(() => {
     fetch(`/api/housing/${neighborhood_id}`)
       .then(response => response.json())
@@ -345,8 +357,12 @@ function FindHousing(props) {
       })
   }, [])
 
+ 
+
+    
   return(
     <React.Fragment>
+      <b>{neighborhoodName} Housing</b>
       {postList}
     </React.Fragment>
   );
@@ -356,10 +372,20 @@ function PostHousing() {
 
   let {neighborhood_id} = ReactRouterDOM.useParams();
   const email = localStorage.getItem('logged_in_user');
-
+  
+  const [neighborhoodName, setNeighborhoodName] = React.useState(["loading..."]);
   const[title, setTitle] = React.useState('');
   const[desc, setDesc] = React.useState('');
   const[contact_info, setContact_info] = React.useState('');
+
+  //Get neighborhood name based on neighborhood_id
+  React.useEffect(() => {
+  fetch(`/api/neighborhood/${neighborhood_id}`)
+    .then(response => response.json())
+    .then((data) => {
+      setNeighborhoodName(data.name);
+    })
+  }, [])
 
   const createNewPost = () => {
     const post = {
@@ -381,6 +407,7 @@ function PostHousing() {
 
   return (
     <React.Fragment>
+      <b>Post {neighborhoodName} Housing</b>
       <form action="/profile">
         <p>
           Title:
@@ -630,7 +657,6 @@ function Login(props) {
 
   console.log(localStorage.getItem('logged_in_user'));
   if (localStorage.getItem('logged_in_user') !== null) {
-    console.log("We have a user!")
   }
 
   let history = useHistory();
@@ -703,6 +729,8 @@ function Login(props) {
         <button type="button" onClick={loginUser}> Login </button> 
       </p>
     </form>
+      Not registered? &nbsp;
+      <Link to="/create-user">Create account</Link>
     </React.Fragment>
   );
 }
@@ -785,7 +813,7 @@ function Logout() {
 
 function App() {
 
-  let history = useHistory();
+//  let history = useHistory();
 
   
 
@@ -839,9 +867,9 @@ function App() {
             <Route path="/housing/:neighborhood_id">
               <FindHousing />
             </Route>
-            <Route path="/post/:neighborhood_id">
+            <PrivateRoute path="/post/:neighborhood_id">
               <PostHousing />
-            </Route>
+            </PrivateRoute>
             <PrivateRoute exact path="/profile">
               <UserProfile />
             </PrivateRoute>
