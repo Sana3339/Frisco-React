@@ -371,16 +371,16 @@ neighborhoods = [
     'name': 'Russian Hill',
     'latitude': 37.8011,
     'longitude': -122.4194,
-    'short_desc': """<div style='float:right'><img src='/static/img/russian1.jpeg' width="120" height="120" vertical-align="middle"></div>
-                    <div style='float:left; height:130px; width:180px;'>
-                    Views from the top of <b>Russian Hill</b> extend in several directions, including the Bay Bridge, 
+    'short_desc': """<div style='float:right'><img src='/static/img/richmond1.jpg' width="120" height="120" vertical-align="middle"></div>
+                    <div style='float:left; height:130px; width:180px;'>
+                    Views from the top of <b>Russian Hill</b> include the Bay Bridge, 
                     Marin County, and the Golden Gate Bridge. Tourists frequent the cable car 
                     line along Hyde Street, which is lined with restaurants and shops.
                     <a href="/neighborhood/russian">Click here to learn more.</a>""",
     'long_desc': """Russian Hill is one of San Francisco's original "Seven Hills."
                     At the northern foot of the hill is Ghiradelli Square, Aquatic Park, and
                     Fisherman's Wharf, a popular tourist area.
-                    It's most famous for Lombard Street, a one-way street 
+                    It's most famous for Lombard St, a one-way street 
                     in which the roadway has eight sharp turns that have earned 
                     the street the distinction of being "the crookedest street in the world". 
                     Because of the steepness of the hill, many streets are staircases.""",

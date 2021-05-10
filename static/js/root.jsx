@@ -62,6 +62,7 @@ function MapView(){
 
         const markerList = [];
 
+
         for (const neighborhood of data) {
           const markerDetails = {
             coords: {lat:neighborhood.latitude, lng:neighborhood.longitude},
@@ -74,10 +75,13 @@ function MapView(){
           
           for (const aMarker of markerList) {
 
-            //console.log(aMarker.neighborhood_id);
-
+          if (aMarker.neighborhood_id === 'marina' || aMarker.neighborhood_id === 'north' || aMarker.neighborhood_id === 'russian' ||
+          aMarker.neighborhood_id === 'presidio' || aMarker.neighborhood_id === 'pac' || aMarker.neighborhood_id === 'nob' ||
+          aMarker.neighborhood_id === 'financial' ) {
           const infoWindow = new google.maps.InfoWindow({
-            content: aMarker.windowContent
+            content: aMarker.windowContent,
+            disableAutoPan: true,
+            pixelOffset: new google.maps.Size(0,220)
             });
           
           const marker = new window.google.maps.Marker({
@@ -86,19 +90,46 @@ function MapView(){
             map:gMap
             });
 
-            marker.addListener("dblclick", () => {
+            marker.addListener("click", () => {
               history.push(`/neighborhood/${aMarker.neighborhood_id}`);
               console.log(aMarker.neighborhood_id);
             })
-            marker.addListener("click", () => {
+
+            marker.addListener("mouseover", () => {
               infoWindow.open(gMap,marker)
               });
-          //   marker.addListener("dblclick", () => {
-          //     infoWindow.close(gMap,marker)
-          //   });
-        }
-      })
-     addMarkers();
+            
+            marker.addListener("mouseout", () => {
+              infoWindow.close(gMap,marker)
+            });
+        } else {
+          const infoWindow = new google.maps.InfoWindow({
+            content: aMarker.windowContent,
+            disableAutoPan: true,
+            });
+          
+          const marker = new window.google.maps.Marker({
+            position:aMarker.coords,
+            animation: google.maps.Animation.DROP,
+            map:gMap
+            });
+
+            marker.addListener("click", () => {
+              history.push(`/neighborhood/${aMarker.neighborhood_id}`);
+              console.log(aMarker.neighborhood_id);
+            })
+
+            marker.addListener("mouseover", () => {
+              infoWindow.open(gMap,marker)
+              });
+            
+            marker.addListener("mouseout", () => {
+              infoWindow.close(gMap,marker)
+            });
+          }
+         }
+       })
+      addMarkers();
     }
 
       const script = document.createElement("script");
@@ -125,7 +156,7 @@ function MapView(){
     return (
       <React.Fragment>
         Click on a marker to learn more about the neighborhood
-        <div
+        <div id="map"
         style={{ height: "500px", width:"60%" }}
         {...{ref}}>
         </div>
@@ -138,7 +169,7 @@ function MapView(){
 
 function MapHousing() {
   const options = {
-    zoom:12.2,
+    zoom:12,
     center:{lat:37.7822, lng:-122.4342}
     };
   const ref = React.useRef();
@@ -935,6 +966,9 @@ function App() {
             <Route exact path="/">
               <Homepage />
             </Route>
+            {/* <Route exact path="'*">
+              <NoMatch />
+            </Route> */}
           </Switch>
         </div>
     </Router>

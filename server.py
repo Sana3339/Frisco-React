@@ -12,10 +12,9 @@ app.secret_key = "dev"
 GOOG_API_KEY = os.environ['GOOGLE_API_KEY']
 
 
-@app.route("/", defaults={"path": ""})
 @app.route("/<path:path>")
+@app.route("/", defaults={"path": ""})
 def catch_all(path):
-
     return render_template("root.html")
 
 @app.route("/api/jobs.json")
