@@ -1,6 +1,6 @@
 """CRUD operations."""
 
-from model import db, connect_to_db, Job, Neighborhood, Posting, User
+from model import db, connect_to_db, Job, Neighborhood, Posting, User, Image
 
 def create_job(job_name, company):
     """Create a job application"""
@@ -60,6 +60,15 @@ def create_neighborhood(neighborhood_id, name, latitude, longitude,
     db.session.add(neighborhood)
     db.session.commit()
 
+def add_image(image_name, neighborhood_id):
+    """Add image and its neighborhood_id to db"""
+
+    image = Image(image_name = image_name,
+                neighborhood_id = neighborhood_id)
+
+    db.session.add(image)
+    db.session.commit()
+
 def get_all_neighborhoods():
     """Return details of all neighborhoods in db"""
 
@@ -73,6 +82,13 @@ def get_neighborhood_by_id(neighborhood_id):
     neighborhood = Neighborhood.query.get(neighborhood_id)
 
     return neighborhood
+
+def get_images_by_id(neighborhood_id):
+    """Provided a neighborhood_id, return the associated images."""
+
+    images = Image.query.filter(Image.neighborhood_id == neighborhood_id).all()
+
+    return images
 
 def create_posting(neighborhood_id, email, date, title, desc, contact_info):
     

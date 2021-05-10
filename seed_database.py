@@ -98,7 +98,7 @@ neighborhoods = [
     'name': 'Haight-Ashbury',
     'latitude': 37.7692,
     'longitude': -122.4481,
-    'short_desc': """<div style='float:right'><img src='/static/img/haight1.jpeg' width="120" height="120"></div>
+    'short_desc': """<div style='float:right'><img src='/static/img/haight1.png' width="120" height="120"></div>
                     <div style='float:left; height:130px; width:180px;'><b>Haight-Ashbury</b> 
                     is known as a main center of the 
                     hippie and counterculture of the 1960s. The Summer of Love (1967)
@@ -117,7 +117,7 @@ neighborhoods = [
     'sq_ft_price': 1221,
     'walk_score': 97,
     'transit_score': 80,
-    'images': '/static/img/haight1.jpeg, /static/img/haight2.jpeg, /static/img/haight3.jpeg'   
+    'images': '/static/img/haight1.png, /static/img/haight2.jpeg, /static/img/haight3.jpeg'   
     },
     {
     'neighborhood_id': 'marina',
@@ -396,7 +396,7 @@ neighborhoods = [
     'name': 'SoMA',
     'latitude': 37.7785,
     'longitude': -122.4056,
-    'short_desc': """<div style='float:right'><img src='/static/img/soma1.jpeg' width="120" height="120" vertical-align="middle"></div>
+    'short_desc': """<div style='float:right'><img src='/static/img/soma1.png' width="120" height="120" vertical-align="middle"></div>
                     <div style='float:left; height:130px; width:180px;'>
                     <b>SoMa</b> houses museums, technology companies, warehouses, 
                     auto repair shops, nightclubs, residential hotels, art spaces, 
@@ -412,7 +412,7 @@ neighborhoods = [
     'sq_ft_price': 917,
     'walk_score': 97,
     'transit_score': 100,
-    'images': '/static/img/soma1.jpeg, /static/img/soma2.jpeg, /static/img/soma3.jpeg'   
+    'images': '/static/img/soma1.png, /static/img/soma2.jpeg, /static/img/soma3.jpeg'   
     }, 
     {
     'neighborhood_id': 'sunset',
@@ -461,6 +461,26 @@ for neighborhood in neighborhoods:
         short_desc, long_desc, median_rent, median_home_price, sq_ft_price, walk_score, transit_score, images)
                                        
 
+#Add images to neighborhooods
+
+images = [
+    {
+        'image_name':'haight1.png',
+        'neighborhood_id': 'haight'
+    },
+    {
+        'image_name':'soma1.png',
+        'neighborhood_id': 'soma'
+    }
+]
+
+for image in images:
+    image_name = image['image_name']
+    neighborhood_id = image['neighborhood_id']
+
+    crud.add_image(image_name, neighborhood_id)
+
+
 #Create fake users with which to seed the db
 
 for n in range(10):
@@ -468,7 +488,6 @@ for n in range(10):
     password = 'test'
 
     crud.create_user(email, password)
-
 
 #Create fake postings with which to seed the db
 

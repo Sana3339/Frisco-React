@@ -5,11 +5,14 @@ from datetime import datetime
 import os
 import crud
 import json
+import cloudinary.uploader
 
 app = Flask(__name__)
 app.secret_key = "dev"
 
 GOOG_API_KEY = os.environ['GOOGLE_API_KEY']
+CLOUDINARY_API_KEY = os.environ['CLOUDINARY_API_KEY']
+CLOUDINARY_SECRET = os.environ['CLOUDINARY_SECRET']
 
 
 @app.route("/<path:path>")
@@ -110,6 +113,7 @@ def get_neighborhood_details():
         all_neighborhood_details.append(neighborhood_dict)
 
     return jsonify(all_neighborhood_details)
+    
 
 @app.route('/api/neighborhood/<neighborhood_id>')
 def show_neighborhood(neighborhood_id):
@@ -142,6 +146,30 @@ def show_neighborhood(neighborhood_id):
     }
 
     return jsonify(neighborhood_obj)
+
+@app.route('/api/images/<neighborhood_id>')
+def show_images(neighborhood_id):
+
+    images = crud.get_images_by_id(neighborhood_id)
+
+    image_list = []
+
+    for image in images:
+        image_dict = {
+            'image_id': image.image_id,
+            'image_name' : image.image_name,
+            'neighborhood_id' : image.neighborhood_id
+        }
+
+        image_list.append(image_dict)
+
+    return jsonify(image_list)
+        
+        
+
+        
+
+    return jsonify(image)
 
 @app.route('/api/website.json/<place_id>')
 def get_restaurant_website(place_id):

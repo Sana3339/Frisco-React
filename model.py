@@ -60,6 +60,21 @@ class User(db.Model):
 
         return f'<email={self.email} password={self.password}>'
 
+class Image(db.Model):
+    """Images of neighborhoods."""
+
+    __tablename__='images'
+
+    image_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    image_name = db.Column(db.String, nullable=False)
+    neighborhood_id=db.Column(db.String, db.ForeignKey('neighborhoods.neighborhood_id'))
+
+   #neighborhood = db.relationship( 'Neighborhood', backref='images')
+
+    def __repr__(self):
+
+        return f'<id={self.image_id} image={self.image_name} neighborhood={self.neighborhood_id}>'
+
 
 class Job(db.Model):
     """A job application."""

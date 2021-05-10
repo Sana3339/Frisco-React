@@ -81,7 +81,7 @@ function MapView(){
           const infoWindow = new google.maps.InfoWindow({
             content: aMarker.windowContent,
             disableAutoPan: true,
-            pixelOffset: new google.maps.Size(0,220)
+            pixelOffset: new google.maps.Size(0,215)
             });
           
           const marker = new window.google.maps.Marker({
@@ -305,11 +305,54 @@ function Neighborhood() {
       <p>Sq Ft Price: ${sqFtPrice}</p>
       <p>Walk Score: {walkScore}</p>
       <p>Transit Score: {transitScore}</p>
+      <Images neighborhood_id={neighborhood_id} />
       <Restaurants neighborhood_id={neighborhood_id} />
       <p><Link to={`/housing/${neighborhood_id}`}> Find {name} housing </Link></p>
       <p><Link to={`/post/${neighborhood_id}`}> Post {name} housing </Link></p>
       
     </React.Fragment>
+  );
+}
+
+function Images(props) {
+
+  const [imageList, setImageList] = React.useState([" loading..."]);
+
+  React.useEffect(() => {
+    fetch(`/api/images/${props.neighborhood_id}`)
+    .then(response => response.json())
+    .then((data) => {
+        const imageFetchList = []
+
+        for (const image of data) {
+          imageFetchList.push(
+            <ImageListItem
+              key={image.image_id}
+              image_name={image.image_name}
+              neighborhood_id={image.neighborhood_id}
+            />
+          );
+        }
+        setImageList(imageFetchList);
+    })
+  }, [])
+
+  return(
+    <React.Fragment>
+      Images should load here:
+        {imageList}
+    </React.Fragment>
+  );
+}
+
+function ImageListItem(props) {
+  
+  const image_url = `/static/img/${props.image_name}`
+
+  return (
+    <p>
+    <img src={image_url} />
+    </p>
   );
 }
 
