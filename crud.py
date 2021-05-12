@@ -90,7 +90,7 @@ def get_images_by_id(neighborhood_id):
 
     return images
 
-def create_posting(neighborhood_id, email, date, title, desc, contact_info):
+def create_posting(neighborhood_id, email, date, title, desc, contact_info, image_url):
     
     posting = Posting(neighborhood_id=neighborhood_id,
                         user_email=email,
@@ -98,6 +98,7 @@ def create_posting(neighborhood_id, email, date, title, desc, contact_info):
                         title=title,
                         desc=desc,
                         contact_info=contact_info,
+                        image_url=image_url
                         )
 
     db.session.add(posting)

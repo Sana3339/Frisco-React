@@ -1,6 +1,6 @@
 .jobcard {
   border-radius: 1px;
-  border: 1px solid black;
+  border: 1px solid rgb(189, 67, 67);
   width: 12em;
   height: 5em;
   margin: 1em;
@@ -9,7 +9,12 @@
 }
 
 #search-box{
-  display: block;
+  display: flex;
+}
+
+.photo {
+  height: 400px;
+  width: 600px;
 }
 
 

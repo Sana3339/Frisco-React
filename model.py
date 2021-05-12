@@ -39,13 +39,14 @@ class Posting(db.Model):
     title = db.Column(db.Text, nullable=False)
     desc = db.Column(db.Text, nullable=False)
     contact_info = db.Column(db.Text, nullable=False)
+    image_url = db.Column(db.String, nullable=True)
 
     neighborhood = db.relationship( 'Neighborhood', backref='postings')
     user = db.relationship('User', backref='postings')
 
     def __repr__(self):
 
-        return f'<id={self.posting_id} title={self.title}, backref={self.neighborhood_id} user={self.user_email}>'
+        return f'<id={self.posting_id} title={self.title}, backref={self.neighborhood_id} user={self.user_email} image={self.image_url}>'
 
 
 class User(db.Model):

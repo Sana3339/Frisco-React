@@ -351,7 +351,7 @@ function ImageListItem(props) {
 
   return (
     <p>
-    <img src={image_url} />
+    <img className="photo" src={image_url} />
     </p>
   );
 }
@@ -431,6 +431,7 @@ function FindHousing(props) {
               title={posting.title}
               desc={posting.desc}
               contact_info={posting.contact_info}
+              image_url={posting.image_url}
             />
            );
           }
@@ -458,6 +459,9 @@ function PostHousing() {
   const[title, setTitle] = React.useState('');
   const[desc, setDesc] = React.useState('');
   const[contact_info, setContact_info] = React.useState('');
+  const [url, setUrl] = React.useState('');
+  const [image, setImage] = React.useState('');
+  let history = useHistory();
 
   //Get neighborhood name based on neighborhood_id
   React.useEffect(() => {
@@ -474,7 +478,8 @@ function PostHousing() {
       'email': email,
       'title': title,
       'desc': desc,
-      'contact_info': contact_info
+      'contact_info': contact_info,
+      'image_url': url,
       }
     fetch('/api/create-posting', {
       method: 'POST',
@@ -482,14 +487,38 @@ function PostHousing() {
       headers: {
         'Content-Type': 'application/json'
       }
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data === "Success") {
+        alert('Post added')
+      }
     });
+    history.push('/profile');
+  }
+
+  const uploadImage = () => {
+    const data = new FormData()
+    data.append("file", image)
+
+    data.append("upload_preset", "Frisco")
+    data.append("cloud_name", "sana3339")
+    fetch("https://api.cloudinary.com/v1_1/sana3339/image/upload", {
+      method:"POST",
+      body: data
+    })
+    .then(resp => resp.json())
+    .then(data => {
+      setUrl(data.url);
+    })
+    .catch(err => console.log(err))
   }
   
 
   return (
     <React.Fragment>
       <b>Post {neighborhoodName} Housing</b>
-      <form action="/profile">
+      <div>
         <p>
           Title:
           <input
@@ -500,8 +529,7 @@ function PostHousing() {
         </p>
         <p>
           Description:
-          <input
-            type="textarea"
+          <textarea
             onChange={(event) => setDesc(event.target.value)}
             value={desc}
           />
@@ -514,8 +542,16 @@ function PostHousing() {
             value={contact_info}
           />
         </p>
-        <button type="submit" onClick={createNewPost}> Add Posting </button>
-      </form>
+          <div>
+            <input type="file" onChange= {(event)=> setImage(event.target.files[0])}></input>
+              <button onClick={uploadImage}>Upload</button>
+            </div>
+          <div>
+              Uploaded image here:
+              <img src={url} />
+          </div>
+        <button onClick={createNewPost}> Add Posting </button>
+      </div>
     </React.Fragment>
   );
 }
@@ -528,6 +564,7 @@ function PostListItem(props){
       <p>{props.title}</p>
       <p>{props.desc}</p>
       <p>{props.contact_info}</p>   
+      <img src={props.image_url} />
     </React.Fragment>
   );
 }
@@ -543,6 +580,7 @@ function PostListItemWithDelete(props){
       <p>{props.title}</p>
       <p>{props.desc}</p>
       <p>{props.contact_info}</p>   
+      <img src={props.image_url} />
       <DeletePosting posting_id={props.posting_id}/>  
     </React.Fragment>
   );
@@ -887,6 +925,7 @@ function UserProfile() {
               title={posting.title}
               desc={posting.desc}
               contact_info={posting.contact_info}
+              image_url={posting.image_url}
             />
            );
           }

@@ -169,7 +169,7 @@ def show_images(neighborhood_id):
 
         
 
-    return jsonify(image)
+    #return jsonify(image)
 
 @app.route('/api/website.json/<place_id>')
 def get_restaurant_website(place_id):
@@ -258,7 +258,8 @@ def show_housing_postings(neighborhood_id):
             'title': posting.title,
             'desc': posting.desc,
             'contact_info': posting.contact_info,
-            'posting_id': posting.posting_id
+            'posting_id': posting.posting_id,
+            'image_url': posting.image_url
         }
 
         posting_list.append(post_dict)
@@ -321,7 +322,8 @@ def get_user_postings():
             'title': posting.title,
             'desc': posting.desc,
             'contact_info': posting.contact_info,
-            'posting_id': posting.posting_id
+            'posting_id': posting.posting_id,
+            'image_url': posting.image_url
         }
 
         posting_list.append(post_dict)
@@ -339,8 +341,9 @@ def create_posting():
     title = data.get('title')
     desc = data.get('desc')
     contact_info = data.get('contact_info')
+    image_url = data.get('image_url')
 
-    crud.create_posting(neighborhood_id, email, date, title, desc, contact_info)
+    crud.create_posting(neighborhood_id, email, date, title, desc, contact_info, image_url)
 
     return jsonify("Success")
 
