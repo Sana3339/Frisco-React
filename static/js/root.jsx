@@ -92,7 +92,6 @@ function MapView(){
 
             marker.addListener("click", () => {
               history.push(`/neighborhood/${aMarker.neighborhood_id}`);
-              console.log(aMarker.neighborhood_id);
             })
 
             marker.addListener("mouseover", () => {
@@ -339,7 +338,6 @@ function Images(props) {
 
   return(
     <React.Fragment>
-      Images should load here:
         {imageList}
     </React.Fragment>
   );
@@ -363,7 +361,7 @@ function RestaurantListItem(props) {
       <p><b>{props.name}</b></p>
       <p>Address: {props.address}</p>
       <p>Rating: {props.rating}</p>
-      <a href={props.website}>Website</a>
+      <a href={props.website} target="blank">Website</a>
     </div>
   );
 }
