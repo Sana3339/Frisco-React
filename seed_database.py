@@ -498,7 +498,7 @@ postings = [
     'date': datetime.now(),
     'title': 'Beautiful room by the Palace of Fine Arts',
     'desc': 'Gorgeous panoramic views.  Youll be living in a house with 2 other girls.',
-    'contact_info': 'Call 415-222-3333',
+    'contact_info': 'sana.other@gmail.com',
     'image_url': 'https://res.cloudinary.com/sana3339/image/upload/v1620836686/sp46yz9ltklqlt5wj20c.jpg'
     },
     {
@@ -507,7 +507,7 @@ postings = [
     'date': datetime.now(),
     'title': 'Room available immediately in 2b/2b',
     'desc': 'Great location right by Valencia street with lots of restaurants',
-    'contact_info': 'Email user2@test.com',
+    'contact_info': 'sanaahmad393@gmail.com',
     'image_url': 'https://res.cloudinary.com/sana3339/image/upload/v1620836601/vgq5mlbxqdhfzxgejy1z.gif'
     }
 ]

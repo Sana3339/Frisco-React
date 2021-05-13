@@ -358,6 +358,13 @@ def delete_posting():
 
     return jsonify("Success")
 
+@app.route('/api/get-seller-email/<posting_id>')
+def get_seller_by_id(posting_id):
+
+    contact_info = crud.get_seller_by_id(posting_id)
+
+    return jsonify(contact_info)
+
 if __name__ == '__main__':
     connect_to_db(app)
     app.run(host='0.0.0.0', debug=True)

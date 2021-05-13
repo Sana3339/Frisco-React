@@ -133,6 +133,13 @@ def delete_posting(posting_id):
         db.session.delete(posting)
         db.session.commit()
 
+def get_seller_by_id(posting_id):
+
+    posting = Posting.query.filter_by(posting_id=posting_id).first()
+    contact_info = posting.contact_info
+
+    return contact_info
+
 if __name__ == '__main__':
     from server import app
     connect_to_db(app)

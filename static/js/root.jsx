@@ -425,6 +425,7 @@ function FindHousing(props) {
           postFetchList.push(
             <PostListItem
               key={posting.posting_id}
+              posting_id={posting.posting_id}
               date={posting.date}
               title={posting.title}
               desc={posting.desc}
@@ -556,6 +557,14 @@ function PostHousing() {
 
 function PostListItem(props){
 
+  let history = useHistory();
+
+  console.log('posting id is:', props.posting_id)
+
+  const redirectToContact = () => {
+      history.push(`/send-email/${props.posting_id}`);
+  }
+
   return(
     <React.Fragment>
       <p>{props.date}</p>
@@ -563,9 +572,77 @@ function PostListItem(props){
       <p>{props.desc}</p>
       <p>{props.contact_info}</p>   
       <img src={props.image_url} />
+      <button onClick={redirectToContact}>Contact Seller</button>
     </React.Fragment>
   );
 }
+
+function ContactUsThruSendGrid() {
+
+  const [fromName, setFromName] = React.useState('');
+  const [sellerEmail, setSellerEmail] = React.useState('');
+  const [replyToEmail, setReplyToEmail] = React.useState('');
+  const [message, setMessage] = React.useState('');
+
+  let {posting_id} = ReactRouterDOM.useParams();
+  let history = useHistory();
+
+  React.useEffect(() => {
+      fetch(`/api/get-seller-email/${posting_id}`)
+      .then(response => response.json())
+      .then((data) => {
+          setSellerEmail(data)
+      })
+  }, [])
+
+  console.log("seller email is:", sellerEmail); 
+
+  const redirectBack = () => {
+      history.goBack();
+  }
+
+  function sendEmail(e) {
+      e.preventDefault();
+
+      window.emailjs.sendForm('default_service', 'template_43ponc9', e.target, 'user_uTFw7bspn4zVAkmNegIxE')
+          .then((result) => {
+              console.log(result.text);
+              alert("Your message has been sent")
+              setFromName('');
+              setSellerEmail('');
+              setReplyToEmail('');
+              setMessage('');
+          }, (error) => {
+              console.log(error.text);
+          });
+      }
+
+      
+  return (
+      <React.Fragment>
+      <form id="contact-form" onSubmit={sendEmail}>
+          <input type="hidden" name="seller_email" 
+              onChange={(event) => setSellerEmail(event.target.value)}
+              value={sellerEmail}/>
+          <label>Your Name</label>
+          <input type="text" name="from_name" 
+              onChange={(event) => setFromName(event.target.value)}
+              value={fromName}/>
+          <label>Your Email</label>
+          <input type="email" name="reply_to" 
+              onChange={(event) => setReplyToEmail(event.target.value)}
+              value={replyToEmail}/>
+          <label>Your Message</label>
+          <textarea name="message"
+              onChange={(event) => setMessage(event.target.value)}
+              value={message}/>
+          <input type="submit" value="Send" />
+      </form>
+      <button onClick={redirectBack}>Back</button>
+      </React.Fragment>
+      );
+  }
+
 
 //This is a copy of the PostListItem component above but it includes delete functionality.
 //These are different components bc a post should only be able to be deleted by the user who created it
@@ -1007,6 +1084,9 @@ function App() {
             <li>
               <Link to="/add-job"> Add Job </Link>
             </li>
+            <li>
+              <Link to="/send-email/:posting_id">Send Email</Link>
+            </li>
           </ul>
         </nav>
         <Switch>
@@ -1045,6 +1125,9 @@ function App() {
             </Route>   
             <Route exact path="/">
               <Homepage />
+            </Route>
+            <Route exact path="/send-email/:posting_id">
+                <ContactUsThruSendGrid />
             </Route>
             {/* <Route exact path="'*">
               <NoMatch />
