@@ -1,43 +1,45 @@
 """CRUD operations."""
 
-from model import db, connect_to_db, Job, Neighborhood, Posting, User, Image
+from model import db, connect_to_db, Neighborhood, Posting, User, Image
 
-def create_job(job_name, company):
-    """Create a job application"""
+#from model import Job
 
-    job = Job(job_name=job_name, company=company)
+# def create_job(job_name, company):
+#     """Create a job application"""
 
-    db.session.add(job)
-    db.session.commit()
+#     job = Job(job_name=job_name, company=company)
 
-def get_all_jobs():
+#     db.session.add(job)
+#     db.session.commit()
 
-    jobs = Job.query.all()
+# def get_all_jobs():
 
-    return jobs
+#     jobs = Job.query.all()
 
-def create_job(job_name, company):
+#     return jobs
+
+# def create_job(job_name, company):
     
-    job = Job(job_name=job_name,
-              company=company
-              )
+#     job = Job(job_name=job_name,
+#               company=company
+#               )
 
-    db.session.add(job)
-    db.session.commit()
+#     db.session.add(job)
+#     db.session.commit()
 
-def delete_job(job_id):
+# def delete_job(job_id):
 
-    job = Job.query.get(job_id)
-    if job is not None:
-        db.session.delete(job)
-        db.session.commit()
+#     job = Job.query.get(job_id)
+#     if job is not None:
+#         db.session.delete(job)
+#         db.session.commit()
 
-def get_job_id(job_name, company):
+# def get_job_id(job_name, company):
 
-    job_id = job.query.filter("job_name"==job_name, "company"==company).first()
-    return job_id
+#     job_id = job.query.filter("job_name"==job_name, "company"==company).first()
+#     return job_id
 
-#********************************************************************************
+# #********************************************************************************
 
 def create_neighborhood(neighborhood_id, name, latitude, longitude,
                         short_desc, long_desc, median_rent, median_home_price,

@@ -20,58 +20,6 @@ CLOUDINARY_SECRET = os.environ['CLOUDINARY_SECRET']
 def catch_all(path):
     return render_template("root.html")
 
-@app.route("/api/jobs.json")
-def show_jobs():
-
-    jobs = crud.get_all_jobs()
-
-    all_jobs_list = []
-
-    for job in jobs:
-        job_id = job.job_id
-        job_name = job.job_name
-        company = job.company
-
-        job_dict = {
-            'job_id': job_id,
-            'job_name': job_name,
-            'company': company
-            }
-
-        all_jobs_list.append(job_dict)
-
-    return jsonify(all_jobs_list)
-
-
-@app.route("/api/add-job", methods=["POST"])
-def add_job():
-    """Add a new job to the database."""
-
-    data = request.get_json(force=True) 
-
-    job_name = data['job_name']
-    company = data['company']
-
-    crud.create_job(job_name, company)
-    
-    return jsonify("Success")
-
-@app.route("/api/get-job-id")
-def get_job_id(job_name, company):
-
-    job_id = crud.get_job_id
-
-    return jsonify(job_id)
-
-@app.route("/api/delete-job", methods=["POST"])
-def delete_job():
-    """Delete job from database."""
-
-    job_id = request.get_json(force=True) 
-
-    crud.delete_job(job_id)
-
-    return jsonify("Success")
 
 @app.route("/api/login", methods=["POST"])
 def handle_login():
@@ -81,9 +29,7 @@ def handle_login():
     email = data['email']
     password = data['password']
 
-    #need to query db to see if user is in db
 
-#************************************************
 #This route is used to get neighborhood details from DB to the front end
 #via AJAX requests in the maps JS files. The data is used to populate
 #the map markers, info windows and text on the page
@@ -165,11 +111,6 @@ def show_images(neighborhood_id):
 
     return jsonify(image_list)
         
-        
-
-        
-
-    #return jsonify(image)
 
 @app.route('/api/website.json/<place_id>')
 def get_restaurant_website(place_id):

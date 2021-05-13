@@ -77,18 +77,18 @@ class Image(db.Model):
         return f'<id={self.image_id} image={self.image_name} neighborhood={self.neighborhood_id}>'
 
 
-class Job(db.Model):
-    """A job application."""
+# class Job(db.Model):
+#     """A job application."""
 
-    __tablename__='jobs'
+#     __tablename__='jobs'
 
-    job_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    job_name = db.Column(db.String, nullable=False)
-    company = db.Column(db.String, nullable=False)
+#     job_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+#     job_name = db.Column(db.String, nullable=False)
+#     company = db.Column(db.String, nullable=False)
 
-    def __repr__(self):
+#     def __repr__(self):
 
-        return f'<id={self.job_id} name={self.job_name} company={self.company}>'
+#         return f'<id={self.job_id} name={self.job_name} company={self.company}>'
 
 
 def connect_to_db(flask_app, db_uri='postgresql:///jobs', echo=True):
