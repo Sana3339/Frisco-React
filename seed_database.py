@@ -48,12 +48,12 @@ neighborhoods = [
     'name': 'Castro',
     'latitude': 37.7609,
     'longitude': -122.435,
-    'short_desc': """<div style='float:right'><img src='/static/img/castro1.jpeg' width="120" height="120" vertical-align="middle"></div>
+    'short_desc': """<div style='float:right'><img src='/static/img/castro_thumb.jpg' width="150" height="120" vertical-align="middle"></div>
                     <div style='float:left; height:130px; width:180px;'>
                     The <b>Castro</b> was one of the first gay neighborhoods in the US.
                     It's currently among the most prominent symbols of lesbian, gay,
-                    bisexual and transgender (LGBT) activism and events in the world.
-                    <a href="/neighborhood/castro">Click here to learn more.</a>""",
+                    bisexual and transgender (LGBT) activism and events in the world. 
+                    <b>Click</b> the marker to learn more.""",
     'long_desc': """The Castro was one of the first gay neighborhoods in the US. One of its more
                     notable features is Castro Theatre, a movie palace built in 1922 and one of 
                     San Francisco's premier movie houses. 18th and Castro is a major intersection 
@@ -75,12 +75,12 @@ neighborhoods = [
     'name': 'Haight-Ashbury',
     'latitude': 37.7692,
     'longitude': -122.4481,
-    'short_desc': """<div style='float:right'><img src='/static/img/haight1.png' width="120" height="120"></div>
-                    <div style='float:left; height:130px; width:180px;'><b>Haight-Ashbury</b> 
+    'short_desc': """<div style='float:right'><img src='/static/img/haight_thumb.png' width="150" height="110"></div>
+                    <div style='float:left; height:120px; width:180px;'><b>Haight-Ashbury</b> 
                     is known as a main center of the 
                     hippie and counterculture of the 1960s. The Summer of Love (1967)
-                    has been synonymous with the neighborhood ever since.
-                    <a href="/neighborhood/haight">Click here to learn more.</a>""",
+                    has been synonymous with the neighborhood ever since. 
+                    <b>Click</b> the marker to learn more.""",
     'long_desc': """Haight-Ashbury is known as one of the main centers of the 
                     hippie and counterculture of the 1960s. The mainstream media's 
                     coverage of hippie life in the Haight-Ashbury drew the attention 
@@ -101,11 +101,11 @@ neighborhoods = [
     'name': 'Marina',
     'latitude': 37.8037,
     'longitude': -122.4368,
-    'short_desc': """<div style='float:right'><img src='/static/img/marina1.jpeg' width="120" height="120" vertical-align="middle"></div>
+    'short_desc': """<div style='float:right'><img src='/static/img/marina_thumb.png' width="150" height="120" vertical-align="middle"></div>
                     <div style='float:left; height:130px; width:180px;'>
                     The <b>Marina</b> has the highest non-Hispanic white resident percentage of any neighborhood in SF. 
                     Chestnut Street is an attraction, lined with stores, restaurants, coffee shops and bars.
-                    <a href="/neighborhood/marina">Click here to learn more.</a>""",
+                    <b>Click</b> the marker to learn more.""",
     'long_desc': """The Marina is most famous for the Palace of Fine Arts, which is a year-round attraction
                     for tourists and locals and is used as a location for weddings and wedding-related photography.
 
@@ -125,11 +125,11 @@ neighborhoods = [
     'name': 'Mission',
     'latitude': 37.7599,
     'longitude': -122.4148,
-    'short_desc': """<div style='float:right'><img src='/static/img/mission1.jpg' width="120" height="120" vertical-align="middle"></div>
-                    <div style='float:left; height:130px; width:180px;'>
+    'short_desc': """<div style='float:right'><img src='/static/img/mission_thumb.png' width="160" height="110" vertical-align="middle"></div>
+                    <div style='float:left; height:120px; width:180px;'>
                     The <b>Mission</b> has been the center of the city's Chicano/Mexican-American community
-                    and is often warmer and sunnier than other parts of the city.
-                    <a href="/neighborhood/mission">Click here to learn more.</a>""",
+                    and is often warmer and sunnier than other parts of the city. 
+                    <b>Click</b> the marker to learn more.""",
     'long_desc': """The Mission includes four recognized sub-districts. The northeastern 
                     quadrant is known as a center for high tech startup businesses including some 
                     chic bars and restaurants. The northwest quadrant is famous for Victorian mansions
@@ -148,12 +148,12 @@ neighborhoods = [
     'name': 'Financial District',
     'latitude': 37.7946,
     'longitude': -122.3999,
-    'short_desc': """<div style='float:right'><img src='/static/img/financial1.jpeg' width="120" height="120"></div>
+    'short_desc': """<div style='float:right'><img src='/static/img/financial_thumb.jpeg' width="150" height="120"></div>
                     <div style='float:left; height:130px; width:180px;'>
-                    The <b>Financial District</b> serves as SF's main business district.
-                    It's home to the city's largest concentration of corporate headquarters, law firms,
+                    The <b>Financial District</b> serves as SF's main business district, housing 
+                    the city's largest concentration of corporate headquarters, law firms,
                     real estate firms and other financial institutions.
-                    <a href="/neighborhood/financial">Click here to learn more.</a>""",
+                    <b>Click</b> the marker to learn more.""",
     'long_desc': """The Financial District is home to numerous corporate headquarters including
                     6 Fortune 500 companies.  The area is marked by a cluster of high-rise towers 
                     and several shopping malls including the Ferry Building Marketplace where a 
@@ -174,11 +174,11 @@ neighborhoods = [
     'name': 'Nob Hill',
     'latitude': 37.7930,
     'longitude': -122.4161,
-    'short_desc': """<div style='float:right'><img src='/static/img/nob1.jpeg' width="120" height="120" vertical-align="middle"></div>
-                    <div style='float:left; height:130px; width:180px;'>
+    'short_desc': """<div style='float:right'><img src='/static/img/nob_thumb.jpeg' width="150" height="110" vertical-align="middle"></div>
+                    <div style='float:left; height:115px; width:170px;'>
                     <b>Nob Hill</b> is known for its numerous luxury hotels and historic mansions.
                     It has historically served as a center of San Francisco's upper class.
-                    <a href="/neighborhood/nob">Click here to learn more.</a>""",
+                    <b>Click</b> the marker to learn more.""",
     'long_desc': """Nob Hill is among the highest-income neighborhoods in the US as well as one
                     of the most desirable and expensive real estate markets in the country. 
                     It's a luxury destination in San Francisco, owing to its numerous
@@ -224,13 +224,13 @@ neighborhoods = [
     'name': 'North Beach',
     'latitude': 37.8061,
     'longitude': -122.4103,
-    'short_desc': """<div style='float:right'><img src='/static/img/north1.jpeg' width="120" height="120" vertical-align="middle"></div>
+    'short_desc': """<div style='float:right'><img src='/static/img/north_thumb.jpg' width="150" height="120" vertical-align="middle"></div>
                     <div style='float:left; height:130px; width:180px;'>
                     <b>North Beach</b> has many Italian restaurants
                     and is one of SF's main nightlife districts as well as a 
                     residential neighborhood populated with young urban professionals, 
                     families, and Chinese immigrants. 
-                    <a href="/neighborhood/north">Click here to learn more.</a>""",
+                    <b>Click</b> the marker to learn more.""",
     'long_desc': """North Beach is San Francisco's "Little Italy" and has historically been home to a
                 large Italian American population. It still has many Italian restaurants, although many other
                 ethnic groups currently live in the neighborhood. It was also the historic center of beatnik
@@ -251,12 +251,12 @@ neighborhoods = [
     'name': 'Pacific Heights',
     'latitude': 37.7925,
     'longitude': -122.4382,
-    'short_desc': """<div style='float:right'><img src='/static/img/pac1.jpg' width="120" height="120" vertical-align="middle"></div>
-                    <div style='float:left; height:130px; width:180px;'>
+    'short_desc': """<div style='float:right'><img src='/static/img/pac_thumb.png' width="160" height="110" vertical-align="middle"></div>
+                    <div style='float:left; height:120px; width:180px;'>
                     <b>Pacific Heights</b> has panoramic views of the Golden Gate Bridge, 
                     San Francisco Bay, the Palace of Fine Arts and the Presidio.
-                    It is SF's most expensive neighborhood.
-                    <a href="/neighborhood/pac">Click here to learn more.</a>""",
+                    It's SF's most expensive neighborhood. 
+                    <b>Click</b> the marker to learn more.""",
     'long_desc': """If Pacific Heights had its own zip code, it would be one of the most expensive
                     places to live in the United States.  The area is famous for its billionaire 
                     residents and record-breaking prices.   
@@ -301,12 +301,12 @@ neighborhoods = [
     'name': 'Presidio',
     'latitude': 37.7989,
     'longitude': -122.4662,
-    'short_desc': """<div style='float:right'><img src='/static/img/presidio1.jpeg' width="120" height="120" vertical-align="middle"></div>
+    'short_desc': """<div style='float:right'><img src='/static/img/presidio_thumb.jpg' width="150" height="120" vertical-align="middle"></div>
                     <div style='float:left; height:130px; width:180px;'>
                     The <b>Presidio</b> is a park and former U.S. Army military fort. It's characterized 
                     by wooded areas, hills, and scenic vistas overlooking the Golden Gate Bridge, 
-                    San Francisco Bay, and the Pacific Ocean.
-                    <a href="/neighborhood/presidio">Click here to learn more.</a>""",
+                    San Francisco Bay, and the Pacific Ocean. 
+                    <b>Click</b> the marker to learn more.""",
     'long_desc': """The Presidio is a park and former U.S. Army military fort and is part of 
                     the Golden Gate National Recreation Area. A major planned component of the Presidio's 
                     park attractions is the Tunnel Tops project, which would construct a 14-acre park 
@@ -325,12 +325,12 @@ neighborhoods = [
     'name': 'Inner Richmond',
     'latitude': 37.7781,
     'longitude': -122.4673,
-    'short_desc': """<div style='float:right'><img src='/static/img/richmond1.jpg' width="120" height="120" vertical-align="middle"></div>
-                    <div style='float:left; height:130px; width:180px;'>
+    'short_desc': """<div style='float:right'><img src='/static/img/richmond_thumb.png' width="150" height="110" vertical-align="middle"></div>
+                    <div style='float:left; height:120px; width:180px;'>
                     <b>Inner Richmond</b> is known for its Chinese, 
                     Cambodian, Korean, Burmese, and Russian cuisine. It's a diverse
-                    area with sizable Chinese and Russian populations.
-                    <a href="/neighborhood/richmond">Click here to learn more.</a>""",
+                    area with sizable Chinese and Russian populations. 
+                    <b>Click</b> the marker to learn more.""",
     'long_desc': """The Richmond has influences from the Chinese-American culture and of its 
                     three commercial strips, Clement Street, is sometimes called the second 
                     Chinatown due to the high concentration 
@@ -348,12 +348,12 @@ neighborhoods = [
     'name': 'Russian Hill',
     'latitude': 37.8011,
     'longitude': -122.4194,
-    'short_desc': """<div style='float:right'><img src='/static/img/richmond1.jpg' width="120" height="120" vertical-align="middle"></div>
+    'short_desc': """<div style='float:right'><img src='/static/img/russian_thumb.jpg' width="150" height="120" vertical-align="middle"></div>
                     <div style='float:left; height:130px; width:180px;'>
                     Views from the top of <b>Russian Hill</b> include the Bay Bridge, 
                     Marin County, and the Golden Gate Bridge. Tourists frequent the cable car 
                     line along Hyde Street, which is lined with restaurants and shops.
-                    <a href="/neighborhood/russian">Click here to learn more.</a>""",
+                    <b>Click</b> the marker to learn more.""",
     'long_desc': """Russian Hill is one of San Francisco's original "Seven Hills."
                     At the northern foot of the hill is Ghiradelli Square, Aquatic Park, and
                     Fisherman's Wharf, a popular tourist area.
@@ -373,7 +373,7 @@ neighborhoods = [
     'name': 'SoMA',
     'latitude': 37.7785,
     'longitude': -122.4056,
-    'short_desc': """<div style='float:right'><img src='/static/img/soma1.png' width="120" height="120" vertical-align="middle"></div>
+    'short_desc': """<div style='float:right'><img src='/static/img/soma_thumb.png' width="140" height="100" vertical-align="middle"></div>
                     <div style='float:left; height:130px; width:180px;'>
                     <b>SoMa</b> houses museums, technology companies, warehouses, 
                     auto repair shops, nightclubs, residential hotels, art spaces, 
@@ -493,11 +493,11 @@ for posting in postings:
 
     neighborhood_id = posting['neighborhood_id']
     user_email = posting['user_email']
-    date = posting['date']
     title = posting['title']
     desc = posting['desc']
     contact_info = posting['contact_info']
     image_url = posting['image_url']
+    date = posting['date']
 
     crud.create_posting(neighborhood_id, user_email, date, title, desc, contact_info, image_url)
 

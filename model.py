@@ -35,7 +35,7 @@ class Posting(db.Model):
     posting_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     neighborhood_id = db.Column(db.String, db.ForeignKey('neighborhoods.neighborhood_id'))
     user_email = db.Column(db.String, db.ForeignKey('users.email'))
-    date = db.Column(db.DateTime, nullable=False)
+    date = db.Column(db.Date, nullable=False)
     title = db.Column(db.Text, nullable=False)
     desc = db.Column(db.Text, nullable=False)
     contact_info = db.Column(db.Text, nullable=False)
@@ -46,7 +46,7 @@ class Posting(db.Model):
 
     def __repr__(self):
 
-        return f'<id={self.posting_id} title={self.title}, backref={self.neighborhood_id} user={self.user_email} image={self.image_url}>'
+        return f'<id={self.posting_id} date={self.date} title={self.title}, backref={self.neighborhood_id} user={self.user_email} image={self.image_url}>'
 
 
 class User(db.Model):

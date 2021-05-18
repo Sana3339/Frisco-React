@@ -7,6 +7,24 @@ const Redirect = ReactRouterDOM.Redirect;
 const useHistory = ReactRouterDOM.useHistory;
 const useLocation = ReactRouterDOM.useLocation;
 
+const Navbar = ReactBootstrap.Navbar;
+const Nav = ReactBootstrap.Nav;
+const Form = ReactBootstrap.Form;
+const FormControl = ReactBootstrap.FormControl;
+const Button = ReactBootstrap.Button;
+const Carousel = ReactBootstrap.Carousel;
+const Container = ReactBootstrap.Container;
+const Row = ReactBootstrap.Row;
+const Col = ReactBootstrap.Col;
+const Card = ReactBootstrap.Card;
+const Alert = ReactBootstrap.Alert;
+const ToggleButtonGroup = ReactBootstrap.ToggleButtonGroup;
+const ButtonGroup = ReactBootstrap.ButtonGroup;
+const ToggleButton = ReactBootstrap.ToggleButton;
+const CardDeck = ReactBootstrap.CardDeck;
+const Table = ReactBootstrap.Table;
+const Jumbotron = ReactBootstrap.Jumbotron;
+
 function Homepage() {
   let history = useHistory();
   
@@ -16,8 +34,10 @@ function Homepage() {
 
   return (
     <React.Fragment>
-      <p>Which San Francisco neighborhood should you live in?</p>
-      <button type="submit" onClick={redirectToMapPage}> Enter </button>
+      <Container>
+        <p>Which San Francisco neighborhood should you live in?</p>
+        <Button type="button" className="btn btn-light" onClick={redirectToMapPage}> Enter </Button>
+      </Container>
     </React.Fragment>
   );   
 }
@@ -152,11 +172,13 @@ function MapView(){
 
     return (
       <React.Fragment>
-        Click on a marker to learn more about the neighborhood
-        <div id="map"
-        style={{ height: "500px", width:"60%" }}
-        {...{ref}}>
-        </div>
+        <Container fluid>
+          <h4>Click on a marker to learn more about the neighborhood</h4>
+          <div id="map"
+          style={{ height: "500px", width:"60%" }}
+          {...{ref}}>
+          </div>
+        </Container>
       </React.Fragment>
     );
   }
@@ -279,6 +301,7 @@ function Neighborhood() {
   const [walkScore, setWalkScore] = React.useState();
   const [transitScore, setTransitScore] = React.useState();
   let {neighborhood_id} = ReactRouterDOM.useParams();
+  let history = useHistory();
 
 
   React.useEffect(() => {
@@ -295,21 +318,90 @@ function Neighborhood() {
     });
   }, [])
 
+  const redirectToFindHousing = () => {
+    history.push(`/housing/${neighborhood_id}`);
+  }
+  //<p><Link to={`/housing/${neighborhood_id}`}> Find {name} housing </Link></p>
+
+  const redirectToPostHousing = () => {
+    history.push(`/post/${neighborhood_id}`)
+  }
+
+  const redirectToMap = () => {
+    history.push('/map')
+  }
+  
+  //<Link to={`/post/${neighborhood_id}`}> Post {name} housing </Link>
 
   return(
     <React.Fragment>
-      <p><b>{name}</b></p>
-      <p>{desc} </p>
-      <p>Median Home Price: ${medianHomePrice}</p>
-      <p>Median Rental Price: ${medianRental}</p>
-      <p>Sq Ft Price: ${sqFtPrice}</p>
-      <p>Walk Score: {walkScore}</p>
-      <p>Transit Score: {transitScore}</p>
-      <Images neighborhood_id={neighborhood_id} />
-      <Restaurants neighborhood_id={neighborhood_id} />
-      <p><Link to={`/housing/${neighborhood_id}`}> Find {name} housing </Link></p>
-      <p><Link to={`/post/${neighborhood_id}`}> Post {name} housing </Link></p>
-      
+      <Container>
+          <Row>
+              <Col s={12} md={5}>
+                  <h3>{name}</h3>
+                  <p>{desc} </p>
+                  
+                  {/* <CardDeck>
+                    <Card>
+                      <Card.Header>Median Rental Price</Card.Header>
+                      <Card.Body>${medianRental}</Card.Body>
+                    </Card>
+                    <Card>
+                        <Card.Header>Median Home Price</Card.Header>
+                        <Card.Body>${medianHomePrice}</Card.Body> 
+                    </Card>
+                  </CardDeck>
+                  <CardDeck>
+                    <Card>
+                      <Card.Header>Transit Score</Card.Header>
+                      <Card.Body>{transitScore}</Card.Body>
+                    </Card>
+                    <Card>
+                      <Card.Header>Walk Score</Card.Header>
+                      <Card.Body>{walkScore}</Card.Body>
+                    </Card>
+                  </CardDeck> */}
+                  <Table striped bordered hover size="sm">
+                    <tbody>
+                      <tr>
+                        <td>Median Rental Price:</td>
+                        <td>${medianRental}</td>
+                      </tr>
+                      <tr>
+                        <td>Median Home Price:</td>
+                        <td>${medianHomePrice}</td>
+                      </tr>
+                      <tr>
+                        <td>Sq Ft Price:</td>
+                        <td>${sqFtPrice}</td>
+                      </tr>
+                      <tr>
+                        <td>Walk Score:</td>
+                        <td>{walkScore}</td>
+                      </tr>
+                      <tr>
+                        <td>Transit Score:</td>
+                        <td>{transitScore}</td>
+                      </tr>
+                    </tbody>
+                  </Table>
+              </Col>
+              <Col s={12} md={7}> 
+                <Images neighborhood_id={neighborhood_id} />
+              </Col>
+          </Row>
+                <h4>Restaurants</h4>
+          <Row>
+            <CardDeck>
+                <Restaurants neighborhood_id={neighborhood_id} />
+            </CardDeck>
+          </Row>
+          <Row>
+                <Button className="button-margin" variant="primary" onClick={redirectToFindHousing}>Find {name} housing</Button>
+                <Button className="button-margin" variant="primary" onClick={redirectToPostHousing}>Post {name} housing</Button>
+                <Button className="button-margin" variant="primary" onClick={redirectToMap}>Back</Button>
+          </Row>
+        </Container>
     </React.Fragment>
   );
 }
@@ -350,7 +442,7 @@ function ImageListItem(props) {
 
   return (
     <p>
-    <img className="photo" src={image_url} />
+    <img className="neighborhood-image" src={image_url} />
     </p>
   );
 }
@@ -358,18 +450,24 @@ function ImageListItem(props) {
 function RestaurantListItem(props) {
 
   return(
-    <div className="restaurant-list">
-      <p><b>{props.name}</b></p>
-      <p>Address: {props.address}</p>
-      <p>Rating: {props.rating}</p>
-      <a href={props.website} target="blank">Website</a>
+      <div>
+        <Col sm={12} m={5}>
+          <Card className="restaurant-card">
+            <Card.Body>
+              <Card.Title>{props.name}</Card.Title>
+              <Card.Text>{props.address}</Card.Text>
+              <Card.Text>Rating: {props.rating}</Card.Text>
+              <a href={props.website} target="blank">Website</a>
+          </Card.Body>
+        </Card>
+      </Col>
     </div>
   );
 }
 
 function Restaurants(props) {
 
-  const [restaurantList, setRestaurantList] = React.useState([" loading..."]);
+  const [restaurantList, setRestaurantList] = React.useState(["....loading..."]);
 
   React.useEffect(() => {
     fetch(`/api/restaurants/${props.neighborhood_id}`)
@@ -394,7 +492,6 @@ function Restaurants(props) {
 
   return(
     <React.Fragment>
-      Restaurants
         {restaurantList}
     </React.Fragment>
   );
@@ -406,6 +503,8 @@ function FindHousing(props) {
   const [postList, setPostList] = React.useState(["loading..."]);
   const [neighborhoodName, setNeighborhoodName] = React.useState(["loading..."]);
 
+  
+
      //Get neighborhood name based on neighborhood_id
   React.useEffect(() => {
     fetch(`/api/neighborhood/${neighborhood_id}`)
@@ -415,14 +514,16 @@ function FindHousing(props) {
       })
     }, [])
   
-  
+
   React.useEffect(() => {
     fetch(`/api/housing/${neighborhood_id}`)
       .then(response => response.json())
       .then((data) => {
+        
         const postFetchList = []
 
         for (const posting of data) {
+
           postFetchList.push(
             <PostListItem
               key={posting.posting_id}
@@ -442,8 +543,10 @@ function FindHousing(props) {
     
   return(
     <React.Fragment>
-      <b>{neighborhoodName} Housing</b>
-      {postList}
+      <Container>
+        <h3>{neighborhoodName} Housing</h3>
+        {postList}
+      </Container>
     </React.Fragment>
   );
 }
@@ -715,26 +818,36 @@ function CreateUser() {
 
   return(
     <React.Fragment>
-      Create Account
-      <form>
-        <p>
-          Email:
-          <input
-            type="text"
-            onChange={(event) => setEmail(event.target.value)}
-            value={email}
-          />
-        </p>
-        <p>
-          Password:
-          <input
-            type="password"
-            onChange={(event) => setPassword(event.target.value)}
-            value={password}
-          />
-          <button type="button" onClick={createNewUser}>Submit</button>
-        </p>
-      </form>
+      
+        <Jumbotron className="forms-background">
+        <Row className="justify-content-center">
+          <Card className="user-form">
+            <Card.Body>
+            <Card.Title className="text-center">Create Account</Card.Title>
+            <Form>
+
+              <Form.Group controlId="formBasicEmail">
+                <Form.Label>Email:</Form.Label>
+                <Form.Control type="email"
+                  onChange={(event) => setEmail(event.target.value)}
+                  value={email}/>
+              </Form.Group>
+
+              <Form.Group controlId="formBasicPassword">
+                <Form.Label>Password:</Form.Label>
+                <Form.Control type="password"
+                  onChange={(event) => setPassword(event.target.value)}
+                  value={password}
+                  />
+                  <Button className="form-button" type="button" onClick={createNewUser} block>Submit</Button>
+              </Form.Group>
+
+             </Form>
+            </Card.Body>
+          </Card>
+         </Row>
+         </Jumbotron>
+    
     </React.Fragment>
   );
 }
@@ -916,34 +1029,33 @@ function App() {
   return (
     <Router>
       <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/"> Home </Link>
-            </li>
-            <li>
-              <Link to="/map"> Map Container </Link>
-            </li>
-            <li>
-              <Link to="/login"> Login </Link>
-            </li>
-            <li>
-              <Link to="/logout"> Logout </Link>
-            </li>
-            <li>
-              <Link to="/create-user"> Create Account </Link>
-            </li>
-            <li>
-              <Link to="/profile"> Profile </Link>
-            </li>
-            <li>
-              <Link to="/post-housing"> Post Housing </Link>
-            </li>
-            <li>
-              <Link to="/send-email/:posting_id">Send Email</Link>
-            </li>
-          </ul>
-        </nav>
+      
+        <Navbar bg="light" sticky="top">
+          <Nav className="justify-content-end">
+            <Nav.Item>
+              <Nav.Link href="/"> Home </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link href="/map"> Neighborhoods </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link href="/login"> Login </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link href="/logout"> Logout </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link href="/create-user"> Create Account </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link to="/profile"> Profile </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link to="/post-housing"> Post Housing </Nav.Link>
+            </Nav.Item>
+          </Nav>
+        </Navbar>
+      
         <Switch>
           <Route exact path="/login">
               <Login />

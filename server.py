@@ -1,7 +1,7 @@
 from flask import (Flask, render_template, request, flash, session, redirect, jsonify)
 import requests
 from model import connect_to_db
-from datetime import datetime
+import datetime
 import os
 import crud
 import json
@@ -150,14 +150,17 @@ def show_restaurant_details(neighborhood_id):
 
 
     for i, restaurant in enumerate(data):
-        if i < 5:
+        if i < 6:
             rest_dict = {}
             
             name = data[i]['name']
-            address = data[i]['formatted_address']
+            formatted_address = data[i]['formatted_address']
             rating = data[i]['rating']
             place_id = data[i]['place_id']
             website = get_restaurant_website(place_id)
+
+            street, city, zip_code, country = formatted_address.rsplit(",")
+            address = street + "," + " SF, CA"
 
             rest_dict = {
                 'name': name,
@@ -194,8 +197,11 @@ def show_housing_postings(neighborhood_id):
     posting_list = []
 
     for posting in postings:
+
+        date = posting.date.strftime('%m/%d/%Y')
+
         post_dict = {
-            'date': posting.date,
+            'date': date,
             'title': posting.title,
             'desc': posting.desc,
             'contact_info': posting.contact_info,
@@ -278,7 +284,7 @@ def create_posting():
 
     neighborhood_id = data.get('neighborhood_id')
     email = data.get('email')
-    date = datetime.now()
+    date = datetime.date()
     title = data.get('title')
     desc = data.get('desc')
     contact_info = data.get('contact_info')
