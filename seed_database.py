@@ -29,14 +29,14 @@ neighborhoods = [
                     <b>Bernal Heights</b> is a primarily residential neighborhood with a commercial strip 
                     and a farmer's market every Saturday.
                     <a href="/neighborhood/bernal">Click here to learn more.</a>""",
-    'long_desc': """"The neighborhood is primary residential with a commercial strip along
+    'long_desc': """The neighborhood is primary residential with a commercial strip along
                     Corland Ave featuring restaurants, bars, bakeries, a fish and butchery 
                     shop and more.  It's home to the open-air Alemany Farmers' Market, 
                     one of the oldest extant farmers' markets in the US.  Bernal has not 
                     gentrified to the extent of its neighbor Noe Valley, but gentrification 
                     and property values are increasing as urban professionals replace 
                     working-class home owners and renters""",
-    'median_rent': 2704,
+    'median_rent': 2500,
     'median_home_price': 1621000,
     'sq_ft_price': 1093,
     'walk_score': 89,
@@ -63,7 +63,7 @@ neighborhoods = [
                     meanings to the word gay.  There are cafes, the Castro Theater, and many businesses 
                     that cater to or openly welcome LGBT consumers. These establishments make the Castro 
                     an area of high spending and lead to high tourist traffic.""",
-    'median_rent': 0,
+    'median_rent': 2697,
     'median_home_price': 2645000,
     'sq_ft_price': 1265,
     'walk_score': 99,
@@ -89,7 +89,7 @@ neighborhoods = [
                     upon counterculture ideals, drugs, and music. This neighborhood 
                     offered a concentrated gathering spot for hippies to create a social 
                     experiment that would soon spread throughout the nation""",
-    'median_rent': 3094,
+    'median_rent': 2595,
     'median_home_price': 3540000,
     'sq_ft_price': 1221,
     'walk_score': 97,
@@ -113,7 +113,7 @@ neighborhoods = [
                     from mostly middle-class families and pensioners to professionals in their twenties 
                     and thirties. These now make up more than half of the population, although a small, 
                     affluent older population remains""",
-    'median_rent': 2460,
+    'median_rent': 2925,
     'median_home_price': 4296000,
     'sq_ft_price': 1394,
     'walk_score': 98,
@@ -136,7 +136,7 @@ neighborhoods = [
                     and the popular Dolores Park. Two main commercial zones in the south central part of 
                     the Mission District are both popular destinationsfor their restaurants, bars, 
                     galleries and street life.""",
-    'median_rent': 2911,
+    'median_rent': 2500,
     'median_home_price': 1765000,
     'sq_ft_price': 967,
     'walk_score': 99,
@@ -162,7 +162,7 @@ neighborhoods = [
                     The Financial District is served by more than two dozen Muni bus and rail lines, 
                     including one cable car line, as well as Montgomery Street Station and 
                     Embarcadero Station in the BART system.""",
-    'median_rent': 0,
+    'median_rent': 3293,
     'median_home_price': 1599000,
     'sq_ft_price': 1283,
     'walk_score': 99,
@@ -186,7 +186,7 @@ neighborhoods = [
                     and historic landmarks. It's home to many of the city's upper class families
                     as well as a large young urban professional population and a growing Chinese
                     immigrant population from Chinatown to the east.""",
-    'median_rent': 2491,
+    'median_rent': 2500,
     'median_home_price': 1280000,
     'sq_ft_price': 1149,
     'walk_score': 99,
@@ -212,7 +212,7 @@ neighborhoods = [
                     Twin Peaks partly blocks the coastal fog and cool winds from the 
                     Pacific, making the microclimate usually sunnier and warmer than 
                     surrounding neighborhoods.""",
-    'median_rent': 2815,
+    'median_rent': 2495,
     'median_home_price': 2800000,
     'sq_ft_price': 1383,
     'walk_score': 92,
@@ -239,7 +239,7 @@ neighborhoods = [
                 The North Beach Festival street fair held annually in June is considered the city's oldest
                 and largest street fair.
                 """,
-    'median_rent': 2814,
+    'median_rent': 2600,
     'median_home_price': 1285000,
     'sq_ft_price': 1196,
     'walk_score': 99,
@@ -264,7 +264,7 @@ neighborhoods = [
                     It features two parks, Lafayette and Alta Plaza, and boasts fantastic
                     views. Visible to the north are the Golden Gate Bridge, the Marin Headlands, 
                     and Alcatraz Island. Visible to the south are Twin Peaks and the Sutro Tower.""",
-    'median_rent': 2512,
+    'median_rent': 2895,
     'median_home_price': 5600000,
     'sq_ft_price': 1620,
     'walk_score': 96,
@@ -289,7 +289,7 @@ neighborhoods = [
                     proximity to offices, shopping, dining, entertainment, 
                     freeways and a Caltrain station. Despite being surrounded by busy 
                     neighborhoods, Potrero Hill is generally quiet and sleepy.""",
-    'median_rent': 2992,
+    'median_rent': 3047,
     'median_home_price': 1898000,
     'sq_ft_price': 1101,
     'walk_score': 89,
@@ -313,7 +313,7 @@ neighborhoods = [
                     slated to be openfor public use in 2021.  It houses several visitors centers and 
                     Crissy Field Center, an urban environmental education center with programs 
                     for schools, public workshops, after-school programs, summer camps, and more.""",
-    'median_rent': 4738,
+    'median_rent': 2990,
     'median_home_price': 3600000,
     'sq_ft_price': 1200,
     'walk_score': 41,
@@ -336,7 +336,7 @@ neighborhoods = [
                     Chinatown due to the high concentration 
                     of Chinese establishments.  The Richmond also has deep Irish and 
                     Russian roots and has many Catholic and Orthodox churches.""",
-    'median_rent': 3205,
+    'median_rent': 2400,
     'median_home_price': 2305000,
     'sq_ft_price': 1016,
     'walk_score': 94,
@@ -361,7 +361,7 @@ neighborhoods = [
                     in which the roadway has eight sharp turns that have earned 
                     the street the distinction of being "the crookedest street in the world". 
                     Because of the steepness of the hill, many streets are staircases.""",
-    'median_rent': 2489,
+    'median_rent': 2800,
     'median_home_price': 3850000,
     'sq_ft_price': 1408,
     'walk_score': 97,
@@ -384,7 +384,7 @@ neighborhoods = [
                     stores in San Francisco such as Costco, REI, Nordstrom Rack, and Best Buy.
                     SOMA is home to many of San Francisco's museums, including SFMOMA, the Yerba 
                     Buena Center for the Arts and more.""",
-    'median_rent': 2992,
+    'median_rent': 2800,
     'median_home_price': 1122500,
     'sq_ft_price': 917,
     'walk_score': 97,
@@ -411,7 +411,7 @@ neighborhoods = [
                     California-grown produce, fish, eggs, and meat, as well as local food 
                     vendors and artisans.  It also includes Stern Grove, a heavily wooded park 
                     and amphitheater, known for its annual summer festival.""",
-    'median_rent': 2813,
+    'median_rent': 2395,
     'median_home_price': 1850000,
     'sq_ft_price': 1033,
     'walk_score': 95,
@@ -448,6 +448,10 @@ images = [
     {
         'image_name':'soma1.png',
         'neighborhood_id': 'soma'
+    },
+    {
+        'image_name':'nob1.jpg',
+        'neighborhood_id': 'nob'
     }
 ]
 

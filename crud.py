@@ -2,45 +2,6 @@
 
 from model import db, connect_to_db, Neighborhood, Posting, User, Image
 
-#from model import Job
-
-# def create_job(job_name, company):
-#     """Create a job application"""
-
-#     job = Job(job_name=job_name, company=company)
-
-#     db.session.add(job)
-#     db.session.commit()
-
-# def get_all_jobs():
-
-#     jobs = Job.query.all()
-
-#     return jobs
-
-# def create_job(job_name, company):
-    
-#     job = Job(job_name=job_name,
-#               company=company
-#               )
-
-#     db.session.add(job)
-#     db.session.commit()
-
-# def delete_job(job_id):
-
-#     job = Job.query.get(job_id)
-#     if job is not None:
-#         db.session.delete(job)
-#         db.session.commit()
-
-# def get_job_id(job_name, company):
-
-#     job_id = job.query.filter("job_name"==job_name, "company"==company).first()
-#     return job_id
-
-# #********************************************************************************
-
 def create_neighborhood(neighborhood_id, name, latitude, longitude,
                         short_desc, long_desc, median_rent, median_home_price,
                         sq_ft_price, walk_score, transit_score,images):

@@ -74,21 +74,21 @@ def show_neighborhood(neighborhood_id):
     median_rental = neighborhood.median_rent
     walk_score = neighborhood.walk_score
     transit_score = neighborhood.transit_score
-    #neighborhood_images = crud.create_list_of_neighborhood_images(neighborhood_id)
-    
-    #restaurant_data = show_restaurant_details(neighborhood_id)
+
+    #convert prices (integers) to strings with commas in the appropriate places to improve user readability
+    median_home_price_str = '{:,}'.format(median_home_price)
+    sq_ft_price_str = '{:,}'.format(sq_ft_price)
+    median_rental_str = '{:,}'.format(median_rental)
 
     neighborhood_obj = {
         'neighborhood_id': neighborhood_id,
         'name': name,
         'long_desc': long_desc,
-        'median_home_price': median_home_price,
-        'sq_ft_price': sq_ft_price,
-        'median_rental': median_rental,
+        'median_home_price': median_home_price_str,
+        'sq_ft_price': sq_ft_price_str,
+        'median_rental': median_rental_str,
         'walk_score': walk_score,
         'transit_score': transit_score,
-        #'restaurant_data':restaurant_data,
-        #images=neighborhood_images
     }
 
     return jsonify(neighborhood_obj)
@@ -131,6 +131,29 @@ def get_restaurant_website(place_id):
     
     return website
 
+#The route below uses the restaurant's Google Place ID to get the 'photo reference' url for the
+#first photo.  We then use the photo reference to create the url that displays the photo"
+@app.route('/api/photo.json/<place_id>')
+def get_restaurant_photo(place_id):
+    """Send restaurant id to Google Places Search API endpoint to get restaurant photo reference id.
+    
+    Use photo reference id to create photo url (to be sent to front-end to dispaly photo in restaurant results)"""
+    
+    payload = {"key": GOOG_API_KEY,
+                "place_id": place_id,
+                "fields": "photo" }
+
+    res = requests.get('https://maps.googleapis.com/maps/api/place/details/json', params=payload)
+
+    converted_res = res.json()
+    first_photo = converted_res["result"]["photos"][1]
+    photo_reference = first_photo["photo_reference"]
+
+    photo_url = f"https://maps.googleapis.com/maps/api/place/photo?key={GOOG_API_KEY}&photoreference={photo_reference}&maxheight=180"
+    
+    return photo_url
+
+
 @app.route('/api/restaurants/<neighborhood_id>')
 def show_restaurant_details(neighborhood_id):
     """Show a list of restaurants for a given neighborhood_id"""
@@ -150,6 +173,7 @@ def show_restaurant_details(neighborhood_id):
 
 
     for i, restaurant in enumerate(data):
+        
         if i < 6:
             rest_dict = {}
             
@@ -158,35 +182,26 @@ def show_restaurant_details(neighborhood_id):
             rating = data[i]['rating']
             place_id = data[i]['place_id']
             website = get_restaurant_website(place_id)
+            photo = get_restaurant_photo(place_id)
 
-            street, city, zip_code, country = formatted_address.rsplit(",")
-            address = street + "," + " SF, CA"
+            street_address = formatted_address.rsplit(",")[0]
+            address = street_address + "," + " SF, CA"
 
             rest_dict = {
                 'name': name,
                 'address': address,
                 'rating': rating,
                 'website': website,
-                'place_id': place_id
+                'place_id': place_id,
+                'photo': photo
             }
 
             restaurant_list.append(rest_dict)
-        
 
-    #I'm creating an empty list to limit the API search results to 5. 
-    #This limitation allows us to do a separate API call and add the website to our search results
-    #If you don't limit it, you will get a 'key error' for the 'website' field and the page won't load
-    # limited_data = []
+            #Below we are sorting the list of restaurant dictionaries in descending order by their rating
+            sorted_restaurant_list = sorted(restaurant_list, key=lambda i: i['rating'], reverse=True)
 
-    # for i in range(5):
-    #     limited_data.append(data[i])    
-    
-    # # for i in range(5):
-    # #     place_id = search_results["results"][i].get("place_id")
-    # #     website = get_restaurant_website(place_id)
-    # #     limited_data[i]["website"] = website
-
-    return jsonify(restaurant_list)
+    return jsonify(sorted_restaurant_list)
 
 @app.route('/api/housing/<neighborhood_id>')
 def show_housing_postings(neighborhood_id):

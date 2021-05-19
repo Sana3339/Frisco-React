@@ -429,6 +429,7 @@ function Images(props) {
     })
   }, [])
 
+
   return(
     <React.Fragment>
         {imageList}
@@ -441,9 +442,9 @@ function ImageListItem(props) {
   const image_url = `/static/img/${props.image_name}`
 
   return (
-    <p>
+   
     <img className="neighborhood-image" src={image_url} />
-    </p>
+    
   );
 }
 
@@ -454,9 +455,10 @@ function RestaurantListItem(props) {
         <Col sm={12} m={5}>
           <Card className="restaurant-card">
             <Card.Body>
-              <Card.Title>{props.name}</Card.Title>
-              <Card.Text>{props.address}</Card.Text>
-              <Card.Text>Rating: {props.rating}</Card.Text>
+              <Card.Img className="card-img-top" variant="top" src={props.photo} />
+              <Card.Title style={{fontSize: 17}}>{props.name}</Card.Title>
+              <Card.Text style={{fontSize: 14}}>{props.address}</Card.Text>
+              <Card.Text style={{fontSize: 14}}>Rating: {props.rating}</Card.Text>
               <a href={props.website} target="blank">Website</a>
           </Card.Body>
         </Card>
@@ -483,6 +485,7 @@ function Restaurants(props) {
               address={restaurant.address}
               rating={restaurant.rating}
               website={restaurant.website}
+              photo={restaurant.photo}
             />
           );
         }
