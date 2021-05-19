@@ -15,8 +15,8 @@ CLOUDINARY_API_KEY = os.environ['CLOUDINARY_API_KEY']
 CLOUDINARY_SECRET = os.environ['CLOUDINARY_SECRET']
 
 
-@app.route("/<path:path>")
 @app.route("/", defaults={"path": ""})
+@app.route("/<path:path>")
 def catch_all(path):
     return render_template("root.html")
 

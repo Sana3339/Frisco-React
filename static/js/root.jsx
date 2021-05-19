@@ -110,17 +110,17 @@ function MapView(){
             map:gMap
             });
 
-            marker.addListener("click", () => {
+            marker.addListener("dblclick", () => {
               history.push(`/neighborhood/${aMarker.neighborhood_id}`);
             })
 
-            marker.addListener("mouseover", () => {
+            marker.addListener("click", () => {
               infoWindow.open(gMap,marker)
               });
             
-            marker.addListener("mouseout", () => {
-              infoWindow.close(gMap,marker)
-            });
+            // marker.addListener("mouseout", () => {
+            //   infoWindow.close(gMap,marker)
+            // });
         } else {
           const infoWindow = new google.maps.InfoWindow({
             content: aMarker.windowContent,
@@ -133,18 +133,18 @@ function MapView(){
             map:gMap
             });
 
-            marker.addListener("click", () => {
+            marker.addListener("dblclick", () => {
               history.push(`/neighborhood/${aMarker.neighborhood_id}`);
               console.log(aMarker.neighborhood_id);
             })
 
-            marker.addListener("mouseover", () => {
+            marker.addListener("click", () => {
               infoWindow.open(gMap,marker)
               });
             
-            marker.addListener("mouseout", () => {
-              infoWindow.close(gMap,marker)
-            });
+            // marker.addListener("mouseout", () => {
+            //   infoWindow.close(gMap,marker)
+            // });
           }
          }
        })
@@ -248,15 +248,15 @@ function MapHousing() {
             map:gMap
             });
 
-            marker.addListener("click", () => {
+            marker.addListener("dblclick", () => {
               history.push(`/post/${aMarker.neighborhood_id}`);
             })
-            marker.addListener("mouseover", () => {
+            marker.addListener("click", () => {
               infoWindow.open(gMap,marker)
               });
-            marker.addListener("mouseout", () => {
-              infoWindow.close(gMap,marker)
-            });
+            // marker.addListener("mouseout", () => {
+            //   infoWindow.close(gMap,marker)
+            // });
         }
       })
      addMarkers();
@@ -917,32 +917,42 @@ function Login(props) {
 
   return (
     <React.Fragment>
-      
+      <Jumbotron className="forms-background">
+        <Row className="justify-content-center">
+          <Card className="user-form">
+            <Card.Body>
+              <Card.Title className="text-center">Login</Card.Title>
+                <Form>
+                  
+                You must be logged in to post housing.
+              
+                <Form.Group controlId="formBasicEmail">
+                <Form.Label>Email:</Form.Label>
+                  <Form.Control
+                    type="text"
+                    onChange={(event) => setEmail(event.target.value)}
+                    value={email || ''}
+                    />
+                  </Form.Group>
 
-      <p><b>Login</b></p>
-
-      You must be logged in to post housing.
-    <form>
-      <p>
-      Email:
-      <input 
-        type="text"
-        onChange={(event) => setEmail(event.target.value)}
-        value={email || ''}
-        />
-      </p>
-      <p>
-      Password:
-      <input 
-        type="password"
-        onChange={(event) => setPassword(event.target.value)}
-        value={password || ''}
-        />
-        <button type="button" onClick={loginUser}> Login </button> 
-      </p>
-    </form>
-      Not registered? &nbsp;
-      <Link to="/create-user">Create account</Link>
+                  <Form.Group controlId="formBasicPassword">
+                    <Form.Label>Password:</Form.Label>
+                      <Form.Control
+                        type="password"
+                        onChange={(event) => setPassword(event.target.value)}
+                        value={password || ''}
+                        />
+                        <Button className="form-button" type="button" onClick={loginUser} block> Login </Button> 
+                    </Form.Group>
+                
+                    <Form.Text className="muted"> Not registered? &nbsp;
+                        <Link to="/create-user">Create an account</Link>
+                  </Form.Text>
+                </Form>
+              </Card.Body>
+          </Card>
+        </Row>
+      </Jumbotron>
     </React.Fragment>
   );
 }
@@ -1066,13 +1076,13 @@ function App() {
             <Route exact path="/create-user">
               <CreateUser />
             </Route>
-            <Route path="/neighborhood/:neighborhood_id">
+            <Route exact path="/neighborhood/:neighborhood_id">
               <Neighborhood />
             </Route>
             <Route path="/housing/:neighborhood_id">
               <FindHousing />
             </Route>
-            <PrivateRoute path="/post/:neighborhood_id">
+            <PrivateRoute exact path="/post/:neighborhood_id">
               <PostHousing />
             </PrivateRoute>
             <PrivateRoute exact path="/profile">
@@ -1084,11 +1094,11 @@ function App() {
             <Route exact path="/map">
               <MapView />
             </Route>       
-            <Route exact path="/">
-              <Homepage />
-            </Route>
             <Route exact path="/send-email/:posting_id">
                 <ContactSellerForm />
+            </Route>
+            <Route exact path="/">
+              <Homepage />
             </Route>
           </Switch>
         </div>
