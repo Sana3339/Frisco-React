@@ -28,7 +28,7 @@ neighborhoods = [
                     <div style='float:left; height:130px; width:180px;'>
                     <b>Bernal Heights</b> is a primarily residential neighborhood with a commercial strip 
                     and a farmer's market every Saturday.
-                    <a href="/neighborhood/bernal">Click here to learn more.</a>""",
+                    <b>Click the marker</b> to learn more.""",
     'long_desc': """The neighborhood is primary residential with a commercial strip along
                     Corland Ave featuring restaurants, bars, bakeries, a fish and butchery 
                     shop and more.  It's home to the open-air Alemany Farmers' Market, 
@@ -53,7 +53,7 @@ neighborhoods = [
                     The <b>Castro</b> was one of the first gay neighborhoods in the US.
                     It's currently among the most prominent symbols of lesbian, gay,
                     bisexual and transgender (LGBT) activism and events in the world. 
-                    <b>Click</b> the marker to learn more.""",
+                    <b>Click the marker</b> to learn more.""",
     'long_desc': """The Castro was one of the first gay neighborhoods in the US. One of its more
                     notable features is Castro Theatre, a movie palace built in 1922 and one of 
                     San Francisco's premier movie houses. 18th and Castro is a major intersection 
@@ -80,7 +80,7 @@ neighborhoods = [
                     is known as a main center of the 
                     hippie and counterculture of the 1960s. The Summer of Love (1967)
                     has been synonymous with the neighborhood ever since. 
-                    <b>Click</b> the marker to learn more.""",
+                    <b>Click the marker</b> to learn more.""",
     'long_desc': """Haight-Ashbury is known as one of the main centers of the 
                     hippie and counterculture of the 1960s. The mainstream media's 
                     coverage of hippie life in the Haight-Ashbury drew the attention 
@@ -88,13 +88,36 @@ neighborhoods = [
                     district was sought out by hippies to constitute a community based 
                     upon counterculture ideals, drugs, and music. This neighborhood 
                     offered a concentrated gathering spot for hippies to create a social 
-                    experiment that would soon spread throughout the nation""",
+                    experiment that would soon spread throughout the nation.""",
     'median_rent': 2595,
     'median_home_price': 3540000,
     'sq_ft_price': 1221,
     'walk_score': 97,
     'transit_score': 80,
     'images': '/static/img/haight1.png, /static/img/haight2.jpeg, /static/img/haight3.jpeg'   
+    },
+      {
+    'neighborhood_id': 'japantown',
+    'name': 'Japantown',
+    'latitude': 37.7854,
+    'longitude': -122.4294,
+    'short_desc': """<div style='float:right'><img src='/static/img/japantown_thumb.png' width="150" height="110"></div>
+                    <div style='float:left; height:120px; width:180px;'>
+                    <b>Japantown</b> 
+                    is home to Japanese restaurants, supermarkets, indoor shopping malls,
+                    hotels, banks and more. It's considered one of the largest and oldestest
+                    ethnic encleves in the US.
+                    <b>Click the marker</b> to learn more.""",
+    'long_desc': """Japantown celebrates 2 major festivals every year: The Cherry Blossom Festival 
+                    and the Nihonmaschi Street Fair. Its focal point is the Japan Center and is the 
+                    site of 3 Japanese-oriented shopping centers. The area is within the SF Unified
+                    School District and Rosa Parks Elementary School is located nearby.""",
+    'median_rent': 2400,
+    'median_home_price': 875000,
+    'sq_ft_price': 987,
+    'walk_score': 96,
+    'transit_score': 89,
+    'images': ''   
     },
     {
     'neighborhood_id': 'marina',
@@ -105,7 +128,7 @@ neighborhoods = [
                     <div style='float:left; height:130px; width:180px;'>
                     The <b>Marina</b> has the highest non-Hispanic white resident percentage of any neighborhood in SF. 
                     Chestnut Street is an attraction, lined with stores, restaurants, coffee shops and bars.
-                    <b>Click</b> the marker to learn more.""",
+                    <b>Click the marker</b> to learn more.""",
     'long_desc': """The Marina is most famous for the Palace of Fine Arts, which is a year-round attraction
                     for tourists and locals and is used as a location for weddings and wedding-related photography.
 
@@ -129,7 +152,7 @@ neighborhoods = [
                     <div style='float:left; height:120px; width:180px;'>
                     The <b>Mission</b> has been the center of the city's Chicano/Mexican-American community
                     and is often warmer and sunnier than other parts of the city. 
-                    <b>Click</b> the marker to learn more.""",
+                    <b>Click the marker</b> to learn more.""",
     'long_desc': """The Mission includes four recognized sub-districts. The northeastern 
                     quadrant is known as a center for high tech startup businesses including some 
                     chic bars and restaurants. The northwest quadrant is famous for Victorian mansions
@@ -153,7 +176,7 @@ neighborhoods = [
                     The <b>Financial District</b> serves as SF's main business district, housing 
                     the city's largest concentration of corporate headquarters, law firms,
                     real estate firms and other financial institutions.
-                    <b>Click</b> the marker to learn more.""",
+                    <b>Click the marker</b> to learn more.""",
     'long_desc': """The Financial District is home to numerous corporate headquarters including
                     6 Fortune 500 companies.  The area is marked by a cluster of high-rise towers 
                     and several shopping malls including the Ferry Building Marketplace where a 
@@ -178,8 +201,8 @@ neighborhoods = [
                     <div style='float:left; height:115px; width:170px;'>
                     <b>Nob Hill</b> is known for its numerous luxury hotels and historic mansions.
                     It has historically served as a center of San Francisco's upper class.
-                    <b>Click</b> the marker to learn more.""",
-    'long_desc': """Nob Hill is among the highest-income neighborhoods in the US as well as one
+                    <b>Click the marker</b> to learn more.""",
+    'long_desc': """Nob Hill is among the highest-income neighborhoods in the US and one
                     of the most desirable and expensive real estate markets in the country. 
                     It's a luxury destination in San Francisco, owing to its numerous
                     Michelin-starred restaurants, boutiques, cultural institutions, art galleries,
@@ -203,7 +226,7 @@ neighborhoods = [
                     <b>Noe Valley</b> is home to many young professional
                     couples with children and is known as 'Stroller Valley'. Its microclimate is 
                     sunnier and warmer than other neighborhoods. 
-                    <a href="/neighborhood/noe">Click here to learn more.</a>""",
+                    <b>Click the marker</b> to learn more.""",
     'long_desc': """Noe Valley started is considered an upper-middle class/wealthy 
                     neighborhood. It's home to many urban professionals, particularly young 
                     couples with children. It is colloquially known as Stroller Valley, 
@@ -230,7 +253,7 @@ neighborhoods = [
                     and is one of SF's main nightlife districts as well as a 
                     residential neighborhood populated with young urban professionals, 
                     families, and Chinese immigrants. 
-                    <b>Click</b> the marker to learn more.""",
+                    <b>Click the marker</b> to learn more.""",
     'long_desc': """North Beach is San Francisco's "Little Italy" and has historically been home to a
                 large Italian American population. It still has many Italian restaurants, although many other
                 ethnic groups currently live in the neighborhood. It was also the historic center of beatnik
@@ -256,7 +279,7 @@ neighborhoods = [
                     <b>Pacific Heights</b> has panoramic views of the Golden Gate Bridge, 
                     San Francisco Bay, the Palace of Fine Arts and the Presidio.
                     It's SF's most expensive neighborhood. 
-                    <b>Click</b> the marker to learn more.""",
+                    <b>Click the marker</b> to learn more.""",
     'long_desc': """If Pacific Heights had its own zip code, it would be one of the most expensive
                     places to live in the United States.  The area is famous for its billionaire 
                     residents and record-breaking prices.   
@@ -281,7 +304,7 @@ neighborhoods = [
                     <b>Potrero Hill</b> is known for its views of the San Francisco Bay and city skyline, 
                     its proximity to many destination spots, its sunny weather, and having 
                     two freeways and a Caltrain station. 
-                    <a href="/neighborhood/potrero">Click here to learn more.</a>""",
+                    <b>Click the marker</b> to learn more.""",
     'long_desc': """Potrero Hill is one of the sunniest neighborhoods in San Francisco.
                     It's a residential neighborhood and not considered a tourist destination. 
                     Although it's most walkable neighborhood in San Francisco due to 
@@ -306,7 +329,7 @@ neighborhoods = [
                     The <b>Presidio</b> is a park and former U.S. Army military fort. It's characterized 
                     by wooded areas, hills, and scenic vistas overlooking the Golden Gate Bridge, 
                     San Francisco Bay, and the Pacific Ocean. 
-                    <b>Click</b> the marker to learn more.""",
+                    <b>Click the marker</b> to learn more.""",
     'long_desc': """The Presidio is a park and former U.S. Army military fort and is part of 
                     the Golden Gate National Recreation Area. A major planned component of the Presidio's 
                     park attractions is the Tunnel Tops project, which would construct a 14-acre park 
@@ -330,7 +353,7 @@ neighborhoods = [
                     <b>Inner Richmond</b> is known for its Chinese, 
                     Cambodian, Korean, Burmese, and Russian cuisine. It's a diverse
                     area with sizable Chinese and Russian populations. 
-                    <b>Click</b> the marker to learn more.""",
+                    <b>Click the marker</b> to learn more.""",
     'long_desc': """The Richmond has influences from the Chinese-American culture and of its 
                     three commercial strips, Clement Street, is sometimes called the second 
                     Chinatown due to the high concentration 
@@ -353,7 +376,7 @@ neighborhoods = [
                     Views from the top of <b>Russian Hill</b> include the Bay Bridge, 
                     Marin County, and the Golden Gate Bridge. Tourists frequent the cable car 
                     line along Hyde Street, which is lined with restaurants and shops.
-                    <b>Click</b> the marker to learn more.""",
+                    <b>Click the marker</b> to learn more.""",
     'long_desc': """Russian Hill is one of San Francisco's original "Seven Hills."
                     At the northern foot of the hill is Ghiradelli Square, Aquatic Park, and
                     Fisherman's Wharf, a popular tourist area.
@@ -373,12 +396,12 @@ neighborhoods = [
     'name': 'SoMA',
     'latitude': 37.7785,
     'longitude': -122.4056,
-    'short_desc': """<div style='float:right'><img src='/static/img/soma_thumb.png' width="140" height="100" vertical-align="middle"></div>
+    'short_desc': """<div style='float:right'><img src='/static/img/soma.jpg' width="140" height="100" vertical-align="middle"></div>
                     <div style='float:left; height:130px; width:180px;'>
                     <b>SoMa</b> houses museums, technology companies, warehouses, 
                     auto repair shops, nightclubs, residential hotels, art spaces, 
                     loft apartments, furniture showrooms and condominiums.
-                    <a href="/neighborhood/soma">Click here to learn more.</a>""",
+                    <b>Click the marker</b> to learn more.""",
     'long_desc': """Many major software and technology companies have headquarters and offices 
                     here and the area is home to The area is also home to the few Big-box 
                     stores in San Francisco such as Costco, REI, Nordstrom Rack, and Best Buy.
@@ -401,7 +424,7 @@ neighborhoods = [
                     The <b>Inner Sunset</b> has a variety of local businesses including restaurants, 
                     bars, breweries, book stores, bakeries, ice cream parlors, 
                     clothing stores, a tattoo parlor, a wine bar and more.
-                    <a href="/neighborhood/sunset">Click here to learn more.</a>""",
+                    <b>Click the marker</b> to learn more.""",
     'long_desc': """The Sunset district has a cool summer mediterranean 
                     climate, albeit with an unusual annual temperature distribution. 
                     The warmest days of the year occur in October and then the coldest 
@@ -417,6 +440,28 @@ neighborhoods = [
     'walk_score': 95,
     'transit_score': 72,
     'images': '/static/img/sunset1.jpeg, /static/img/sunset2.jpeg, /static/img/sunset3.jpeg'  
+    },
+    {
+    'neighborhood_id': 'tenderloin',
+    'name': 'Tenderloin',
+    'latitude': 37.7847,
+    'longitude': -122.4145,
+    'short_desc': """<div style='float:right'><img src='/static/img/tenderloin1.jpeg' width="120" height="120" vertical-align="middle"></div>
+                    <div style='float:left; height:130px; width:180px;'>
+                    The <b>Tenderloin</b> has resisted gentrification, maintaining a seedy character
+                    and reputation for crime. Squalid conditions, homelessness, drugs and 
+                    prostitution are prevalent.
+                    <b>Click the marker</b> to learn more.""",
+    'long_desc': """The Tenderloin is a high-crime neighborhood, particularly violent street crime such
+                as robbery and aggravated assault. Graffiti and art tagging are a common problem in the 
+                neighborhood, as are dealing and use of illicit drugs occuring on the streets. It serves as a mecca
+                for the art scene in SF and is home to mural work by a number of artists.""",
+    'median_rent': 1895,
+    'median_home_price': 970000, 
+    'sq_ft_price': 957,
+    'walk_score': 99,
+    'transit_score': 100,
+    'images': ''  
     }
 ]
 

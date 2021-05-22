@@ -174,7 +174,7 @@ def show_restaurant_details(neighborhood_id):
 
     for i, restaurant in enumerate(data):
         
-        if i < 6:
+        if i < 4:
             rest_dict = {}
             
             name = data[i]['name']
@@ -279,8 +279,11 @@ def get_user_postings():
     posting_list = []
 
     for posting in postings:
+
+        date = posting.date.strftime('%m/%d/%Y')
+
         post_dict = {
-            'date': posting.date,
+            'date': date,
             'title': posting.title,
             'desc': posting.desc,
             'contact_info': posting.contact_info,
@@ -299,7 +302,7 @@ def create_posting():
 
     neighborhood_id = data.get('neighborhood_id')
     email = data.get('email')
-    date = datetime.date()
+    date = datetime.datetime.now()
     title = data.get('title')
     desc = data.get('desc')
     contact_info = data.get('contact_info')
