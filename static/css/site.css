@@ -26,6 +26,15 @@
 }
 
 /* Background for login form */
+.Frisco-background {
+  background-image: url("/static/img/Frisco.jpeg");
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Background for login form */
 .login-background {
   background-image: url("/static/img/login_background.png");
   height: 100vh;
@@ -79,16 +88,19 @@
 }
 
 #Frisco {
-  margin-top: 6%;
+  margin-top: 3%;
   font-size: 5rem;
+  font-family: 'Great Vibes', cursive;
+  text-shadow: 4px 4px 4px #aaa;
 }
 
 #subheading-Frisco {
-  margin-top: 3%;
+  margin-top: 2%;
 }
 
 #button-Frisco {
-  margin-top: 3%;
+  margin-top: 8%;
+  margin-bottom: 2%;
 }
 
 .neighborhood-header {
@@ -217,4 +229,9 @@ table {
 .contact-seller-textarea{
   width: 17rem;
   height: 7rem;
+}
+
+.carousel-item {
+  width: 100%;
+  height: 30rem;
 }

@@ -54,9 +54,7 @@ neighborhoods = [
                     It's currently among the most prominent symbols of lesbian, gay,
                     bisexual and transgender (LGBT) activism and events in the world. 
                     <b>Click the marker</b> to learn more.""",
-    'long_desc': """The Castro was one of the first gay neighborhoods in the US. One of its more
-                    notable features is Castro Theatre, a movie palace built in 1922 and one of 
-                    San Francisco's premier movie houses. 18th and Castro is a major intersection 
+    'long_desc': """The Castro was one of the first gay neighborhoods in the US. 18th and Castro is a major intersection 
                     where many historic events, marches, and protests have taken and continue to take place.
                     The Castro is a "thriving marketplace for all things gay" meaning everything 
                     in the area is catered to people who identify with LGBT culture and other associated 
@@ -108,7 +106,7 @@ neighborhoods = [
                     hotels, banks and more. It's considered one of the largest and oldestest
                     ethnic encleves in the US.
                     <b>Click the marker</b> to learn more.""",
-    'long_desc': """Japantown celebrates 2 major festivals every year: The Cherry Blossom Festival 
+    'long_desc': """Japantown celebrates 2 major festivals every year: the Cherry Blossom Festival 
                     and the Nihonmaschi Street Fair. Its focal point is the Japan Center and is the 
                     site of 3 Japanese-oriented shopping centers. The area is within the SF Unified
                     School District and Rosa Parks Elementary School is located nearby.""",
@@ -135,7 +133,7 @@ neighborhoods = [
                     The neighborhood is also noted for its demographics, which since the 1980s have shifted 
                     from mostly middle-class families and pensioners to professionals in their twenties 
                     and thirties. These now make up more than half of the population, although a small, 
-                    affluent older population remains""",
+                    affluent older population remains.""",
     'median_rent': 2925,
     'median_home_price': 4296000,
     'sq_ft_price': 1394,
@@ -154,10 +152,10 @@ neighborhoods = [
                     and is often warmer and sunnier than other parts of the city. 
                     <b>Click the marker</b> to learn more.""",
     'long_desc': """The Mission includes four recognized sub-districts. The northeastern 
-                    quadrant is known as a center for high tech startup businesses including some 
+                    quadrant is known as a center for high-tech startup businesses including some 
                     chic bars and restaurants. The northwest quadrant is famous for Victorian mansions
                     and the popular Dolores Park. Two main commercial zones in the south central part of 
-                    the Mission District are both popular destinationsfor their restaurants, bars, 
+                    the Mission District are both popular destinations for their restaurants, bars, 
                     galleries and street life.""",
     'median_rent': 2500,
     'median_home_price': 1765000,
@@ -202,7 +200,7 @@ neighborhoods = [
                     <b>Nob Hill</b> is known for its numerous luxury hotels and historic mansions.
                     It has historically served as a center of San Francisco's upper class.
                     <b>Click the marker</b> to learn more.""",
-    'long_desc': """Nob Hill is among the highest-income neighborhoods in the US and one
+    'long_desc': """Nob Hill is among the highest-income neighborhoods in the United States and one
                     of the most desirable and expensive real estate markets in the country. 
                     It's a luxury destination in San Francisco, owing to its numerous
                     Michelin-starred restaurants, boutiques, cultural institutions, art galleries,
@@ -229,7 +227,7 @@ neighborhoods = [
                     <b>Click the marker</b> to learn more.""",
     'long_desc': """Noe Valley started is considered an upper-middle class/wealthy 
                     neighborhood. It's home to many urban professionals, particularly young 
-                    couples with children. It is colloquially known as Stroller Valley, 
+                    couples with children. It is colloquially known as Stroller Valley 
                     for the many strollers in the neighborhood. 
                     One of the attractions of Noe Valley is that the adjacent 
                     Twin Peaks partly blocks the coastal fog and cool winds from the 
@@ -307,7 +305,7 @@ neighborhoods = [
                     <b>Click the marker</b> to learn more.""",
     'long_desc': """Potrero Hill is one of the sunniest neighborhoods in San Francisco.
                     It's a residential neighborhood and not considered a tourist destination. 
-                    Although it's most walkable neighborhood in San Francisco due to 
+                    Although it's the most walkable neighborhood in San Francisco due to 
                     its hills, it's generally considered a convenient location due to its 
                     proximity to offices, shopping, dining, entertainment, 
                     freeways and a Caltrain station. Despite being surrounded by busy 
@@ -354,8 +352,8 @@ neighborhoods = [
                     Cambodian, Korean, Burmese, and Russian cuisine. It's a diverse
                     area with sizable Chinese and Russian populations. 
                     <b>Click the marker</b> to learn more.""",
-    'long_desc': """The Richmond has influences from the Chinese-American culture and of its 
-                    three commercial strips, Clement Street, is sometimes called the second 
+    'long_desc': """The Richmond has influences from Chinese-American culture, and of its 
+                    three commercial strips, Clement Street is sometimes called the second 
                     Chinatown due to the high concentration 
                     of Chinese establishments.  The Richmond also has deep Irish and 
                     Russian roots and has many Catholic and Orthodox churches.""",
@@ -427,10 +425,10 @@ neighborhoods = [
                     <b>Click the marker</b> to learn more.""",
     'long_desc': """The Sunset district has a cool summer mediterranean 
                     climate, albeit with an unusual annual temperature distribution. 
-                    The warmest days of the year occur in October and then the coldest 
+                    The warmest days of the year occur in October and the coldest 
                     nights of the year occur just two months later in December.
 
-                    There is a year-round, Sunday morning farmers' market offering 
+                    There is a year-round Sunday morning farmers' market offering 
                     California-grown produce, fish, eggs, and meat, as well as local food 
                     vendors and artisans.  It also includes Stern Grove, a heavily wooded park 
                     and amphitheater, known for its annual summer festival.""",
@@ -455,7 +453,7 @@ neighborhoods = [
     'long_desc': """The Tenderloin is a high-crime neighborhood, particularly violent street crime such
                 as robbery and aggravated assault. Graffiti and art tagging are a common problem in the 
                 neighborhood, as are dealing and use of illicit drugs occuring on the streets. It serves as a mecca
-                for the art scene in SF and is home to mural work by a number of artists.""",
+                for the art scene in San Francisco and is home to mural work by a number of artists.""",
     'median_rent': 1895,
     'median_home_price': 970000, 
     'sq_ft_price': 957,
@@ -499,7 +497,7 @@ images = [
         'neighborhood_id': 'financial'
     },
     {
-        'image_name':'haight1.png',
+        'image_name':'haight.jpg',
         'neighborhood_id': 'haight'
     },
     {

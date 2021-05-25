@@ -34,20 +34,24 @@ function Homepage() {
 
   return (
     <React.Fragment>
-      <Container>
-        <div className="block-center">
-          <h1 id="Frisco">Frisco</h1>
-          <h4 id="subheading-Frisco">Which San Francisco neighborhood should you live in?</h4>
-          <Button id="button-Frisco" type="button" className="btn btn-warning" onClick={redirectToMapPage}> Enter </Button>
-        </div>
-      </Container>
+      
+        <Jumbotron className="Frisco-background">
+          <Row className="justify-content-center">
+            <div className="block-center">
+              <h1 id="Frisco">Frisco</h1>
+              <h4 id="subheading-Frisco">Which San Francisco neighborhood should you live in?</h4>
+              <Button id="button-Frisco" type="button" variant="light" onClick={redirectToMapPage}> Enter </Button>
+            </div>
+          </Row>
+        </Jumbotron>
+      
     </React.Fragment>
   );   
 }
 
 function MapView(){
   const options = {
-    zoom:12.2,
+    zoom:12.5,
     center:{lat:37.7822, lng:-122.4342}
     };
   const ref = React.useRef();
@@ -191,7 +195,7 @@ function MapView(){
 
 function MapHousing() {
   const options = {
-    zoom:12.2,
+    zoom:12.5,
     center:{lat:37.7822, lng:-122.4342}
     };
   const ref = React.useRef();
@@ -597,7 +601,7 @@ function PostHousing() {
     .then(response => response.json())
     .then(data => {
       if (data === "Success") {
-        alert('Post added')
+        alert('Post added.')
       }
     });
     history.push('/profile');
