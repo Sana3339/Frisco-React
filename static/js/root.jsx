@@ -38,7 +38,7 @@ function Homepage() {
         <div className="block-center">
           <h1 id="Frisco">Frisco</h1>
           <h4 id="subheading-Frisco">Which San Francisco neighborhood should you live in?</h4>
-          <Button id="button-Frisco" type="button" className="btn btn-warning btn-sm" onClick={redirectToMapPage}> Enter </Button>
+          <Button id="button-Frisco" type="button" className="btn btn-warning" onClick={redirectToMapPage}> Enter </Button>
         </div>
       </Container>
     </React.Fragment>
@@ -372,8 +372,7 @@ function Neighborhood() {
                     </tbody>
                   </Table>
                 </Col>
-              <Col s={12} md={7
-              }> 
+              <Col s={12} md={7}> 
                 <Images neighborhood_id={neighborhood_id} />
                 <Row>
                   <Col sm={4}>
@@ -389,7 +388,7 @@ function Neighborhood() {
               </Col>
             </Row>
          <Row>  
-              <h5>{name} Restaurants</h5>  
+              <h5>&nbsp; {name} Restaurants</h5>  
           </Row>
           <Row>
             <div className="card-deck">
@@ -549,7 +548,8 @@ function FindHousing(props) {
   return(
     <React.Fragment>
       <Container>
-        <h3>{neighborhoodName} Housing</h3>
+        <h3 className="find-housing-title">{neighborhoodName} Housing</h3>
+        <hr></hr>
         {postList}
       </Container>
     </React.Fragment>
@@ -622,7 +622,7 @@ function PostHousing() {
   
   return (
     <React.Fragment>
-        <Jumbotron className="create-account-background">
+        <Jumbotron className="post-housing-background">
           <Row className="justify-content-center">
             <Col sm={12} md={8}>
             <Card className="post-housing-form bg-light">
@@ -656,7 +656,7 @@ function PostHousing() {
                       <button onClick={uploadImage}>Upload</button>
                     </div>
                     <div>
-                        <img className="posting-image" src={url} />
+                        <img className="input-posting-image" src={url} />
                     </div>
                 <Button className="posting-form-button" onClick={createNewPost}> Add Posting </Button>
               
@@ -681,13 +681,11 @@ function PostListItem(props){
 
   return(
     <React.Fragment>
-        <Card.Title>{props.date}{props.title}</Card.Title>
-        <p></p>
-        <p></p>
-        <p>{props.desc}</p>
-        <p>{props.contact_info}</p>   
-        <img src={props.image_url} />
-        <button onClick={redirectToContact}>Contact Seller</button>
+        <p>{props.date} &nbsp; <b>{props.title}</b></p>
+        <p>{props.desc}</p>  
+        <img className="posting-image" src={props.image_url} />
+        <p><Button onClick={redirectToContact}>Contact Seller</Button></p>
+        <hr></hr>
     </React.Fragment>
   );
 }
@@ -733,30 +731,92 @@ function ContactSellerForm() {
       }
 
       
+  // return (
+  //     <React.Fragment>
+  //       <Jumbotron className="create-account-background">
+  //           <div className="card contact-seller-form">
+  //             <div className="card-body">
+  //               <h5 className="card-title text-center">Contact Seller</h5>
+  //               <form onSubmit={sendEmail}>
+  //                   <input type="hidden" name="seller_email" 
+  //                       onChange={(event) => setSellerEmail(event.target.value)}
+  //                       value={sellerEmail}/>
+  //                   <label>Your Name:</label><br></br>
+  //                   <input type="text" name="from_name" 
+  //                       onChange={(event) => setFromName(event.target.value)}
+  //                       value={fromName}/>
+  //                   <br></br>
+                    
+  //                   <label>Your Email:</label><br></br>
+  //                   <input type="email" name="reply_to" 
+  //                       onChange={(event) => setReplyToEmail(event.target.value)}
+  //                       value={replyToEmail}/>
+  //                   <label>Your Message</label>
+  //                   <textarea name="message"
+  //                       onChange={(event) => setMessage(event.target.value)}
+  //                       value={message}/>
+  //                   <Button type="submit" value="Send" ></Button>
+  //               </form>
+  //               <Button onClick={redirectBack}>Back</Button>
+  //             </div>
+  //         </div>
+  //       </Jumbotron>
+  //     </React.Fragment>
+  //     );
+  // }
+
   return (
-      <React.Fragment>
-      <form id="contact-form" onSubmit={sendEmail}>
-          <input type="hidden" name="seller_email" 
-              onChange={(event) => setSellerEmail(event.target.value)}
-              value={sellerEmail}/>
-          <label>Your Name</label>
-          <input type="text" name="from_name" 
-              onChange={(event) => setFromName(event.target.value)}
-              value={fromName}/>
-          <label>Your Email</label>
-          <input type="email" name="reply_to" 
-              onChange={(event) => setReplyToEmail(event.target.value)}
-              value={replyToEmail}/>
-          <label>Your Message</label>
-          <textarea name="message"
-              onChange={(event) => setMessage(event.target.value)}
-              value={message}/>
-          <input type="submit" value="Send" />
-      </form>
-      <button onClick={redirectBack}>Back</button>
-      </React.Fragment>
-      );
-  }
+    <React.Fragment>
+      <Jumbotron className="contact-seller-background">
+        <Row className="justify-content-center">
+          <Card className="contact-seller-form bg-light">
+            <Card.Body>
+              <Card.Title className="text-center">Contact Seller</Card.Title>
+                <Form onSubmit={sendEmail}>
+                  
+                    <input type="hidden" name="seller_email" 
+                        onChange={(event) => setSellerEmail(event.target.value)}
+                        value={sellerEmail}/>
+                    <Form.Group>
+                      <label>Your Name:</label><br></br>
+                      <input 
+                          type="text" 
+                          name="from_name" 
+                          className="contact-seller-input"
+                          onChange={(event) => setFromName(event.target.value)}
+                          value={fromName}/>
+                    </Form.Group>
+                  
+                    <Form.Group>
+                      <label>Your Email:</label><br></br>
+                      <input 
+                          type="email" 
+                          name="reply_to" 
+                          className="contact-seller-input"
+                          onChange={(event) => setReplyToEmail(event.target.value)}
+                          value={replyToEmail}/>
+                    </Form.Group>
+
+                    <Form.Group>
+                      <label>Your Message:</label><br></br>
+                      <textarea 
+                          name="message"
+                          className="contact-seller-textarea"
+                          onChange={(event) => setMessage(event.target.value)}
+                          value={message}/>
+                      <br></br>&nbsp;&emsp;
+                    <Button type="submit" value="Send" >Send</Button>
+                    <Button onClick={redirectBack}>Back</Button>
+                  </Form.Group>
+                </Form>
+              
+            </Card.Body>
+          </Card>
+        </Row>
+      </Jumbotron>
+    </React.Fragment>
+    );
+}
 
 
 //This is a copy of the PostListItem component above but it includes delete functionality.
@@ -766,10 +826,11 @@ function PostListItemWithDelete(props){
 
   return(
     <React.Fragment>
-        <p>{props.date} &nbsp; <u>{props.title}</u></p>
+        <p>{props.date} &nbsp; <u><b>{props.title}</b></u></p>
         <p>{props.desc}</p>  
         <img className="posting-image" src={props.image_url} />
         <DeletePosting posting_id={props.posting_id}/> 
+        <hr></hr>
     </React.Fragment>
   );
 }
@@ -793,7 +854,7 @@ function DeletePosting(props) {
 
   return (
     <form action="/profile">
-      <button type="submit" onClick={deletePosting}>Delete</button>
+      <button className="delete-button" type="submit" onClick={deletePosting}>Delete</button>
     </form>
   );
 }
@@ -1020,6 +1081,7 @@ function UserProfile() {
               <Logout />
           </h4>
             <h5>Your posted housing listings are below:</h5>
+            <hr></hr>
             {postList}
        </Container>
     </React.Fragment>

@@ -7,7 +7,7 @@
 
 .restaurant-button {
   margin-top: 1vw;
-  width: 100%;
+  width: 11rem;
 }
 
 .user-form {
@@ -25,11 +25,6 @@
   overflow: hidden;
 }
 
-.d-flex {
-  display: flex!important;
-  height: 100vh;
-}
-
 /* Background for login form */
 .login-background {
   background-image: url("/static/img/login_background.png");
@@ -41,7 +36,25 @@
 
 /* Background for create account form */
 .create-account-background {
-  background-image: url("/static/img/account_background.png");
+  background-image: url("/static/img/create_account_background.jpg");
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Background for post housing form */
+.post-housing-background {
+  background-image: url("/static/img/post_housing_background.png");
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Background for contact seller form */
+.contact-seller-background {
+  background-image: url("/static/img/contact_seller_background.jpg");
   height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
@@ -120,14 +133,9 @@ table {
   margin-bottom: .9rem;
 }
 
-.list-group {
-  margin-top: 20px;
-  margin-bottom:20px;
-}
-
 .restaurant-card {
-  width:90%;
-  height: 22vw;
+  width:100%;
+  height: 24vw;
   margin-bottom: 5vw;
   margin-top: 1vw;
 }
@@ -137,7 +145,7 @@ table {
 }
 
 .post-housing-form {
-  width: 35rem;
+  width: 37rem;
 }
 
 .posting-form-title {
@@ -167,7 +175,14 @@ table {
 }
 
 .posting-file-input {
-  margin-left:5rem;
+  margin-left: 5rem;
+}
+
+.input-posting-image {
+  height: 200px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 5rem;
 }
 
 .posting-image {
@@ -181,4 +196,25 @@ table {
   margin-left: 5rem;
   margin-right: 5rem;
   height: 2.5rem;
+}
+
+.find-housing-title {
+  margin-top: 2rem;
+}
+
+.delete-button {
+  width: 6rem;
+}
+
+.contact-seller-form{
+  width: 20rem;
+}
+
+.contact-seller-input{
+  width: 17rem;
+}
+
+.contact-seller-textarea{
+  width: 17rem;
+  height: 7rem;
 }
