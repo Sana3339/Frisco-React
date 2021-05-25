@@ -730,40 +730,6 @@ function ContactSellerForm() {
           });
       }
 
-      
-  // return (
-  //     <React.Fragment>
-  //       <Jumbotron className="create-account-background">
-  //           <div className="card contact-seller-form">
-  //             <div className="card-body">
-  //               <h5 className="card-title text-center">Contact Seller</h5>
-  //               <form onSubmit={sendEmail}>
-  //                   <input type="hidden" name="seller_email" 
-  //                       onChange={(event) => setSellerEmail(event.target.value)}
-  //                       value={sellerEmail}/>
-  //                   <label>Your Name:</label><br></br>
-  //                   <input type="text" name="from_name" 
-  //                       onChange={(event) => setFromName(event.target.value)}
-  //                       value={fromName}/>
-  //                   <br></br>
-                    
-  //                   <label>Your Email:</label><br></br>
-  //                   <input type="email" name="reply_to" 
-  //                       onChange={(event) => setReplyToEmail(event.target.value)}
-  //                       value={replyToEmail}/>
-  //                   <label>Your Message</label>
-  //                   <textarea name="message"
-  //                       onChange={(event) => setMessage(event.target.value)}
-  //                       value={message}/>
-  //                   <Button type="submit" value="Send" ></Button>
-  //               </form>
-  //               <Button onClick={redirectBack}>Back</Button>
-  //             </div>
-  //         </div>
-  //       </Jumbotron>
-  //     </React.Fragment>
-  //     );
-  // }
 
   return (
     <React.Fragment>

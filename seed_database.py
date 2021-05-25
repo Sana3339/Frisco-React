@@ -29,13 +29,13 @@ neighborhoods = [
                     <b>Bernal Heights</b> is a primarily residential neighborhood with a commercial strip 
                     and a farmer's market every Saturday.
                     <b>Click the marker</b> to learn more.""",
-    'long_desc': """The neighborhood is primary residential with a commercial strip along
+    'long_desc': """The neighborhood is primarily residential with a commercial strip along
                     Corland Ave featuring restaurants, bars, bakeries, a fish and butchery 
                     shop and more.  It's home to the open-air Alemany Farmers' Market, 
                     one of the oldest extant farmers' markets in the US.  Bernal has not 
                     gentrified to the extent of its neighbor Noe Valley, but gentrification 
                     and property values are increasing as urban professionals replace 
-                    working-class home owners and renters""",
+                    working-class home owners and renters.""",
     'median_rent': 2500,
     'median_home_price': 1621000,
     'sq_ft_price': 1093,
@@ -487,16 +487,76 @@ for neighborhood in neighborhoods:
 
 images = [
     {
+        'image_name':'bernal.jpg',
+        'neighborhood_id': 'bernal'
+    },
+    {
+        'image_name':'castro.jpg',
+        'neighborhood_id': 'castro'
+    },
+    {
+        'image_name':'financial_district.jpg',
+        'neighborhood_id': 'financial'
+    },
+    {
         'image_name':'haight1.png',
         'neighborhood_id': 'haight'
+    },
+    {
+        'image_name':'mission.jpg',
+        'neighborhood_id': 'mission'
+    },
+    {
+        'image_name':'richmond.jpeg',
+        'neighborhood_id': 'richmond'
+    },
+    {
+        'image_name':'japantown.jpg',
+        'neighborhood_id': 'japantown'
+    },
+    {
+        'image_name':'marina.jpg',
+        'neighborhood_id': 'marina'
+    },
+    {
+        'image_name':'nob_hill.jpg',
+        'neighborhood_id': 'nob'
+    },
+    {
+        'image_name':'noe.jpg',
+        'neighborhood_id': 'noe'
+    },
+    {
+        'image_name':'north_beach.jpg',
+        'neighborhood_id': 'north'
+    },
+    {
+        'image_name':'pacific_heights.jpg',
+        'neighborhood_id': 'pac'
+    },
+    {
+        'image_name':'potrero_hill.jpeg',
+        'neighborhood_id': 'potrero'
+    },
+    {
+        'image_name':'presidio.jpg',
+        'neighborhood_id': 'presidio'
+    },
+    {
+        'image_name':'russian_hill.jpg',
+        'neighborhood_id': 'russian'
     },
     {
         'image_name':'soma1.png',
         'neighborhood_id': 'soma'
     },
     {
-        'image_name':'nob1.jpg',
-        'neighborhood_id': 'nob'
+        'image_name':'sunset.jpeg',
+        'neighborhood_id': 'sunset'
+    },
+    {
+        'image_name':'tenderloin.jpg',
+        'neighborhood_id': 'tenderloin'
     }
 ]
 
