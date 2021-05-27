@@ -39,7 +39,7 @@ function Homepage() {
           <Row className="justify-content-center">
             <div className="block-center">
               <h1 id="Frisco">Frisco</h1>
-              <h4 id="subheading-Frisco">Which San Francisco neighborhood should you live in?</h4>
+              <h4 id="Frisco-subheading">Which San Francisco neighborhood should you live in?</h4>
               <Button id="button-Frisco" type="button" variant="light" onClick={redirectToMapPage}> Enter </Button>
             </div>
           </Row>
@@ -51,7 +51,7 @@ function Homepage() {
 
 function MapView(){
   const options = {
-    zoom:12.5,
+    zoom:12.4,
     center:{lat:37.7822, lng:-122.4342}
     };
   const ref = React.useRef();
@@ -110,6 +110,7 @@ function MapView(){
             disableAutoPan: true,
             pixelOffset: new google.maps.Size(0,215)
             });
+          
           
           const marker = new window.google.maps.Marker({
             position:aMarker.coords,
@@ -182,7 +183,7 @@ function MapView(){
         <Container>
           <h4 id="map-heading">Click on a marker to learn more about the neighborhood</h4>
           <div id="map"
-          style={{ height: "500px", width:"70%" }}
+          style={{ height: "600px", width:"80%" }}
           {...{ref}}>
           </div>
         </Container>
@@ -195,7 +196,7 @@ function MapView(){
 
 function MapHousing() {
   const options = {
-    zoom:12.5,
+    zoom:12.4,
     center:{lat:37.7822, lng:-122.4342}
     };
   const ref = React.useRef();
@@ -236,7 +237,7 @@ function MapHousing() {
         for (const neighborhood of data) {
           const markerDetails = {
             coords: {lat:neighborhood.latitude, lng:neighborhood.longitude},
-            windowContent: neighborhood.name,
+            windowContent: `<div style='font-size:1rem;'>${neighborhood.name}`,
             neighborhood_id: neighborhood.neighborhood_id
           };
           markerList.push(markerDetails);
@@ -330,7 +331,6 @@ function Neighborhood() {
   const redirectToFindHousing = () => {
     history.push(`/housing/${neighborhood_id}`);
   }
-  //<p><Link to={`/housing/${neighborhood_id}`}> Find {name} housing </Link></p>
 
   const redirectToPostHousing = () => {
     history.push(`/post/${neighborhood_id}`)
@@ -339,8 +339,6 @@ function Neighborhood() {
   const redirectToMap = () => {
     history.push('/map')
   }
-  
-  //<Link to={`/post/${neighborhood_id}`}> Post {name} housing </Link>
 
   return(
     <React.Fragment>
@@ -628,7 +626,7 @@ function PostHousing() {
     <React.Fragment>
         <Jumbotron className="post-housing-background">
           <Row className="justify-content-center">
-            <Col sm={12} md={8}>
+            <Col sm={12} md={7}>
             <Card className="post-housing-form bg-light">
               <p className="posting-form-title">Post {neighborhoodName} Housing</p>
               
@@ -687,7 +685,7 @@ function PostListItem(props){
     <React.Fragment>
         <p>{props.date} &nbsp; <b>{props.title}</b></p>
         <p>{props.desc}</p>  
-        <img className="posting-image" src={props.image_url} />
+        <img className="find-housing-image" src={props.image_url} />
         <p><Button onClick={redirectToContact}>Contact Seller</Button></p>
         <hr></hr>
     </React.Fragment>
@@ -748,7 +746,7 @@ function ContactSellerForm() {
                         onChange={(event) => setSellerEmail(event.target.value)}
                         value={sellerEmail}/>
                     <Form.Group>
-                      <label>Your Name:</label><br></br>
+                      <label className="contact-seller-header">Your Name:</label><br></br>
                       <input 
                           type="text" 
                           name="from_name" 
@@ -758,7 +756,7 @@ function ContactSellerForm() {
                     </Form.Group>
                   
                     <Form.Group>
-                      <label>Your Email:</label><br></br>
+                      <label className="contact-seller-header">Your Email:</label><br></br>
                       <input 
                           type="email" 
                           name="reply_to" 
@@ -768,13 +766,13 @@ function ContactSellerForm() {
                     </Form.Group>
 
                     <Form.Group>
-                      <label>Your Message:</label><br></br>
+                      <label className="contact-seller-header">Your Message:</label><br></br>
                       <textarea 
                           name="message"
                           className="contact-seller-textarea"
                           onChange={(event) => setMessage(event.target.value)}
                           value={message}/>
-                      <br></br>&nbsp;&emsp;
+                      <br></br>&emsp;&emsp;&emsp;&emsp;
                     <Button type="submit" value="Send" >Send</Button>
                     <Button onClick={redirectBack}>Back</Button>
                   </Form.Group>
@@ -965,7 +963,7 @@ function Login(props) {
             <Card.Body>
               <Card.Title className="text-center">Login</Card.Title>
                 <Form>
-                  <Form.Text className="form-text">You must be logged in to post housing.</Form.Text>
+                  <Form.Text className="form-text">You must be logged in to post housing or view your profile.</Form.Text>
                   
               
                 <Form.Group controlId="formBasicEmail">
@@ -1001,6 +999,8 @@ function Login(props) {
 
 function UserProfile() {
 
+  let history = useHistory();
+
   const [postList, setPostList] = React.useState(["loading..."]);
 
   const email = localStorage.getItem('logged_in_user')
@@ -1020,7 +1020,6 @@ function UserProfile() {
       const postFetchList = []
 
         for (const posting of data) {
-          console.log("posting_id is:", posting.posting_id);
           postFetchList.push(
             <PostListItemWithDelete
               key={posting.posting_id}
@@ -1033,7 +1032,7 @@ function UserProfile() {
             />
            );
           }
-       setPostList(postFetchList);   
+       setPostList(postFetchList.reverse());   
      })
     }, []);
 
@@ -1041,7 +1040,9 @@ function UserProfile() {
       history.push("/post-housing");
     }
 
-    let history = useHistory();
+  if(postList.length === 0) {
+    setPostList("You have no housing posted.")
+  } 
 
   return (
     <React.Fragment>
@@ -1083,6 +1084,7 @@ function App() {
   return (
     <Router>
         <Navbar bg="light" sticky="top">
+          <Navbar.Brand id="Frisco-navbar-brand">Frisco</Navbar.Brand>
           <Nav className="ml-auto">
             <Nav.Item>
               <Nav.Link href="/"> Home </Nav.Link>

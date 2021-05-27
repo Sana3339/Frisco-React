@@ -1,4 +1,4 @@
-"""Models for JobTracker app."""
+"""Models for Frisco app."""
 
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
@@ -70,26 +70,10 @@ class Image(db.Model):
     image_name = db.Column(db.String, nullable=False)
     neighborhood_id=db.Column(db.String, db.ForeignKey('neighborhoods.neighborhood_id'))
 
-   #neighborhood = db.relationship( 'Neighborhood', backref='images')
 
     def __repr__(self):
 
         return f'<id={self.image_id} image={self.image_name} neighborhood={self.neighborhood_id}>'
-
-
-# class Job(db.Model):
-#     """A job application."""
-
-#     __tablename__='jobs'
-
-#     job_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-#     job_name = db.Column(db.String, nullable=False)
-#     company = db.Column(db.String, nullable=False)
-
-#     def __repr__(self):
-
-#         return f'<id={self.job_id} name={self.job_name} company={self.company}>'
-
 
 def connect_to_db(flask_app, db_uri='postgresql:///jobs', echo=True):
     flask_app.config['SQLALCHEMY_DATABASE_URI'] = db_uri

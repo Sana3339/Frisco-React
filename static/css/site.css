@@ -25,9 +25,9 @@
   overflow: hidden;
 }
 
-/* Background for login form */
+/* Background for homepage */
 .Frisco-background {
-  background-image: url("/static/img/Frisco.jpeg");
+  background-image: url("/static/img/Frisco_people.jpg");
   height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
@@ -36,7 +36,7 @@
 
 /* Background for login form */
 .login-background {
-  background-image: url("/static/img/login_background.png");
+  background-image: url("/static/img/SF_gray.jpg");
   height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
@@ -54,7 +54,7 @@
 
 /* Background for post housing form */
 .post-housing-background {
-  background-image: url("/static/img/post_housing_background.png");
+  background-image: url("/static/img/SF_streets.jpg");
   height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
@@ -63,7 +63,7 @@
 
 /* Background for contact seller form */
 .contact-seller-background {
-  background-image: url("/static/img/contact_seller_background.jpg");
+  background-image: url("/static/img/SF_houses.jpg");
   height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
@@ -73,6 +73,7 @@
 #map-heading {
   margin-top: 30px;
   margin-bottom: 30px;
+  font-family: 'Merriweather', serif;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -87,15 +88,25 @@
   text-align: center;
 }
 
+.navbar{
+  height: 4vw;
+  font-size: 1rem;
+}
+
+#Frisco-navbar-brand {
+  font-size: 2rem;
+  font-family: 'Great Vibes', cursive;
+  text-shadow: 4px 4px 4px #aaa;
+}
+
 #Frisco {
-  margin-top: 3%;
   font-size: 5rem;
   font-family: 'Great Vibes', cursive;
   text-shadow: 4px 4px 4px #aaa;
 }
 
-#subheading-Frisco {
-  margin-top: 2%;
+#Frisco-subheading {
+  font-weight: 400;
 }
 
 #button-Frisco {
@@ -137,7 +148,7 @@ table {
 
 .neighborhood-desc {
   margin-top: 20px;
-  font-size: 1rem;
+  font-size: .95rem;
 }
 
 .form-text {
@@ -157,7 +168,9 @@ table {
 }
 
 .post-housing-form {
-  width: 37rem;
+  width: 35rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .posting-form-title {
@@ -203,6 +216,11 @@ table {
   margin-bottom: 20px;
 }
 
+.find-housing-image {
+  height: 200px;
+  margin-bottom: 10px;
+}
+
 .posting-form-button {
   margin-bottom: 3rem;
   margin-left: 5rem;
@@ -219,19 +237,25 @@ table {
 }
 
 .contact-seller-form{
-  width: 20rem;
+  width: 25rem;
 }
 
 .contact-seller-input{
-  width: 17rem;
+  width: 18rem;
+  margin-left: 2rem;
+  
 }
 
 .contact-seller-textarea{
-  width: 17rem;
-  height: 7rem;
+  width: 18rem;
+  height: 9rem;
+  margin-left: 2rem;
 }
 
-.carousel-item {
-  width: 100%;
-  height: 30rem;
+.contact-seller-header{
+  margin-left:2rem;
+}
+
+.InfoWindow{
+  font-size: 2rem;
 }

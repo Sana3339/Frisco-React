@@ -54,6 +54,7 @@ def get_images_by_id(neighborhood_id):
     return images
 
 def create_posting(neighborhood_id, email, date, title, desc, contact_info, image_url):
+    """Create a housing posting."""
     
     posting = Posting(neighborhood_id=neighborhood_id,
                         user_email=email,
@@ -76,20 +77,24 @@ def create_user(email, password):
     db.session.commit()
 
 def get_postings(neighborhood_id):
+    """Get all housing postings for a particular neighborhood."""
 
     postings = Posting.query.filter_by(neighborhood_id=neighborhood_id).all()
     
     return postings
 
 def get_user_by_email(email):
+    """Given an email, return the user."""
 
     return User.query.filter(User.email == email).first()
 
 def get_postings_by_user(email):
+    """Return all housing posted by a user."""
 
     return Posting.query.filter(Posting.user_email == email).all()
 
 def delete_posting(posting_id):
+    """Delete a housing posting from database."""
 
     posting = Posting.query.get(posting_id)
     if posting is not None:
@@ -97,6 +102,7 @@ def delete_posting(posting_id):
         db.session.commit()
 
 def get_seller_by_id(posting_id):
+    """Get seller email for a particular housing posting."""
 
     posting = Posting.query.filter_by(posting_id=posting_id).first()
     contact_info = posting.contact_info
