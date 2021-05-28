@@ -12,18 +12,15 @@ const Nav = ReactBootstrap.Nav;
 const Form = ReactBootstrap.Form;
 const FormControl = ReactBootstrap.FormControl;
 const Button = ReactBootstrap.Button;
-const Carousel = ReactBootstrap.Carousel;
 const Container = ReactBootstrap.Container;
 const Row = ReactBootstrap.Row;
 const Col = ReactBootstrap.Col;
 const Card = ReactBootstrap.Card;
 const Alert = ReactBootstrap.Alert;
-const ToggleButtonGroup = ReactBootstrap.ToggleButtonGroup;
-const ButtonGroup = ReactBootstrap.ButtonGroup;
-const ToggleButton = ReactBootstrap.ToggleButton;
-const CardDeck = ReactBootstrap.CardDeck;
 const Table = ReactBootstrap.Table;
 const Jumbotron = ReactBootstrap.Jumbotron;
+const OverlayTrigger = ReactBootstrap.OverlayTrigger;
+const Tooltip = ReactBootstrap.Tooltip;
 
 function Homepage() {
   let history = useHistory();
@@ -340,39 +337,51 @@ function Neighborhood() {
     history.push('/map')
   }
 
+  const renderTooltip = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+      *Stats current as of May 2021
+    </Tooltip>
+  );
+
   return(
     <React.Fragment>
-      
         <Container>
           <Row>
               <Col s={12} md={5}>
                   <h3 className="neighborhood-header">{name}</h3>
                   <p className="neighborhood-desc">{desc} </p>
 
-                  <Table striped bordered hover size="sm">
-                    <tbody>
-                      <tr>
-                        <td>Median Rental Price:</td>
-                        <td>${medianRental}</td>
-                      </tr>
-                      <tr>
-                        <td>Median Home Price:</td>
-                        <td>${medianHomePrice}</td>
-                      </tr>
-                      <tr>
-                        <td>Sq Ft Price:</td>
-                        <td>${sqFtPrice}</td>
-                      </tr>
-                      <tr>
-                        <td>Walk Score:</td>
-                        <td>{walkScore}</td>
-                      </tr>
-                      <tr>
-                        <td>Transit Score:</td>
-                        <td>{transitScore}</td>
-                      </tr>
-                    </tbody>
-                  </Table>
+                  <OverlayTrigger
+                      placement="right"
+                      delay={{ show: 250, hide: 400 }}
+                      overlay={renderTooltip}
+                    >
+
+                    <Table striped bordered hover size="sm">
+                      <tbody>
+                        <tr>
+                          <td>Median Rental Price:</td>
+                          <td>${medianRental}</td>
+                        </tr>
+                        <tr>
+                          <td>Median Home Price:</td>
+                          <td>${medianHomePrice}</td>
+                        </tr>
+                        <tr>
+                          <td>Sq Ft Price:</td>
+                          <td>${sqFtPrice}</td>
+                        </tr>
+                        <tr>
+                          <td>Walk Score:</td>
+                          <td>{walkScore}</td>
+                        </tr>
+                        <tr>
+                          <td>Transit Score:</td>
+                          <td>{transitScore}</td>
+                        </tr>
+                      </tbody>
+                    </Table>
+                  </OverlayTrigger>
                 </Col>
               <Col s={12} md={7}> 
                 <Images neighborhood_id={neighborhood_id} />
@@ -621,6 +630,12 @@ function PostHousing() {
     })
     .catch(err => console.log(err))
   }
+
+  const renderTooltip = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+      Your email will be anonymized and not shared directly with users.
+    </Tooltip>
+  );
   
   return (
     <React.Fragment>
@@ -645,7 +660,14 @@ function PostHousing() {
                     value={desc}
                   />
                 
-                  <p className="posting-form-header">Email:</p>
+                  <p className="posting-form-header">Email: 
+                      <OverlayTrigger
+                        placement="right"
+                        delay={{ show: 250, hide: 400 }}
+                        overlay={renderTooltip}>
+                          <i className="fa fa-question-circle" aria-hidden="true"></i>
+                      </OverlayTrigger> 
+                  </p>
                     <input
                       className="posting-form-input"
                       type="text"
