@@ -513,7 +513,7 @@ images = [
         'neighborhood_id': 'japantown'
     },
     {
-        'image_name':'marina.jpg',
+        'image_name':'marina.jpeg',
         'neighborhood_id': 'marina'
     },
     {

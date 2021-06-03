@@ -35,8 +35,8 @@ function Homepage() {
         <Jumbotron className="Frisco-background">
           <Row className="justify-content-center">
             <div className="block-center">
-              <h1 id="Frisco">Frisco</h1>
-              <h4 id="Frisco-subheading">Which San Francisco neighborhood should you live in?</h4>
+              <div id="Frisco">Frisco</div>
+              <div id="Frisco-subheading">Which San Francisco neighborhood should you live in?</div>
               <Button id="button-Frisco" type="button" variant="light" onClick={redirectToMapPage}> Enter </Button>
             </div>
           </Row>
@@ -177,13 +177,17 @@ function MapView(){
 
     return (
       <React.Fragment>
-        <Container>
-          <h4 id="map-heading">Click on a marker to learn more about the neighborhood</h4>
-          <div id="map"
-          style={{ height: "600px", width:"80%" }}
-          {...{ref}}>
-          </div>
-        </Container>
+        <Jumbotron className="map-background">
+          <Row className="justify-content-center">
+            <Container>
+              <h4 id="map-heading">Click on a marker to learn more about the neighborhood</h4>
+              <div id="map"
+              style={{ height: "600px", width:"80%" }}
+              {...{ref}}>
+              </div>
+            </Container>
+          </Row>
+        </Jumbotron>
       </React.Fragment>
     );
   }
@@ -288,13 +292,17 @@ function MapHousing() {
 
   return (
     <React.Fragment>
-      <Container>
-        <h4 id="map-heading">Click on a marker closest to the housing you'd like to post</h4>
-            <div id="map"
-            style={{ height: "500px", width:"70%" }}
-            {...{ref}}>
-          </div>
-    </Container>
+        <Jumbotron className="map-background">
+          <Row className="justify-content-center">
+            <Container>
+              <h4 id="map-heading">Click on a marker closest to the housing you'd like to post</h4>
+                  <div id="map"
+                  style={{ height: "600px", width:"80%" }}
+                  {...{ref}}>
+                </div>
+            </Container>
+          </Row>
+        </Jumbotron>
   </React.Fragment>
  );
 }
@@ -337,12 +345,6 @@ function Neighborhood() {
     history.push('/map')
   }
 
-  const renderTooltip = (props) => (
-    <Tooltip id="button-tooltip" {...props}>
-      *Stats current as of May 2021
-    </Tooltip>
-  );
-
   return(
     <React.Fragment>
         <Container>
@@ -350,12 +352,6 @@ function Neighborhood() {
               <Col s={12} md={5}>
                   <h3 className="neighborhood-header">{name}</h3>
                   <p className="neighborhood-desc">{desc} </p>
-
-                  <OverlayTrigger
-                      placement="right"
-                      delay={{ show: 250, hide: 400 }}
-                      overlay={renderTooltip}
-                    >
 
                     <Table striped bordered hover size="sm">
                       <tbody>
@@ -381,7 +377,8 @@ function Neighborhood() {
                         </tr>
                       </tbody>
                     </Table>
-                  </OverlayTrigger>
+                   <p id="data-source">Sources: Zillow, Zumper and Walk Score, May 2021</p> 
+
                 </Col>
               <Col s={12} md={7}> 
                 <Images neighborhood_id={neighborhood_id} />
@@ -633,6 +630,7 @@ function PostHousing() {
 
   const renderTooltip = (props) => (
     <Tooltip id="button-tooltip" {...props}>
+      Provide an email where you would like to receive responses to your post.
       Your email will be anonymized and not shared directly with users.
     </Tooltip>
   );
@@ -929,12 +927,9 @@ function PrivateRoute({ children, ...rest }) {
 
 function Login(props) {
 
-  console.log(localStorage.getItem('logged_in_user'));
-  if (localStorage.getItem('logged_in_user') !== null) {
-  }
-
   let history = useHistory();
   const { state } = ReactRouterDOM.useLocation();
+  const {setIsLoggedIn} = React.useContext(AuthContext);
 
   const [redirectToReferrer, setredirectToReferrer] = React.useState(false)
 
@@ -960,8 +955,8 @@ function Login(props) {
           history.push('/login')
       } else if (data.message === "You are now logged in.") {
           alert(data.message);
+          setIsLoggedIn(true);
           localStorage.setItem('logged_in_user', data.email);
-         // history.push('/profile')
          setredirectToReferrer(true);
         }
       }
@@ -1084,6 +1079,7 @@ function UserProfile() {
 function Logout() {
 
   let history = useHistory();
+  const {setIsLoggedIn} = React.useContext(AuthContext);
 
   const handleLogout = () => {
     if (!localStorage.getItem('logged_in_user')) {
@@ -1092,6 +1088,7 @@ function Logout() {
     } else {
         localStorage.removeItem('logged_in_user');
         alert("Log out successful.");
+        setIsLoggedIn(false);
         history.push("/");
       }
     }
@@ -1101,12 +1098,14 @@ function Logout() {
   );
 }
 
-function App() {
 
-  return (
-    <Router>
-        <Navbar bg="light" sticky="top">
-          <Navbar.Brand id="Frisco-navbar-brand">Frisco</Navbar.Brand>
+function NavigationBar() {
+  const {isLoggedIn} = React.useContext(AuthContext);
+
+  if (isLoggedIn == true) {
+    return(
+      <Navbar bg="light" sticky="top">
+        <Navbar.Brand id="Frisco-navbar-brand">Frisco</Navbar.Brand>
           <Nav className="ml-auto">
             <Nav.Item>
               <Nav.Link href="/"> Home </Nav.Link>
@@ -1115,19 +1114,54 @@ function App() {
               <Nav.Link href="/map"> Neighborhoods </Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link href="/login"> Login </Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link href="/create-user"> Create Account </Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
               <Nav.Link href="/profile"> Profile </Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link href="/post-housing"> Post Housing </Nav.Link>
-            </Nav.Item>
-          </Nav>
-        </Navbar>
+          </Nav.Item>
+      </Nav>
+    </Navbar>
+    )
+  } else {
+    return (
+      <Navbar bg="light" sticky="top">
+      <Navbar.Brand id="Frisco-navbar-brand">Frisco</Navbar.Brand>
+        <Nav className="ml-auto">
+          <Nav.Item>
+            <Nav.Link href="/"> Home </Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link href="/map"> Neighborhoods </Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link href="/login"> Login </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+            <Nav.Link href="/create-user"> Create Account </Nav.Link>
+        </Nav.Item>
+      </Nav>
+    </Navbar>
+  );
+ }
+}
+
+//creating an instance of AuthContext which should be outside of any function
+const AuthContext = React.createContext();
+
+function App() {
+
+  const [isLoggedIn, setIsLoggedIn] = React.useState();
+
+  React.useEffect(() => {
+    if (localStorage.getItem('logged_in_user') !== null) {
+      setIsLoggedIn(true);
+    }
+  }, [isLoggedIn])
+
+  return (
+    <Router>
+        <AuthContext.Provider value={{isLoggedIn, setIsLoggedIn}}>
+            <NavigationBar />
       
         <Switch>
           <Route exact path="/login">
@@ -1164,6 +1198,7 @@ function App() {
               <Homepage />
             </Route>
           </Switch>
+      </AuthContext.Provider>
     </Router>
   );
 }

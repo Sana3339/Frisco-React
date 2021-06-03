@@ -43,9 +43,18 @@
   background-size: cover;
 }
 
+/* Background for map pages */
+.map-background {
+  background-image: url("/static/img/blue_defocused.jpg");
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 /* Background for create account form */
 .create-account-background {
-  background-image: url("/static/img/create_account_background.jpg");
+  background-image: url("/static/img/GG-blurry.jpg");
   height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
@@ -106,7 +115,8 @@
 }
 
 #Frisco-subheading {
-  font-weight: 400;
+  font-weight: 500;
+  font-size: 1.5rem;
 }
 
 #button-Frisco {
@@ -142,9 +152,7 @@ table td {
   font-size: .9rem;
 }
 
-table {
-  margin-bottom: 1vw;
-}
+
 
 .neighborhood-desc {
   margin-top: 20px;
@@ -258,4 +266,9 @@ table {
 
 .InfoWindow{
   font-size: 2rem;
+}
+
+#data-source {
+  font-size: .8rem;
+  font-style: italic;
 }
