@@ -246,7 +246,7 @@ def create_user():
     else:
         new_user = crud.create_user(email, password)
 
-        return jsonify({'message': "Account created. You are logged in."})
+        return jsonify({'message': "Account created. Please log in."})
 
 @app.route('/api/handle-login', methods=["POST"])
 def login_user():

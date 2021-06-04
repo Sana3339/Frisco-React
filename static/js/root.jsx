@@ -21,6 +21,7 @@ const Table = ReactBootstrap.Table;
 const Jumbotron = ReactBootstrap.Jumbotron;
 const OverlayTrigger = ReactBootstrap.OverlayTrigger;
 const Tooltip = ReactBootstrap.Tooltip;
+const Modal = ReactBootstrap.Modal;
 
 function Homepage() {
   let history = useHistory();
@@ -52,32 +53,32 @@ function MapView(){
     center:{lat:37.7822, lng:-122.4342}
     };
   const ref = React.useRef();
-  const [map, setMap] = React.useState("");
-  const [markerList, setMarkerList] = React.useState("");
+  // const [map, setMap] = React.useState("");
+  // const [markerList, setMarkerList] = React.useState("");
   let history = useHistory();
 
-  React.useEffect(() => {
-    fetch("/api/neighborhood-details.json")
-    .then(response => response.json())
-    .then((data) => {
+  // React.useEffect(() => {
+  //   fetch("/api/neighborhood-details.json")
+  //   .then(response => response.json())
+  //   .then((data) => {
 
-      const markerList = [];
+  //     const markerList = [];
 
-      for (const neighborhood of data) {
-        const markerDetails = {
-          coords: {lat:neighborhood.latitude, lng:neighborhood.longitude},
-          windowContent: neighborhood.short_desc,
-        };
-        markerList.push(markerDetails);
-       }
-       setMarkerList(markerList)
-      })
-  }, []);
+  //     for (const neighborhood of data) {
+  //       const markerDetails = {
+  //         coords: {lat:neighborhood.latitude, lng:neighborhood.longitude},
+  //         windowContent: neighborhood.short_desc,
+  //       };
+  //       markerList.push(markerDetails);
+  //      }
+  //      setMarkerList(markerList)
+  //     })
+  // }, []);
 
   React.useEffect(() => {
     const onLoad = () => {
       const gMap = new window.google.maps.Map(ref.current, options);
-      setMap(gMap);
+      // setMap(gMap);
 
       const addMarkers = () => 
         fetch("/api/neighborhood-details.json")
@@ -95,7 +96,7 @@ function MapView(){
           };
           markerList.push(markerDetails);
          }
-         setMarkerList(markerList);
+        //  setMarkerList(markerList);
           
           for (const aMarker of markerList) {
 
@@ -201,32 +202,32 @@ function MapHousing() {
     center:{lat:37.7822, lng:-122.4342}
     };
   const ref = React.useRef();
-  const [map, setMap] = React.useState("");
-  const [markerList, setMarkerList] = React.useState("");
+  // const [map, setMap] = React.useState("");
+  // const [markerList, setMarkerList] = React.useState("");
   let history = useHistory();
 
-  React.useEffect(() => {
-    fetch("/api/neighborhood-details.json")
-    .then(response => response.json())
-    .then((data) => {
+  // React.useEffect(() => {
+  //   fetch("/api/neighborhood-details.json")
+  //   .then(response => response.json())
+  //   .then((data) => {
 
-      const markerList = [];
+  //     const markerList = [];
 
-      for (const neighborhood of data) {
-        const markerDetails = {
-          coords: {lat:neighborhood.latitude, lng:neighborhood.longitude},
-          windowContent: neighborhood.name,
-        };
-        markerList.push(markerDetails);
-       }
-       setMarkerList(markerList)
-      })
-  }, []);
+  //     for (const neighborhood of data) {
+  //       const markerDetails = {
+  //         coords: {lat:neighborhood.latitude, lng:neighborhood.longitude},
+  //         windowContent: neighborhood.name,
+  //       };
+  //       markerList.push(markerDetails);
+  //      }
+  //      setMarkerList(markerList)
+  //     })
+  // }, []);
 
   React.useEffect(() => {
     const onLoad = () => {
       const gMap = new window.google.maps.Map(ref.current, options);
-      setMap(gMap);
+      // setMap(gMap);
 
       const addMarkers = () => 
         fetch("/api/neighborhood-details.json")
@@ -243,7 +244,7 @@ function MapHousing() {
           };
           markerList.push(markerDetails);
          }
-         setMarkerList(markerList);
+        //  setMarkerList(markerList);
           
           for (const aMarker of markerList) {
 
@@ -577,6 +578,9 @@ function PostHousing() {
   const [image, setImage] = React.useState('');
   let history = useHistory();
 
+  //Line below is to control the state of our modal
+  const [isOpen, setIsOpen] = React.useState(false);
+
   //Get neighborhood name based on neighborhood_id
   React.useEffect(() => {
   fetch(`/api/neighborhood/${neighborhood_id}`)
@@ -605,10 +609,11 @@ function PostHousing() {
     .then(response => response.json())
     .then(data => {
       if (data === "Success") {
-        alert('Post added.')
+ //       alert('Post added.')
+        setIsOpen(true);
       }
     });
-    history.push('/profile');
+ //   history.push('/profile');
   }
 
   const uploadImage = () => {
@@ -634,12 +639,22 @@ function PostHousing() {
       Your email will be anonymized and not shared directly with users.
     </Tooltip>
   );
+
+  const redirectToProfile = () => {
+    history.push('/profile');
+}
   
   return (
     <React.Fragment>
         <Jumbotron className="post-housing-background">
           <Row className="justify-content-center">
             <Col sm={12} md={7}>
+            <Modal show={isOpen}>
+              <Modal.Body>Your post has been added.</Modal.Body>
+                <Modal.Footer>
+                  <Button className="modal-button" onClick={redirectToProfile}>Go to Profile</Button>
+                </Modal.Footer>
+            </Modal>
             <Card className="post-housing-form bg-light">
               <p className="posting-form-title">Post {neighborhoodName} Housing</p>
               
@@ -719,6 +734,9 @@ function ContactSellerForm() {
   const [replyToEmail, setReplyToEmail] = React.useState('');
   const [message, setMessage] = React.useState('');
 
+  //Line below is to control the state of our modal
+  const [isOpen, setIsOpen] = React.useState(false);
+
   let {posting_id} = ReactRouterDOM.useParams();
   let history = useHistory();
 
@@ -742,7 +760,12 @@ function ContactSellerForm() {
       window.emailjs.sendForm('default_service', 'template_43ponc9', e.target, 'user_uTFw7bspn4zVAkmNegIxE')
           .then((result) => {
               console.log(result.text);
-              alert("Your message has been sent")
+ //             alert("Your message has been sent")
+
+            //Once form is submitted, modal is displayed
+              setIsOpen(true);
+
+            //Form is reset  
               setFromName('');
               setSellerEmail('');
               setReplyToEmail('');
@@ -758,6 +781,12 @@ function ContactSellerForm() {
       <Jumbotron className="contact-seller-background">
         <Row className="justify-content-center">
           <Card className="contact-seller-form bg-light">
+            <Modal show={isOpen}>
+              <Modal.Body>Your message has been sent</Modal.Body>
+                <Modal.Footer>
+                  <Button className="modal-button" onClick={redirectBack}>Back to Housing</Button>
+                </Modal.Footer>
+            </Modal>
             <Card.Body>
               <Card.Title className="text-center">Contact Seller</Card.Title>
                 <Form onSubmit={sendEmail}>
@@ -825,8 +854,6 @@ function PostListItemWithDelete(props){
 
 function DeletePosting(props) {  
 
-  console.log("In DeletePosting, posting_id is:", props.posting_id)
-
   const deletePosting = () => {
     fetch('/api/delete-posting', {
       method: 'POST',
@@ -835,7 +862,7 @@ function DeletePosting(props) {
     .then(response => response.json())
     .then(data => {
       if (data) {
-        alert("Posting Deleted");
+//        alert("Posting Deleted");
       }
     });
    }
@@ -854,6 +881,9 @@ function CreateUser() {
   const[email, setEmail] = React.useState('');
   const[password, setPassword] = React.useState('');
 
+  const [isOpen1, setIsOpen1] = React.useState(false);
+  const [isOpen2, setIsOpen2] = React.useState(false);
+
   const createNewUser = () => {
     const user = {'email': email, 'password': password}
     fetch('/api/create-user', {
@@ -866,40 +896,56 @@ function CreateUser() {
     .then(response => response.json())
     .then(data => {
       if (data.message === "Error - user already exists. Please log in.") {
-        alert(data.message);
-        history.push('/login');
+ //       alert(data.message);
+        setIsOpen1(true);
+ //       history.push('/login');
       } else {
-        alert(data.message);
+ //       alert(data.message);
         localStorage.setItem('logged_in_user', data.email);
-        history.push('/profile');
+ //       history.push('/login');
+        setIsOpen2(true);
       }
     })
   }
 
+  const redirectToLogin = () => {
+    history.push('/login');
+}
+
   return(
     <React.Fragment>
-      
         <Jumbotron className="create-account-background">
           <Row className="justify-content-center">
+          <Modal show={isOpen1}>
+              <Modal.Body>Error - user already exists. Please log in.</Modal.Body>
+                <Modal.Footer>
+                  <Button className="modal-button" onClick={redirectToLogin}>Go to Login</Button>
+                </Modal.Footer>
+            </Modal>
+            <Modal show={isOpen2}>
+              <Modal.Body>Account created. Please log in.</Modal.Body>
+                <Modal.Footer>
+                  <Button className="modal-button" onClick={redirectToLogin}>Go to Login</Button>
+                </Modal.Footer>
+            </Modal>
             <Card className="user-form">
               <Card.Body>
               <Card.Title className="text-center">Create Account</Card.Title>
               <Form>
+                <Form.Group controlId="formBasicEmail">
+                  <Form.Label>Email:</Form.Label>
+                  <Form.Control type="email"
+                    onChange={(event) => setEmail(event.target.value)}
+                    value={email}/>
+                </Form.Group>
 
-              <Form.Group controlId="formBasicEmail">
-                <Form.Label>Email:</Form.Label>
-                <Form.Control type="email"
-                  onChange={(event) => setEmail(event.target.value)}
-                  value={email}/>
-              </Form.Group>
-
-              <Form.Group controlId="formBasicPassword">
-                <Form.Label>Password:</Form.Label>
-                <Form.Control type="password"
-                  onChange={(event) => setPassword(event.target.value)}
-                  value={password}
-                  />
-              </Form.Group>
+                <Form.Group controlId="formBasicPassword">
+                  <Form.Label>Password:</Form.Label>
+                  <Form.Control type="password"
+                    onChange={(event) => setPassword(event.target.value)}
+                    value={password}
+                    />
+                </Form.Group>
               
               <Button className="form-button" type="button" onClick={createNewUser} block>Register</Button>
              </Form>
@@ -925,7 +971,7 @@ function PrivateRoute({ children, ...rest }) {
   )
 }
 
-function Login(props) {
+function Login() {
 
   let history = useHistory();
   const { state } = ReactRouterDOM.useLocation();
@@ -935,6 +981,9 @@ function Login(props) {
 
   const [email,setEmail] = React.useState();
   const [password,setPassword] = React.useState();
+
+  const [isOpen1, setIsOpen1] = React.useState(false);
+  const [isOpen2, setIsOpen2] = React.useState(false);
 
   const loginUser = () => {
     const user = {'email': email, 'password': password}
@@ -948,13 +997,15 @@ function Login(props) {
     .then(response => response.json())
     .then(data => {
       if (data.message === "No account exists for that email. Please create an account.") {
-        alert(data.message);
-        history.push('/create-user');
+//        alert(data.message);
+//        history.push('/create-user');
+          setIsOpen1(true);
       } else if (data.message === "Incorrect password.") {
-          alert(data.message);
-          history.push('/login')
+//          alert(data.message);
+//          history.push('/login')
+          setIsOpen2(true);
       } else if (data.message === "You are now logged in.") {
-          alert(data.message);
+ //         alert(data.message);
           setIsLoggedIn(true);
           localStorage.setItem('logged_in_user', data.email);
          setredirectToReferrer(true);
@@ -967,15 +1018,33 @@ function Login(props) {
     if (state) {
       return <Redirect to={state.from}/>
     } else {
-      return <Redirect to="/"/>
+      return <Redirect to="/post-housing"/>
    }
   }
+
+  const redirectToCreateAccount = () => {
+    history.push('/create-user');
+  }
+
+  const handleClose = () => setIsOpen2(false);
   
 
   return (
     <React.Fragment>
       <Jumbotron className="login-background">
         <Row className="justify-content-center">
+          <Modal show={isOpen1}>
+              <Modal.Body>No account exists for that email. Please create an account.</Modal.Body>
+                <Modal.Footer>
+                  <Button onClick={redirectToCreateAccount}>OK</Button>
+                </Modal.Footer>
+            </Modal>
+            <Modal show={isOpen2}>
+              <Modal.Body>Incorrect password.</Modal.Body>
+                <Modal.Footer>
+                  <Button onClick={handleClose}>OK</Button>
+                </Modal.Footer>
+            </Modal>
           <Card className="user-form">
             <Card.Body>
               <Card.Title className="text-center">Login</Card.Title>
@@ -1051,7 +1120,7 @@ function UserProfile() {
           }
        setPostList(postFetchList.reverse());   
      })
-    }, []);
+    }, [email]);
 
     const postHousingButton = () => {
       history.push("/post-housing");
@@ -1083,11 +1152,11 @@ function Logout() {
 
   const handleLogout = () => {
     if (!localStorage.getItem('logged_in_user')) {
-      alert("User isn't logged in");
+//      alert("User isn't logged in");
       history.push("/");
     } else {
         localStorage.removeItem('logged_in_user');
-        alert("Log out successful.");
+//        alert("Log out successful.");
         setIsLoggedIn(false);
         history.push("/");
       }
@@ -1100,12 +1169,20 @@ function Logout() {
 
 
 function NavigationBar() {
-  const {isLoggedIn} = React.useContext(AuthContext);
+  const {isLoggedIn, setIsLoggedIn} = React.useContext(AuthContext);
+  let history = useHistory();
+
+  const handleLogout = () => {
+    localStorage.removeItem('logged_in_user');
+  //      alert("Log out successful.");
+        setIsLoggedIn(false);
+        history.push("/");
+    }
 
   if (isLoggedIn == true) {
     return(
       <Navbar bg="light" sticky="top">
-        <Navbar.Brand id="Frisco-navbar-brand">Frisco</Navbar.Brand>
+        <Navbar.Brand id="Frisco-navbar-brand" href="/">Frisco</Navbar.Brand>
           <Nav className="ml-auto">
             <Nav.Item>
               <Nav.Link href="/"> Home </Nav.Link>
@@ -1118,6 +1195,9 @@ function NavigationBar() {
             </Nav.Item>
             <Nav.Item>
               <Nav.Link href="/post-housing"> Post Housing </Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+              <Nav.Link onClick={handleLogout}> Logout </Nav.Link>
           </Nav.Item>
       </Nav>
     </Navbar>
