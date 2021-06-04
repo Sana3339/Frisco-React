@@ -683,7 +683,7 @@ function PostHousing() {
                   </p>
                     <input
                       className="posting-form-input"
-                      type="text"
+                      type="email"
                       onChange={(event) => setContact_info(event.target.value)}
                       value={contact_info}
                     />
@@ -1018,7 +1018,7 @@ function Login() {
     if (state) {
       return <Redirect to={state.from}/>
     } else {
-      return <Redirect to="/post-housing"/>
+      return <Redirect to="/profile"/>
    }
   }
 
@@ -1182,7 +1182,7 @@ function NavigationBar() {
   if (isLoggedIn == true) {
     return(
       <Navbar bg="light" sticky="top">
-        <Navbar.Brand id="Frisco-navbar-brand" href="/">Frisco</Navbar.Brand>
+        <Navbar.Brand href="/" id="Frisco-navbar-brand">Frisco</Navbar.Brand>
           <Nav className="ml-auto">
             <Nav.Item>
               <Nav.Link href="/"> Home </Nav.Link>
@@ -1205,7 +1205,7 @@ function NavigationBar() {
   } else {
     return (
       <Navbar bg="light" sticky="top">
-      <Navbar.Brand id="Frisco-navbar-brand">Frisco</Navbar.Brand>
+      <Navbar.Brand href="/" id="Frisco-navbar-brand">Frisco</Navbar.Brand>
         <Nav className="ml-auto">
           <Nav.Item>
             <Nav.Link href="/"> Home </Nav.Link>
