@@ -25,14 +25,14 @@ const Modal = ReactBootstrap.Modal;
 
 function Homepage() {
   let history = useHistory();
-  
+
   const redirectToMapPage = () => {
     history.push('/map');
   }
 
   return (
     <React.Fragment>
-      
+
         <Jumbotron className="Frisco-background">
           <Row className="justify-content-center">
             <div className="block-center">
@@ -41,18 +41,18 @@ function Homepage() {
               <Button id="button-Frisco" type="button" variant="light" onClick={redirectToMapPage}> Enter </Button>
             </div>
           </Row>
-          
+
             <div id="homepage-footer">
               <i className="fab fa-github"></i>
                 <a href="https://github.com/Sana3339" style={{ color:"black", fontWeight:"400" }}>&nbsp;github.com/Sana3339</a><br></br>
               <i className="fab fa-linkedin-in"></i>
                 <a href="https://www.linkedin.com/in/sanaahmad/" style={{ color:"black", fontWeight:"400" }}>&nbsp;linkedin.com/in/sanaahmad</a>
             </div>
-          
+
         </Jumbotron>
-      
+
     </React.Fragment>
-  );   
+  );
 }
 
 function MapView(){
@@ -61,34 +61,13 @@ function MapView(){
     center:{lat:37.7822, lng:-122.4342}
     };
   const ref = React.useRef();
-  // const [map, setMap] = React.useState("");
-  // const [markerList, setMarkerList] = React.useState("");
   let history = useHistory();
-
-  // React.useEffect(() => {
-  //   fetch("/api/neighborhood-details.json")
-  //   .then(response => response.json())
-  //   .then((data) => {
-
-  //     const markerList = [];
-
-  //     for (const neighborhood of data) {
-  //       const markerDetails = {
-  //         coords: {lat:neighborhood.latitude, lng:neighborhood.longitude},
-  //         windowContent: neighborhood.short_desc,
-  //       };
-  //       markerList.push(markerDetails);
-  //      }
-  //      setMarkerList(markerList)
-  //     })
-  // }, []);
 
   React.useEffect(() => {
     const onLoad = () => {
       const gMap = new window.google.maps.Map(ref.current, options);
-      // setMap(gMap);
 
-      const addMarkers = () => 
+      const addMarkers = () =>
         fetch("/api/neighborhood-details.json")
         .then(response => response.json())
         .then((data) => {
@@ -104,8 +83,7 @@ function MapView(){
           };
           markerList.push(markerDetails);
          }
-        //  setMarkerList(markerList);
-          
+
           for (const aMarker of markerList) {
 
           if (aMarker.neighborhood_id === 'marina' || aMarker.neighborhood_id === 'north' || aMarker.neighborhood_id === 'russian' ||
@@ -116,8 +94,8 @@ function MapView(){
             disableAutoPan: true,
             pixelOffset: new google.maps.Size(0,215)
             });
-          
-          
+
+
           const marker = new window.google.maps.Marker({
             position:aMarker.coords,
             animation: google.maps.Animation.DROP,
@@ -131,7 +109,7 @@ function MapView(){
             marker.addListener("mouseover", () => {
               infoWindow.open(gMap,marker)
               });
-            
+
             marker.addListener("mouseout", () => {
               infoWindow.close(gMap,marker)
             });
@@ -140,7 +118,7 @@ function MapView(){
             content: aMarker.windowContent,
             disableAutoPan: true,
             });
-          
+
           const marker = new window.google.maps.Marker({
             position:aMarker.coords,
             animation: google.maps.Animation.DROP,
@@ -155,7 +133,7 @@ function MapView(){
             marker.addListener("mouseover", () => {
               infoWindow.open(gMap,marker)
               });
-            
+
             marker.addListener("mouseout", () => {
               infoWindow.close(gMap,marker)
             });
@@ -167,16 +145,16 @@ function MapView(){
 
       const script = document.createElement("script");
       script.type = "text/javascript";
-      if (script.readyState) {
-        script.onreadystatechange = function() {
-          if (script.readyState === "loaded" || script.readyState === "complete") {
-            script.onreadystatechange = null;
-            onLoad();
-          }
-        };
-      } else {
+      // if (script.readyState) {
+      //   script.onreadystatechange = function() {
+      //     if (script.readyState === "loaded" || script.readyState === "complete") {
+      //       script.onreadystatechange = null;
+      //       onLoad();
+      //     }
+      //   };
+      // } else {
         script.onload = () => onLoad();
-      }
+      // }
 
       script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyABrkGgdfKYcuUmSE_VZ9cgThiFKHkfYiQ";
 
@@ -201,8 +179,6 @@ function MapView(){
     );
   }
 
-  //<Link to={`/neighborhood/${neighborhood_id}`}> Neighborhood Details </Link>
-
 
 function MapHousing() {
   const options = {
@@ -214,34 +190,13 @@ function MapHousing() {
   const [isOpen, setIsOpen] = React.useState(true);
 
   const ref = React.useRef();
-  // const [map, setMap] = React.useState("");
-  // const [markerList, setMarkerList] = React.useState("");
   let history = useHistory();
-
-  // React.useEffect(() => {
-  //   fetch("/api/neighborhood-details.json")
-  //   .then(response => response.json())
-  //   .then((data) => {
-
-  //     const markerList = [];
-
-  //     for (const neighborhood of data) {
-  //       const markerDetails = {
-  //         coords: {lat:neighborhood.latitude, lng:neighborhood.longitude},
-  //         windowContent: neighborhood.name,
-  //       };
-  //       markerList.push(markerDetails);
-  //      }
-  //      setMarkerList(markerList)
-  //     })
-  // }, []);
 
   React.useEffect(() => {
     const onLoad = () => {
       const gMap = new window.google.maps.Map(ref.current, options);
-      // setMap(gMap);
 
-      const addMarkers = () => 
+      const addMarkers = () =>
         fetch("/api/neighborhood-details.json")
         .then(response => response.json())
         .then((data) => {
@@ -256,14 +211,13 @@ function MapHousing() {
           };
           markerList.push(markerDetails);
          }
-        //  setMarkerList(markerList);
-          
+
           for (const aMarker of markerList) {
 
           const infoWindow = new google.maps.InfoWindow({
             content: aMarker.windowContent
             });
-          
+
           const marker = new window.google.maps.Marker({
             position:aMarker.coords,
             animation: google.maps.Animation.DROP,
@@ -290,16 +244,16 @@ function MapHousing() {
 
       const script = document.createElement("script");
       script.type = "text/javascript";
-      if (script.readyState) {
-        script.onreadystatechange = function() {
-          if (script.readyState === "loaded" || script.readyState === "complete") {
-            script.onreadystatechange = null;
-     //       onLoad();
-          }
-        };
-      } else {
+    //   if (script.readyState) {
+    //     script.onreadystatechange = function() {
+    //       if (script.readyState === "loaded" || script.readyState === "complete") {
+    //         script.onreadystatechange = null;
+    //  //       onLoad();
+    //       }
+    //     };
+    //   } else {
         script.onload = () => onLoad();
-      }
+   //   }
 
       script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyABrkGgdfKYcuUmSE_VZ9cgThiFKHkfYiQ";
 
@@ -403,10 +357,10 @@ function Neighborhood() {
                         </tr>
                       </tbody>
                     </Table>
-                   <p id="data-source">Sources: Wikipedia, Zumper, Zillow and Walk Score, May 2021</p> 
+                   <p id="data-source">Sources: Wikipedia, Zumper, Zillow and Walk Score, May 2021</p>
 
                 </Col>
-              <Col s={12} md={7}> 
+              <Col s={12} md={7}>
                 <Images neighborhood_id={neighborhood_id} />
                 <Row>
                   <Col sm={4}>
@@ -421,16 +375,16 @@ function Neighborhood() {
                 </Row>
               </Col>
             </Row>
-         <Row>  
-              <h5>&nbsp; {name} Restaurants</h5>  
+         <Row>
+              <h5>&nbsp; {name} Restaurants</h5>
           </Row>
           <Row>
             <div className="card-deck">
                 <Restaurants neighborhood_id={neighborhood_id} />
             </div>
-        </Row> 
+        </Row>
     </Container>
-          
+
     </React.Fragment>
   );
 }
@@ -467,13 +421,13 @@ function Images(props) {
 }
 
 function ImageListItem(props) {
-  
+
   const image_url = `/static/img/${props.image_name}`
 
   return (
-   
+
     <img className="neighborhood-image" src={image_url} />
-    
+
   );
 }
 
@@ -488,11 +442,11 @@ function RestaurantListItem(props) {
             className="card-img-top"
           />
           <div className="card-body">
-          
+
             <p className="restaurant-text">
               <b>{props.name}</b><br></br>
               {props.address}<br></br>
-              Rating: {props.rating}<br></br> 
+              Rating: {props.rating}<br></br>
               <a href={props.website} target="blank">Website</a>
             </p>
            </div>
@@ -541,9 +495,9 @@ function FindHousing(props) {
   const [postList, setPostList] = React.useState(["loading..."]);
   const [neighborhoodName, setNeighborhoodName] = React.useState(["loading..."]);
 
-  
 
-     //Get neighborhood name based on neighborhood_id
+
+    //Get neighborhood name based on neighborhood_id
   React.useEffect(() => {
     fetch(`/api/neighborhood/${neighborhood_id}`)
       .then(response => response.json())
@@ -551,13 +505,13 @@ function FindHousing(props) {
         setNeighborhoodName(data.name);
       })
     }, [])
-  
+
 
   React.useEffect(() => {
     fetch(`/api/housing/${neighborhood_id}`)
       .then(response => response.json())
       .then((data) => {
-        
+
         const postFetchList = []
 
         for (const posting of data) {
@@ -578,7 +532,7 @@ function FindHousing(props) {
       })
   }, [])
 
-    
+
   return(
     <React.Fragment>
       <Container>
@@ -598,7 +552,7 @@ function PostHousing() {
   const [neighborhoodName, setNeighborhoodName] = React.useState(["loading..."]);
   const[title, setTitle] = React.useState('');
   const[desc, setDesc] = React.useState('');
-  const[contact_info, setContact_info] = React.useState('');
+  const[contact_info_storage, setContact_info_storage] = React.useState('');
   const [url, setUrl] = React.useState('');
   const [image, setImage] = React.useState('');
   let history = useHistory();
@@ -615,13 +569,20 @@ function PostHousing() {
     })
   }, [])
 
+//Get email of logged in user to set as contact_info for housing posting
+  React.useEffect(() => {
+    const contact_info_storage = localStorage.getItem('logged_in_user')
+    console.log("Contact info is:", contact_info_storage)
+    setContact_info_storage(contact_info_storage)
+  })
+
   const createNewPost = () => {
     const post = {
       'neighborhood_id': neighborhood_id,
       'email': email,
       'title': title,
       'desc': desc,
-      'contact_info': contact_info,
+      'contact_info': contact_info_storage,
       'image_url': url,
       }
     fetch('/api/create-posting', {
@@ -634,11 +595,9 @@ function PostHousing() {
     .then(response => response.json())
     .then(data => {
       if (data === "Success") {
- //       alert('Post added.')
         setIsOpen(true);
       }
     });
- //   history.push('/profile');
   }
 
   const uploadImage = () => {
@@ -658,31 +617,31 @@ function PostHousing() {
     .catch(err => console.log(err))
   }
 
-  const renderTooltip = (props) => (
-    <Tooltip id="button-tooltip" {...props}>
-      Provide an email where you would like to receive responses to your post.
-      Your email will be anonymized and not shared directly with users.
-    </Tooltip>
-  );
+  // const renderTooltip = (props) => (
+  //   <Tooltip id="button-tooltip" {...props}>
+  //     Provide an email where you would like to receive responses to your post.
+  //     Your email will be anonymized and not shared directly with users.
+  //   </Tooltip>
+  // );
 
   const redirectToProfile = () => {
     history.push('/profile');
 }
-  
+
   return (
     <React.Fragment>
         <Jumbotron className="post-housing-background">
           <Row className="justify-content-center">
             <Col sm={12} md={7}>
             <Modal show={isOpen}>
-              <Modal.Body modal-text>Your post has been added.</Modal.Body>
+              <Modal.Body className="modal-text" >Your post has been added.</Modal.Body>
                 <Modal.Footer>
                   <Button className="modal-button" onClick={redirectToProfile}>Go to Profile</Button>
                 </Modal.Footer>
             </Modal>
             <Card className="post-housing-form bg-light">
               <p className="posting-form-title">Post {neighborhoodName} Housing</p>
-              
+
                 <p className="posting-form-header">Title:</p>
                 <input
                   className="posting-form-input"
@@ -690,29 +649,29 @@ function PostHousing() {
                   onChange={(event) => setTitle(event.target.value)}
                   value={title}
                   />
-                
+
                 <p className="posting-form-header">Description:</p>
                   <textarea
                     className="posting-textarea-input"
                     onChange={(event) => setDesc(event.target.value)}
                     value={desc}
                   />
-                
-                  <p className="posting-form-header">Email: 
+
+                  {/* <p className="posting-form-header">Email:
                       <OverlayTrigger
                         placement="right"
                         delay={{ show: 250, hide: 400 }}
                         overlay={renderTooltip}>
                           <i className="fa fa-question-circle" aria-hidden="true"></i>
-                      </OverlayTrigger> 
-                  </p>
-                    <input
+                      </OverlayTrigger>
+                  </p> */}
+                    {/* <input
                       className="posting-form-input"
                       type="email"
                       onChange={(event) => setContact_info(event.target.value)}
                       value={contact_info}
-                    />
-                
+                    /> */}
+
                   <div className="posting-file-input">
                     <input type="file" onChange= {(event)=> setImage(event.target.files[0])}></input>
                       <button onClick={uploadImage}>Upload</button>
@@ -721,7 +680,7 @@ function PostHousing() {
                         <img className="input-posting-image" src={url} />
                     </div>
                 <Button className="posting-form-button" onClick={createNewPost}> Add Posting </Button>
-              
+
             </Card>
           </Col>
         </Row>
@@ -744,7 +703,7 @@ function PostListItem(props){
   return(
     <React.Fragment>
         <p>{props.date} &nbsp; <b>{props.title}</b></p>
-        <p>{props.desc}</p>  
+        <p>{props.desc}</p>
         <img className="find-housing-image" src={props.image_url} />
         <p><Button onClick={redirectToContact}>Contact Seller</Button></p>
         <hr></hr>
@@ -773,7 +732,7 @@ function ContactSellerForm() {
       })
   }, [])
 
-  console.log("seller email is:", sellerEmail); 
+  console.log("seller email is:", sellerEmail);
 
   const redirectBack = () => {
       history.goBack();
@@ -785,12 +744,11 @@ function ContactSellerForm() {
       window.emailjs.sendForm('default_service', 'template_43ponc9', e.target, 'user_uTFw7bspn4zVAkmNegIxE')
           .then((result) => {
               console.log(result.text);
- //             alert("Your message has been sent")
 
             //Once form is submitted, modal is displayed
               setIsOpen(true);
 
-            //Form is reset  
+            //Form is reset
               setFromName('');
               setSellerEmail('');
               setReplyToEmail('');
@@ -807,7 +765,7 @@ function ContactSellerForm() {
         <Row className="justify-content-center">
           <Card className="contact-seller-form bg-light">
             <Modal show={isOpen}>
-              <Modal.Body modal-text>Your message has been sent</Modal.Body>
+              <Modal.Body className="modal-text">Your message has been sent</Modal.Body>
                 <Modal.Footer>
                   <Button className="modal-button" onClick={redirectBack}>Back to Housing</Button>
                 </Modal.Footer>
@@ -815,25 +773,25 @@ function ContactSellerForm() {
             <Card.Body>
               <Card.Title className="text-center">Contact Seller</Card.Title>
                 <Form onSubmit={sendEmail}>
-                  
-                    <input type="hidden" name="seller_email" 
+
+                    <input type="hidden" name="seller_email"
                         onChange={(event) => setSellerEmail(event.target.value)}
                         value={sellerEmail}/>
                     <Form.Group>
                       <label className="contact-seller-header">Your Name:</label><br></br>
-                      <input 
-                          type="text" 
-                          name="from_name" 
+                      <input
+                          type="text"
+                          name="from_name"
                           className="contact-seller-input"
                           onChange={(event) => setFromName(event.target.value)}
                           value={fromName}/>
                     </Form.Group>
-                  
+
                     <Form.Group>
                       <label className="contact-seller-header">Your Email:</label><br></br>
-                      <input 
-                          type="email" 
-                          name="reply_to" 
+                      <input
+                          type="email"
+                          name="reply_to"
                           className="contact-seller-input"
                           onChange={(event) => setReplyToEmail(event.target.value)}
                           value={replyToEmail}/>
@@ -841,7 +799,7 @@ function ContactSellerForm() {
 
                     <Form.Group>
                       <label className="contact-seller-header">Your Message:</label><br></br>
-                      <textarea 
+                      <textarea
                           name="message"
                           className="contact-seller-textarea"
                           onChange={(event) => setMessage(event.target.value)}
@@ -851,7 +809,7 @@ function ContactSellerForm() {
                     <Button onClick={redirectBack}>Back</Button>
                   </Form.Group>
                 </Form>
-              
+
             </Card.Body>
           </Card>
         </Row>
@@ -869,15 +827,15 @@ function PostListItemWithDelete(props){
   return(
     <React.Fragment>
         <p>{props.date} &nbsp; <u><b>{props.title}</b></u></p>
-        <p>{props.desc}</p>  
+        <p>{props.desc}</p>
         <img className="posting-image" src={props.image_url} />
-        <DeletePosting posting_id={props.posting_id}/> 
+        <DeletePosting posting_id={props.posting_id}/>
         <hr></hr>
     </React.Fragment>
   );
 }
 
-function DeletePosting(props) {  
+function DeletePosting(props) {
 
   const deletePosting = () => {
     fetch('/api/delete-posting', {
@@ -887,7 +845,6 @@ function DeletePosting(props) {
     .then(response => response.json())
     .then(data => {
       if (data) {
-//        alert("Posting Deleted");
       }
     });
    }
@@ -921,13 +878,9 @@ function CreateUser() {
     .then(response => response.json())
     .then(data => {
       if (data.message === "Error - user already exists. Please log in.") {
- //       alert(data.message);
         setIsOpen1(true);
- //       history.push('/login');
       } else {
- //       alert(data.message);
         localStorage.setItem('logged_in_user', data.email);
- //       history.push('/login');
         setIsOpen2(true);
       }
     })
@@ -942,13 +895,13 @@ function CreateUser() {
         <Jumbotron className="create-account-background">
           <Row className="justify-content-center">
           <Modal show={isOpen1}>
-              <Modal.Body modal-text>Error - user already exists. Please log in.</Modal.Body>
+              <Modal.Body className="modal-text">Error - user already exists. Please log in.</Modal.Body>
                 <Modal.Footer>
                   <Button className="modal-button" onClick={redirectToLogin}>Go to Login</Button>
                 </Modal.Footer>
             </Modal>
             <Modal show={isOpen2}>
-              <Modal.Body modal-text>Account created. Please log in.</Modal.Body>
+              <Modal.Body className="modal-text">Account created. Please log in.</Modal.Body>
                 <Modal.Footer>
                   <Button className="modal-button" onClick={redirectToLogin}>Go to Login</Button>
                 </Modal.Footer>
@@ -971,14 +924,14 @@ function CreateUser() {
                     value={password}
                     />
                 </Form.Group>
-              
+
               <Button className="form-button" type="button" onClick={createNewUser} block>Register</Button>
              </Form>
             </Card.Body>
           </Card>
          </Row>
          </Jumbotron>
-    
+
     </React.Fragment>
   );
 }
@@ -1022,21 +975,16 @@ function Login() {
     .then(response => response.json())
     .then(data => {
       if (data.message === "No account exists for that email. Please create an account.") {
-//        alert(data.message);
-//        history.push('/create-user');
           setIsOpen1(true);
       } else if (data.message === "Incorrect password.") {
-//          alert(data.message);
-//          history.push('/login')
           setIsOpen2(true);
       } else if (data.message === "You are now logged in.") {
- //         alert(data.message);
           setIsLoggedIn(true);
           localStorage.setItem('logged_in_user', data.email);
          setredirectToReferrer(true);
         }
       }
-    ) 
+    )
   }
 
   if (redirectToReferrer === true) {
@@ -1052,30 +1000,30 @@ function Login() {
   }
 
   const handleClose = () => setIsOpen2(false);
-  
+
 
   return (
     <React.Fragment>
       <Jumbotron className="login-background">
-        
+
         <Row className="justify-content-center">
             <Alert variant="primary" style={{ fontSize:"1rem", fontWeight:"300" }}>
               <p><b>You must be logged in to post housing.</b></p>
             </Alert>
         </Row>
           <Modal show={isOpen1}>
-              <Modal.Body modal-text>No account exists for that email. Please create an account.</Modal.Body>
+              <Modal.Body className="modal-text">No account exists for that email. Please create an account.</Modal.Body>
                 <Modal.Footer>
                   <Button onClick={redirectToCreateAccount}>OK</Button>
                 </Modal.Footer>
             </Modal>
             <Modal show={isOpen2}>
-              <Modal.Body modal-text>Incorrect password.</Modal.Body>
+              <Modal.Body className="modal-text">Incorrect password.</Modal.Body>
                 <Modal.Footer>
                   <Button onClick={handleClose}>OK</Button>
                 </Modal.Footer>
             </Modal>
- 
+
           <Row className="justify-content-center">
             <Card className="user-form">
               <Card.Body>
@@ -1098,8 +1046,8 @@ function Login() {
                           value={password || ''}
                           />
                     </Form.Group>
-                    <Button className="form-button" type="button" onClick={loginUser} block> Login </Button> 
-                  
+                    <Button className="form-button" type="button" onClick={loginUser} block> Login </Button>
+
                     <Form.Text className="muted text-center"> Not registered? &nbsp;
                         <Link to="/create-user">Create an account</Link>
                     </Form.Text>
@@ -1107,7 +1055,7 @@ function Login() {
               </Card.Body>
           </Card>
           </Row>
-        
+
       </Jumbotron>
     </React.Fragment>
   );
@@ -1123,7 +1071,7 @@ function UserProfile() {
   const email_list = email.split("@")
   const username = email_list[0];
 
-  React.useEffect(() => { 
+  React.useEffect(() => {
     fetch('/api/get-user-postings', {
       method: 'POST',
       body: JSON.stringify(email),
@@ -1148,7 +1096,7 @@ function UserProfile() {
             />
            );
           }
-       setPostList(postFetchList.reverse());   
+       setPostList(postFetchList.reverse());
      })
     }, [email]);
 
@@ -1158,7 +1106,7 @@ function UserProfile() {
 
   if(postList.length === 0) {
     setPostList("You have no housing posted.")
-  } 
+  }
 
   return (
     <React.Fragment>
@@ -1182,11 +1130,9 @@ function Logout() {
 
   const handleLogout = () => {
     if (!localStorage.getItem('logged_in_user')) {
-//      alert("User isn't logged in");
       history.push("/");
     } else {
         localStorage.removeItem('logged_in_user');
-//        alert("Log out successful.");
         setIsLoggedIn(false);
         history.push("/");
       }
@@ -1204,7 +1150,6 @@ function NavigationBar() {
 
   const handleLogout = () => {
     localStorage.removeItem('logged_in_user');
-  //      alert("Log out successful.");
         setIsLoggedIn(false);
         history.push("/");
     }
@@ -1272,7 +1217,7 @@ function App() {
     <Router>
         <AuthContext.Provider value={{isLoggedIn, setIsLoggedIn}}>
             <NavigationBar />
-      
+
         <Switch>
           <Route exact path="/login">
               <Login />
@@ -1300,7 +1245,7 @@ function App() {
             </PrivateRoute>
             <Route exact path="/map">
               <MapView />
-            </Route>       
+            </Route>
             <Route exact path="/send-email/:posting_id">
                 <ContactSellerForm />
             </Route>
