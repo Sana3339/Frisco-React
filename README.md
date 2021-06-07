@@ -1,8 +1,11 @@
 # Frisco
-Description here
+Frisco is an SPA (Single Page App) built in React with a Flask server and SQL Alchemy ORM.
+
+## Introduction
+San Francisco is an incredible place with each neighborhood vastly different from the next, all with their own personalities and characteristics.  I was the first in my network to move to SF over 10 years ago and I remember how difficult it was to determine which neighborhood was best suited for me.  I built Frisco to help other young professionals looking to move to the City by the Bay to have the most pertinent information of the most popular/well-known neighborhoods in one place (along with a sampling of restaurants in each neighborhood), as well as functionality that allows sellers to post housing for rent to these potential buyers and functionality for the buyers to email these sellers directly through the app.
 
 ## About the Author
-Sana is a former Googler with 9+ years of experience spanning across program management, technical recruiting and human resources.  She has a B.S. in Business from the University of Southern California ([see Linkedin here](https://www.linkedin.com/in/sanaahmad/)).
+I'm a former Googler with 9+ years of experience spanning across program management, technical recruiting and human resources ([see Linkedin here](https://www.linkedin.com/in/sanaahmad/)).
 
 ## Contents
 * [Technologies](#tech-stack)
