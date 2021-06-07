@@ -18,18 +18,9 @@ CLOUDINARY_SECRET = os.environ['CLOUDINARY_SECRET']
 @app.route("/", defaults={"path": ""})
 @app.route("/<path:path>")
 def catch_all(path):
+    """Render the root div onto which all React components are mounted."""
     
     return render_template("root.html")
-
-
-@app.route("/api/login", methods=["POST"])
-def handle_login():
-
-    data - request.get_json(force=True)
-
-    email = data['email']
-    password = data['password']
-
 
 #This route is used to get neighborhood details from DB to the front end
 #via AJAX requests in the maps JS files. The data is used to populate
@@ -96,6 +87,7 @@ def show_neighborhood(neighborhood_id):
 
 @app.route('/api/images/<neighborhood_id>')
 def show_images(neighborhood_id):
+    """Given a neighborhood_id, return the corresponding images."""
 
     images = crud.get_images_by_id(neighborhood_id)
 
@@ -272,6 +264,7 @@ def login_user():
    
 @app.route('/api/get-user-postings', methods=["POST"])
 def get_user_postings():
+    """Return all housing postings for a given user."""
 
     email = request.get_json()
 
@@ -298,6 +291,7 @@ def get_user_postings():
 
 @app.route('/api/create-posting', methods=["POST"])
 def create_posting():
+    """Create a housing posting and save in database."""
 
     data = request.get_json()
 
@@ -326,6 +320,7 @@ def delete_posting():
 
 @app.route('/api/get-seller-email/<posting_id>')
 def get_seller_by_id(posting_id):
+    """Return the seller's email for a particular housing posting."""
 
     contact_info = crud.get_seller_by_id(posting_id)
 

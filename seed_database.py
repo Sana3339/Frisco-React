@@ -353,7 +353,7 @@ neighborhoods = [
                     area with sizable Chinese and Russian populations. 
                     <b>Click the marker</b> to learn more.""",
     'long_desc': """The Richmond has influences from Chinese-American culture, and of its 
-                    three commercial strips, Clement Street is sometimes called the second 
+                    three commercial strips, Clement Street, is sometimes called the second 
                     Chinatown due to the high concentration 
                     of Chinese establishments.  The Richmond also has deep Irish and 
                     Russian roots and has many Catholic and Orthodox churches.""",
@@ -401,7 +401,7 @@ neighborhoods = [
                     loft apartments, furniture showrooms and condos.
                     <b>Click the marker</b> to learn more.""",
     'long_desc': """Many major software and technology companies have headquarters and offices 
-                    here and the area is home to The area is also home to the few Big-box 
+                    here and the area is home to the few Big-box 
                     stores in San Francisco such as Costco, REI, Nordstrom Rack, and Best Buy.
                     SOMA is home to many of San Francisco's museums, including SFMOMA, the Yerba 
                     Buena Center for the Arts and more.""",

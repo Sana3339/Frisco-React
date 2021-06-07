@@ -43,7 +43,7 @@
   background-size: cover;
 }
 
-/* Background for map pages */
+/* Background for explore neighborhood map page */
 .map-background {
   background-image: url("/static/img/blue_defocused.jpg");
   height: 100vh;
@@ -51,6 +51,16 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+/* Background for post housing map page */
+.posting-map-background {
+  background-image: url("/static/img/background-gray.jpeg");
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 
 /* Background for create account form */
 .create-account-background {
@@ -270,4 +280,25 @@ table td {
 #data-source {
   font-size: .8rem;
   font-style: italic;
+}
+
+#homepage-footer{
+  font-size: 1rem;
+  position: fixed;
+  bottom: 10px;
+  text-align: left;
+  width: 100%;
+}
+
+.modal-text{
+  font-size: 1.1rem;
+}
+
+.gm-ui-hover-effect {
+  display: none !important;
+}
+
+.gm-style .gm-style-iw-t::after {
+  background: none;
+  box-shadow:none;
 }

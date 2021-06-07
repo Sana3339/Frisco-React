@@ -41,6 +41,14 @@ function Homepage() {
               <Button id="button-Frisco" type="button" variant="light" onClick={redirectToMapPage}> Enter </Button>
             </div>
           </Row>
+          
+            <div id="homepage-footer">
+              <i className="fab fa-github"></i>
+                <a href="https://github.com/Sana3339" style={{ color:"black", fontWeight:"400" }}>&nbsp;github.com/Sana3339</a><br></br>
+              <i className="fab fa-linkedin-in"></i>
+                <a href="https://www.linkedin.com/in/sanaahmad/" style={{ color:"black", fontWeight:"400" }}>&nbsp;linkedin.com/in/sanaahmad</a>
+            </div>
+          
         </Jumbotron>
       
     </React.Fragment>
@@ -183,7 +191,7 @@ function MapView(){
             <Container>
               <h4 id="map-heading">Click on a marker to learn more about the neighborhood</h4>
               <div id="map"
-              style={{ height: "600px", width:"80%" }}
+              style={{ height: "470px", width:"70%" }}
               {...{ref}}>
               </div>
             </Container>
@@ -199,8 +207,12 @@ function MapView(){
 function MapHousing() {
   const options = {
     zoom:12.4,
-    center:{lat:37.7822, lng:-122.4342}
+    center:{lat:37.7822, lng:-122.4342},
     };
+
+  //Line below is to control the state of our modal
+  const [isOpen, setIsOpen] = React.useState(true);
+
   const ref = React.useRef();
   // const [map, setMap] = React.useState("");
   // const [markerList, setMarkerList] = React.useState("");
@@ -255,7 +267,11 @@ function MapHousing() {
           const marker = new window.google.maps.Marker({
             position:aMarker.coords,
             animation: google.maps.Animation.DROP,
-            map:gMap
+            map:gMap,
+            icon: {
+              url: "/static/img/blue-pushpin.png",
+              scaledSize: new google.maps.Size(38, 38)
+             }
             });
 
             marker.addListener("click", () => {
@@ -291,14 +307,23 @@ function MapHousing() {
       console.log("Script is adding");
     }, []);
 
+    //This function closes the modal
+    const handleClose = () => setIsOpen(false);
+
   return (
     <React.Fragment>
-        <Jumbotron className="map-background">
+        <Jumbotron className="posting-map-background">
+        <Modal show={isOpen}>
+              <Modal.Body className="modal-text">Click on the pin closest to the housing you'd like to post.</Modal.Body>
+                <Modal.Footer>
+                  <Button onClick={handleClose}>Got it!</Button>
+                </Modal.Footer>
+            </Modal>
           <Row className="justify-content-center">
             <Container>
-              <h4 id="map-heading">Click on a marker closest to the housing you'd like to post</h4>
+              <h4 id="map-heading">Click on the pin closest to the housing you'd like to post</h4>
                   <div id="map"
-                  style={{ height: "600px", width:"80%" }}
+                  style={{ height: "470px", width:"70%" }}
                   {...{ref}}>
                 </div>
             </Container>
@@ -378,7 +403,7 @@ function Neighborhood() {
                         </tr>
                       </tbody>
                     </Table>
-                   <p id="data-source">Sources: Zillow, Zumper and Walk Score, May 2021</p> 
+                   <p id="data-source">Sources: Wikipedia, Zumper, Zillow and Walk Score, May 2021</p> 
 
                 </Col>
               <Col s={12} md={7}> 
@@ -650,7 +675,7 @@ function PostHousing() {
           <Row className="justify-content-center">
             <Col sm={12} md={7}>
             <Modal show={isOpen}>
-              <Modal.Body>Your post has been added.</Modal.Body>
+              <Modal.Body modal-text>Your post has been added.</Modal.Body>
                 <Modal.Footer>
                   <Button className="modal-button" onClick={redirectToProfile}>Go to Profile</Button>
                 </Modal.Footer>
@@ -782,7 +807,7 @@ function ContactSellerForm() {
         <Row className="justify-content-center">
           <Card className="contact-seller-form bg-light">
             <Modal show={isOpen}>
-              <Modal.Body>Your message has been sent</Modal.Body>
+              <Modal.Body modal-text>Your message has been sent</Modal.Body>
                 <Modal.Footer>
                   <Button className="modal-button" onClick={redirectBack}>Back to Housing</Button>
                 </Modal.Footer>
@@ -837,8 +862,8 @@ function ContactSellerForm() {
 
 
 //This is a copy of the PostListItem component above but it includes delete functionality.
-//These are different components bc a post should only be able to be deleted by the user who created it
-//from their user profile page
+//These are different components bc a post should only be able to be deleted by the user who
+//created it from their user profile page
 function PostListItemWithDelete(props){
 
   return(
@@ -917,13 +942,13 @@ function CreateUser() {
         <Jumbotron className="create-account-background">
           <Row className="justify-content-center">
           <Modal show={isOpen1}>
-              <Modal.Body>Error - user already exists. Please log in.</Modal.Body>
+              <Modal.Body modal-text>Error - user already exists. Please log in.</Modal.Body>
                 <Modal.Footer>
                   <Button className="modal-button" onClick={redirectToLogin}>Go to Login</Button>
                 </Modal.Footer>
             </Modal>
             <Modal show={isOpen2}>
-              <Modal.Body>Account created. Please log in.</Modal.Body>
+              <Modal.Body modal-text>Account created. Please log in.</Modal.Body>
                 <Modal.Footer>
                   <Button className="modal-button" onClick={redirectToLogin}>Go to Login</Button>
                 </Modal.Footer>
@@ -1032,52 +1057,57 @@ function Login() {
   return (
     <React.Fragment>
       <Jumbotron className="login-background">
+        
         <Row className="justify-content-center">
+            <Alert variant="primary" style={{ fontSize:"1rem", fontWeight:"300" }}>
+              <p><b>You must be logged in to post housing.</b></p>
+            </Alert>
+        </Row>
           <Modal show={isOpen1}>
-              <Modal.Body>No account exists for that email. Please create an account.</Modal.Body>
+              <Modal.Body modal-text>No account exists for that email. Please create an account.</Modal.Body>
                 <Modal.Footer>
                   <Button onClick={redirectToCreateAccount}>OK</Button>
                 </Modal.Footer>
             </Modal>
             <Modal show={isOpen2}>
-              <Modal.Body>Incorrect password.</Modal.Body>
+              <Modal.Body modal-text>Incorrect password.</Modal.Body>
                 <Modal.Footer>
                   <Button onClick={handleClose}>OK</Button>
                 </Modal.Footer>
             </Modal>
-          <Card className="user-form">
-            <Card.Body>
-              <Card.Title className="text-center">Login</Card.Title>
-                <Form>
-                  <Form.Text className="form-text">You must be logged in to post housing or view your profile.</Form.Text>
-                  
-              
-                <Form.Group controlId="formBasicEmail">
-                <Form.Label>Email:</Form.Label>
-                  <Form.Control
-                    type="text"
-                    onChange={(event) => setEmail(event.target.value)}
-                    value={email || ''}
-                    />
-                  </Form.Group>
+ 
+          <Row className="justify-content-center">
+            <Card className="user-form">
+              <Card.Body>
+                <Card.Title className="text-center">Login</Card.Title>
+                  <Form>
+                  <Form.Group controlId="formBasicEmail">
+                  <Form.Label>Email:</Form.Label>
+                    <Form.Control
+                      type="text"
+                      onChange={(event) => setEmail(event.target.value)}
+                      value={email || ''}
+                      />
+                    </Form.Group>
 
-                  <Form.Group controlId="formBasicPassword">
-                    <Form.Label>Password:</Form.Label>
-                      <Form.Control
-                        type="password"
-                        onChange={(event) => setPassword(event.target.value)}
-                        value={password || ''}
-                        />
+                    <Form.Group controlId="formBasicPassword">
+                      <Form.Label>Password:</Form.Label>
+                        <Form.Control
+                          type="password"
+                          onChange={(event) => setPassword(event.target.value)}
+                          value={password || ''}
+                          />
                     </Form.Group>
                     <Button className="form-button" type="button" onClick={loginUser} block> Login </Button> 
-                
+                  
                     <Form.Text className="muted text-center"> Not registered? &nbsp;
                         <Link to="/create-user">Create an account</Link>
-                  </Form.Text>
-                </Form>
+                    </Form.Text>
+                  </Form>
               </Card.Body>
           </Card>
-        </Row>
+          </Row>
+        
       </Jumbotron>
     </React.Fragment>
   );
