@@ -2,6 +2,7 @@
 Description here
 
 ## About the Author
+Sana is a former Googler with 9+ years of experience spanning across program management, technical recruiting and human resources.  She has a B.S. in Business from the University of Southern California ([see Linkedin here](https://www.linkedin.com/in/sanaahmad/)).
 
   
 ## Contents
