@@ -63,6 +63,10 @@ If users are interested in a posting, clicking on the "Contact Seller" page take
 #### Login/ Create Account
 From the Neighborhood Details page, if a user clicks on the "Post Housing" button, Frisco checks whether the user is logged in, and if they're not, they are redirected to the login page via a React Protected Route. 
 
+![alt text](https://github.com/Sana3339/Frisco-React/blob/master/static/img/login_giphy.gif "login")
+
+
+
 If the user doesn't have an account, there is a link in the login page as well as the navigation bar to route them to the page where they can create one.
 
 #### Post Housing
