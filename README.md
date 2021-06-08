@@ -1,8 +1,8 @@
 # Frisco
-Frisco is an SPA (Single Page App) built in React with a Flask server and SQL Alchemy ORM.
+Frisco is a full-stack, single page web app built using React, Python, Flask and PostgreSQL.
 
 ## Introduction
-San Francisco is an incredible place with each neighborhood vastly different from the next, all with their own personalities and characteristics.  I was the first in my network to move to SF over 10 years ago and I remember how difficult it was to figure out which neighborhood was best suited for me.  
+San Francisco is an incredible place with each neighborhood vastly different from the next, all with their own personalities and characteristics.  I was the first in my network to move to SF over 10 years ago and I remember how difficult it was to figure out which neighborhood was best suited for me.
 
 I built Frisco to help other young professionals looking to move to the City by the Bay to have the most pertinent information of the most popular/well-known neighborhoods in one place (along with a sampling of restaurants in each neighborhood).  I also included functionality that allows sellers to post housing for rent to these potential buyers and functionality for the buyers to email the sellers directly through the app.
 
@@ -97,9 +97,54 @@ Once users submit the posting form, their post is visible on their profile page 
 
 ## <a name="installation"></a>Installation
 
+To run Frisco on your own machine:
 
+Clone or fork this repo:
+```
+$ https://github.com/Sana3339/Frisco-React.git
+```
 
+Create and activate a virtual environment inside your Frisco directory:
+```
+$ virtualenv env
+$ source env/bin/activate
+```
 
+Install the dependencies:
+```
+$ pip install -r requirements.txt
+```
 
+Sign up to use the:
+* [Google Maps API and Google Places API](https://console.cloud.google.com)
+* [Cloudinary API](https://www.cloudinary.com)
 
+Save your API keys in a file called <kbd>secrets.sh</kbd> using this format:
+
+```
+export GOOGLE_API_KEY="YOUR_KEY_HERE"
+export CLOUDINARY_API_KEY="YOUR_KEY_HERE"
+export CLOUDINARY_SECRET="YOUR_KEY_HERE"
+```
+
+Source your keys from your secrets.sh file into your virtual environment:
+
+```
+$ source secrets.sh
+```
+
+Set up the database:
+
+```
+$ python3 seed_database.py
+$ python3 model.py
+```
+
+Run the app:
+
+```
+$ python3 server.py
+```
+
+Navigate to [http://localhost:5000](http://localhost:5000) to access Frisco in your browser to begin exploring San Francisco neighborhoods!
 
