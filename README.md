@@ -52,22 +52,32 @@ Users are also provided with a sampling of 4 restaurants in the neighborhood.  T
 
 ![alt text](https://res.cloudinary.com/sana3339/image/upload/v1623188724/samples/Frisco%20App%20Images/Neighborhood_details_dyxygk.png "neighborhood details")
 
-#### Explore Neighborhood Housing/ Send Emails to Sellers of Housing Postings
+#### Explore Neighborhood Housing 
 When users click on the "Find Housing" button in the neighborhood details page, they are taken to a list of available housing posted for that particular neighborhood.  
+
+
+![alt text](https://res.cloudinary.com/sana3339/image/upload/v1623189924/samples/Frisco%20App%20Images/find_housing_page_mc4boy.png "find housing")
+
+
+
+#### Send Emails to Sellers of Housing Postings
 
 If users are interested in a posting, clicking on the "Contact Seller" page takes them to a form where they can anonymously email the seller who posted the housing.  This functionality is enabled via the EmailJS SendGrid API.
 
-![alt text](https://github.com/Sana3339/Frisco-React/blob/master/static/img/find_housing_giphy.gif "find housing")
+
+![alt text](https://github.com/Sana3339/Frisco-React/blob/master/static/img/seller_form_giphy.gif "email seller")
+
 
 
 #### Login/ Create Account
 From the Neighborhood Details page, if a user clicks on the "Post Housing" button, Frisco checks whether the user is logged in, and if they're not, they are redirected to the login page via a React Protected Route. 
 
-![alt text](https://github.com/Sana3339/Frisco-React/blob/master/static/img/login_giphy.gif "login")
-
-
-
 If the user doesn't have an account, there is a link in the login page as well as the navigation bar to route them to the page where they can create one.
+
+
+![alt text](https://res.cloudinary.com/sana3339/image/upload/v1623190156/samples/Frisco%20App%20Images/login_page_dpimtl.png "login")
+
+
 
 #### Post Housing
 Once a user is logged in, they may post housing.  The post housing form allows users to upload an image via the Cloudinary API.
