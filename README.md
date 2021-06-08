@@ -83,7 +83,7 @@ If the user doesn't have an account, there is a link in the login page as well a
 Once a user is logged in, they may post housing.  The post housing form allows users to upload an image via the Cloudinary API.
 
 
-![alt text](https://github.com/Sana3339/Frisco-React/blob/master/static/img/upload_photo_giphy.gif "post housing")
+![alt text](https://github.com/Sana3339/Frisco-React/blob/master/static/img/post_housing_small.gif "post housing")
 
 
 
