@@ -57,6 +57,9 @@ When users click on the "Find Housing" button in the neighborhood details page, 
 
 If users are interested in a posting, clicking on the "Contact Seller" page takes them to a form where they can anonymously email the seller who posted the housing.  This functionality is enabled via the EmailJS SendGrid API.
 
+![alt text](https://github.com/Sana3339/Frisco-React/blob/master/static/img/find_housing_giphy.gif "find housing")
+
+
 #### Login/ Create Account
 From the Neighborhood Details page, if a user clicks on the "Post Housing" button, Frisco checks whether the user is logged in, and if they're not, they are redirected to the login page via a React Protected Route. 
 
