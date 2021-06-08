@@ -528,7 +528,7 @@ function FindHousing(props) {
             />
            );
           }
-        setPostList(postFetchList);
+        setPostList(postFetchList.reverse());
       })
   }, [])
 
