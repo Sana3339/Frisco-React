@@ -79,11 +79,26 @@ If the user doesn't have an account, there is a link in the login page as well a
 
 
 
-#### Post Housing
+#### Post Housing 
 Once a user is logged in, they may post housing.  The post housing form allows users to upload an image via the Cloudinary API.
 
+
+![alt text](https://github.com/Sana3339/Frisco-React/blob/master/static/img/upload_photo_giphy.gif "post housing")
+
+
+
 #### Profile
+
 Once users submit the posting form, their post is visible on their profile page as well as under the neighborhood page that they posted the housing in.  Other users can anonymously email them if they are interested in the posting (per the 'send email to sellers' functionality described above).
+
+![alt text](https://res.cloudinary.com/sana3339/image/upload/v1623191372/samples/Frisco%20App%20Images/Profile_page_j0vhll.png "profile")
+
+
+
+## <a name="installation"></a>Installation
+
+
+
 
 
 
