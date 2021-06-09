@@ -1,4 +1,4 @@
-# Frisco
+# <img src="https://res.cloudinary.com/sana3339/image/upload/v1623249089/samples/Frisco%20App%20Images/Screen_Shot_2021-06-09_at_7.29.45_AM_vqaewn.png" width="15%" alt="Frisco">
 Frisco is a full-stack, single page web app built using React, Python, Flask and PostgreSQL.
 
 ## Introduction
