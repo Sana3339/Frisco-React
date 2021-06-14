@@ -1,6 +1,11 @@
 # <img src="https://res.cloudinary.com/sana3339/image/upload/v1623249089/samples/Frisco%20App%20Images/Screen_Shot_2021-06-09_at_7.29.45_AM_vqaewn.png" width="15%" alt="Frisco">
 Frisco is a full-stack, single page web app built using React, Python, Flask and PostgreSQL.
 
+## YouTube Video
+Click the image below to watch a video walkthrough of Frisco:
+
+[![Frisco video](https://res.cloudinary.com/sana3339/image/upload/v1623696348/YouTube_Frisco_thumbnail_euuf40.png)](https://www.youtube.com/watch?v=4zFxqFH9lSM "Click to watch")
+
 ## Introduction
 San Francisco is an incredible place with each neighborhood vastly different from the next, all with their own personalities and characteristics.  I was the first in my network to move to SF over 10 years ago and I remember how difficult it was to figure out which neighborhood was best suited for me.
 
