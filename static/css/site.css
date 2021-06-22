@@ -27,7 +27,7 @@
 
 /* Background for homepage */
 .Frisco-background {
-  background-image: url("/static/img/Frisco_people.jpg");
+  background-image: url(https://res.cloudinary.com/sana3339/image/upload/v1624398860/Frisco_people_m6jdos.jpg);
   height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
@@ -36,7 +36,7 @@
 
 /* Background for login form */
 .login-background {
-  background-image: url("/static/img/SF_gray.jpg");
+  background-image: url(https://res.cloudinary.com/sana3339/image/upload/v1624398955/SF_gray_qabtc8.jpg);
   height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
@@ -45,7 +45,7 @@
 
 /* Background for explore neighborhood map page */
 .map-background {
-  background-image: url("/static/img/blue_defocused.jpg");
+  background-image: url(https://res.cloudinary.com/sana3339/image/upload/v1623253563/blue_defocused_htegpc.jpg);
   height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
@@ -54,7 +54,7 @@
 
 /* Background for post housing map page */
 .posting-map-background {
-  background-image: url("/static/img/background-gray.jpeg");
+  background-image: url(https://res.cloudinary.com/sana3339/image/upload/v1623253606/background-gray_jeaeh5.jpg);
   height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
@@ -64,7 +64,7 @@
 
 /* Background for create account form */
 .create-account-background {
-  background-image: url("/static/img/GG-blurry.jpg");
+  background-image: url(https://res.cloudinary.com/sana3339/image/upload/v1623253643/GG-blurry_lvs99p.jpg);
   height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
@@ -73,7 +73,7 @@
 
 /* Background for post housing form */
 .post-housing-background {
-  background-image: url("/static/img/SF_streets.jpg");
+  background-image: url(https://res.cloudinary.com/sana3339/image/upload/v1623253682/SF_Streets_qdrt0v.jpg);
   height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
@@ -82,7 +82,7 @@
 
 /* Background for contact seller form */
 .contact-seller-background {
-  background-image: url("/static/img/SF_houses.jpg");
+  background-image: url(https://res.cloudinary.com/sana3339/image/upload/v1623253784/SF_houses_final_small_i7bodo.jpg);
   height: 100vh;
   background-position: center;
   background-repeat: no-repeat;

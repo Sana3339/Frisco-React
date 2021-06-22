@@ -422,7 +422,8 @@ function Images(props) {
 
 function ImageListItem(props) {
 
-  const image_url = `/static/img/${props.image_name}`
+ // const image_url = `/static/img/${props.image_name}`
+ const image_url = props.image_name
 
   return (
 
