@@ -19,7 +19,7 @@ CLOUDINARY_SECRET = os.environ['CLOUDINARY_SECRET']
 @app.route("/<path:path>")
 def catch_all(path):
     """Render the root div onto which all React components are mounted."""
-    
+
     return render_template("root.html")
 
 #This route is used to get neighborhood details from DB to the front end
@@ -51,7 +51,7 @@ def get_neighborhood_details():
         all_neighborhood_details.append(neighborhood_dict)
 
     return jsonify(all_neighborhood_details)
-    
+
 
 @app.route('/api/neighborhood/<neighborhood_id>')
 def show_neighborhood(neighborhood_id):
@@ -103,12 +103,12 @@ def show_images(neighborhood_id):
         image_list.append(image_dict)
 
     return jsonify(image_list)
-        
+
 
 @app.route('/api/website.json/<place_id>')
 def get_restaurant_website(place_id):
     """Send restaurant id to Google Places Search API to get restaurant website link."""
-    
+
     payload = {"key": GOOG_API_KEY,
                 "place_id": place_id,
                 "fields": "website" }
@@ -121,7 +121,7 @@ def get_restaurant_website(place_id):
         website = converted_res["result"]["website"]
     else:
         website = ""
-    
+
     return website
 
 #The route below uses the restaurant's Google Place ID to get the 'photo reference' url for the
@@ -129,9 +129,9 @@ def get_restaurant_website(place_id):
 @app.route('/api/photo.json/<place_id>')
 def get_restaurant_photo(place_id):
     """Send restaurant id to Google Places Search API endpoint to get restaurant photo reference id.
-    
+
     Use photo reference id to create photo url (to be sent to front-end to dispaly photo in restaurant results)"""
-    
+
     payload = {"key": GOOG_API_KEY,
                 "place_id": place_id,
                 "fields": "photo" }
@@ -143,7 +143,7 @@ def get_restaurant_photo(place_id):
     photo_reference = first_photo["photo_reference"]
 
     photo_url = f"https://maps.googleapis.com/maps/api/place/photo?key={GOOG_API_KEY}&photoreference={photo_reference}&maxheight=180"
-    
+
     return photo_url
 
 
@@ -166,10 +166,10 @@ def show_restaurant_details(neighborhood_id):
 
 
     for i, restaurant in enumerate(data):
-        
+
         if i < 4:
             rest_dict = {}
-            
+
             name = data[i]['name']
             formatted_address = data[i]['formatted_address']
             rating = data[i]['rating']
@@ -261,7 +261,7 @@ def login_user():
             return jsonify({'message': "You are now logged in.",
                             'email': email})
 
-   
+
 @app.route('/api/get-user-postings', methods=["POST"])
 def get_user_postings():
     """Return all housing postings for a given user."""
@@ -328,4 +328,4 @@ def get_seller_by_id(posting_id):
 
 if __name__ == '__main__':
     connect_to_db(app)
-    app.run(host='0.0.0.0', debug=True)
+    app.run(host='0.0.0.0')
