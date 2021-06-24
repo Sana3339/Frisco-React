@@ -20,7 +20,6 @@ const Alert = ReactBootstrap.Alert;
 const Table = ReactBootstrap.Table;
 const Jumbotron = ReactBootstrap.Jumbotron;
 const OverlayTrigger = ReactBootstrap.OverlayTrigger;
-const Tooltip = ReactBootstrap.Tooltip;
 const Modal = ReactBootstrap.Modal;
 
 function Homepage() {
@@ -618,13 +617,6 @@ function PostHousing() {
     .catch(err => console.log(err))
   }
 
-  // const renderTooltip = (props) => (
-  //   <Tooltip id="button-tooltip" {...props}>
-  //     Provide an email where you would like to receive responses to your post.
-  //     Your email will be anonymized and not shared directly with users.
-  //   </Tooltip>
-  // );
-
   const redirectToProfile = () => {
     history.push('/profile');
 }
@@ -657,21 +649,6 @@ function PostHousing() {
                     onChange={(event) => setDesc(event.target.value)}
                     value={desc}
                   />
-
-                  {/* <p className="posting-form-header">Email:
-                      <OverlayTrigger
-                        placement="right"
-                        delay={{ show: 250, hide: 400 }}
-                        overlay={renderTooltip}>
-                          <i className="fa fa-question-circle" aria-hidden="true"></i>
-                      </OverlayTrigger>
-                  </p> */}
-                    {/* <input
-                      className="posting-form-input"
-                      type="email"
-                      onChange={(event) => setContact_info(event.target.value)}
-                      value={contact_info}
-                    /> */}
 
                   <div className="posting-file-input">
                     <input type="file" onChange= {(event)=> setImage(event.target.files[0])}></input>
@@ -889,7 +866,12 @@ function CreateUser() {
 
   const redirectToLogin = () => {
     history.push('/login');
-}
+  }
+
+  const redirectToProfile = () => {
+    localStorage.setItem('logged_in_user', email);
+    history.push('/profile');
+   }
 
   return(
     <React.Fragment>
@@ -902,9 +884,9 @@ function CreateUser() {
                 </Modal.Footer>
             </Modal>
             <Modal show={isOpen2}>
-              <Modal.Body className="modal-text">Account created. Please log in.</Modal.Body>
+              <Modal.Body className="modal-text">Account created. You are logged in.</Modal.Body>
                 <Modal.Footer>
-                  <Button className="modal-button" onClick={redirectToLogin}>Go to Login</Button>
+                  <Button className="modal-button" onClick={redirectToProfile}>Go to Profile</Button>
                 </Modal.Footer>
             </Modal>
             <Card className="user-form">
@@ -1070,7 +1052,9 @@ function UserProfile() {
 
   const email = localStorage.getItem('logged_in_user')
   const email_list = email.split("@")
-  const username = email_list[0];
+
+  //Get the first part of the email and make the first letter uppercase
+  const username = email_list[0].charAt(0).toUpperCase() + email_list[0].slice(1);
 
   React.useEffect(() => {
     fetch('/api/get-user-postings', {
