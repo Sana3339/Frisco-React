@@ -650,7 +650,7 @@ function PostHousing() {
                     value={desc}
                   />
 
-                  <div className="posting-file-input">
+                  <div className="posting-file-input"><p>Upload Image:</p>
                     <input type="file" onChange= {(event)=> setImage(event.target.files[0])}></input>
                       <button onClick={uploadImage}>Upload</button>
                     </div>
