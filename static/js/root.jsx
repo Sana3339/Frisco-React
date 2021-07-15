@@ -45,7 +45,9 @@ function Homepage() {
               <i className="fab fa-github"></i>
                 <a href="https://github.com/Sana3339" style={{ color:"black", fontWeight:"400" }}>&nbsp;github.com/Sana3339</a><br></br>
               <i className="fab fa-linkedin-in"></i>
-                <a href="https://www.linkedin.com/in/sanaahmad/" style={{ color:"black", fontWeight:"400" }}>&nbsp;linkedin.com/in/sanaahmad</a>
+                <a href="https://www.linkedin.com/in/sanaahmad/" style={{ color:"black", fontWeight:"400" }}>&nbsp;linkedin.com/in/sanaahmad</a><br></br>
+              <i class="fab fa-youtube"></i>
+              <a href="https://www.youtube.com/watch?v=4zFxqFH9lSM" style={{ color:"black", fontWeight:"400" }}>&nbsp;YouTube video walkthrough</a>
             </div>
 
         </Jumbotron>
