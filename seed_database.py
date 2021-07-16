@@ -1,7 +1,6 @@
-"""Script to seed database."""
+"""Script to seed database with test data. This only needs to be run once."""
 
 import os
-import json
 from random import choice, randint
 from datetime import datetime
 

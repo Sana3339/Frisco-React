@@ -27,7 +27,7 @@ function Homepage() {
 
   const redirectToMapPage = () => {
     history.push('/map');
-  }
+}
 
   return (
     <React.Fragment>
@@ -60,7 +60,7 @@ function MapView(){
   const options = {
     zoom:12.4,
     center:{lat:37.7822, lng:-122.4342}
-    };
+  };
   const ref = React.useRef();
   let history = useHistory();
 
@@ -83,7 +83,7 @@ function MapView(){
             neighborhood_id: neighborhood.neighborhood_id
           };
           markerList.push(markerDetails);
-         }
+        }
 
           for (const aMarker of markerList) {
 
@@ -94,73 +94,66 @@ function MapView(){
             content: aMarker.windowContent,
             disableAutoPan: true,
             pixelOffset: new google.maps.Size(0,215)
-            });
+          });
 
 
           const marker = new window.google.maps.Marker({
             position:aMarker.coords,
             animation: google.maps.Animation.DROP,
             map:gMap
-            });
+          });
 
-            marker.addListener("click", () => {
-              history.push(`/neighborhood/${aMarker.neighborhood_id}`);
-            })
+          marker.addListener("click", () => {
+            history.push(`/neighborhood/${aMarker.neighborhood_id}`);
+          })
 
-            marker.addListener("mouseover", () => {
-              infoWindow.open(gMap,marker)
-              });
+          marker.addListener("mouseover", () => {
+            infoWindow.open(gMap,marker)
+          });
 
-            marker.addListener("mouseout", () => {
-              infoWindow.close(gMap,marker)
-            });
-        } else {
+          marker.addListener("mouseout", () => {
+            infoWindow.close(gMap,marker)
+          });
+
+          } else {
           const infoWindow = new google.maps.InfoWindow({
             content: aMarker.windowContent,
             disableAutoPan: true,
-            });
+          });
 
           const marker = new window.google.maps.Marker({
             position:aMarker.coords,
             animation: google.maps.Animation.DROP,
             map:gMap
-            });
+          });
 
-            marker.addListener("click", () => {
-              history.push(`/neighborhood/${aMarker.neighborhood_id}`);
-              console.log(aMarker.neighborhood_id);
-            })
+          marker.addListener("click", () => {
+            history.push(`/neighborhood/${aMarker.neighborhood_id}`);
+            console.log(aMarker.neighborhood_id);
+          })
 
-            marker.addListener("mouseover", () => {
-              infoWindow.open(gMap,marker)
-              });
+          marker.addListener("mouseover", () => {
+            infoWindow.open(gMap,marker)
+          });
 
-            marker.addListener("mouseout", () => {
-              infoWindow.close(gMap,marker)
-            });
-          }
-         }
-       })
-      addMarkers();
-    }
+          marker.addListener("mouseout", () => {
+            infoWindow.close(gMap,marker)
+          });
+        }
+       }
+      })
+    addMarkers();
+  }
 
-      const script = document.createElement("script");
-      script.type = "text/javascript";
-      // if (script.readyState) {
-      //   script.onreadystatechange = function() {
-      //     if (script.readyState === "loaded" || script.readyState === "complete") {
-      //       script.onreadystatechange = null;
-      //       onLoad();
-      //     }
-      //   };
-      // } else {
-        script.onload = () => onLoad();
-      // }
+    const script = document.createElement("script");
+    script.type = "text/javascript";
 
-      script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyABrkGgdfKYcuUmSE_VZ9cgThiFKHkfYiQ";
+    script.onload = onLoad;
 
-      document.getElementsByTagName("head")[0].appendChild(script);
-      console.log("Script is adding");
+    script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyABrkGgdfKYcuUmSE_VZ9cgThiFKHkfYiQ";
+
+    document.getElementsByTagName("head")[0].appendChild(script);
+    console.log("Script is adding");
     }, []);
 
     return (
@@ -182,10 +175,11 @@ function MapView(){
 
 
 function MapHousing() {
+
   const options = {
     zoom:12.4,
     center:{lat:37.7822, lng:-122.4342},
-    };
+  };
 
   //Line below is to control the state of our modal
   const [isOpen, setIsOpen] = React.useState(true);
@@ -213,11 +207,11 @@ function MapHousing() {
           markerList.push(markerDetails);
          }
 
-          for (const aMarker of markerList) {
+        for (const aMarker of markerList) {
 
           const infoWindow = new google.maps.InfoWindow({
             content: aMarker.windowContent
-            });
+          });
 
           const marker = new window.google.maps.Marker({
             position:aMarker.coords,
@@ -226,40 +220,34 @@ function MapHousing() {
             icon: {
               url: "/static/img/blue-pushpin.png",
               scaledSize: new google.maps.Size(38, 38)
-             }
-            });
+            }
+          });
 
-            marker.addListener("click", () => {
-              history.push(`/post/${aMarker.neighborhood_id}`);
-            })
-            marker.addListener("mouseover", () => {
-              infoWindow.open(gMap,marker)
-              });
-            marker.addListener("mouseout", () => {
-              infoWindow.close(gMap,marker)
-            });
+          marker.addListener("click", () => {
+            history.push(`/post/${aMarker.neighborhood_id}`);
+          })
+
+          marker.addListener("mouseover", () => {
+            infoWindow.open(gMap,marker)
+          });
+
+          marker.addListener("mouseout", () => {
+            infoWindow.close(gMap,marker)
+          });
         }
       })
      addMarkers();
     }
 
-      const script = document.createElement("script");
-      script.type = "text/javascript";
-    //   if (script.readyState) {
-    //     script.onreadystatechange = function() {
-    //       if (script.readyState === "loaded" || script.readyState === "complete") {
-    //         script.onreadystatechange = null;
-    //  //       onLoad();
-    //       }
-    //     };
-    //   } else {
-        script.onload = () => onLoad();
-   //   }
+    const script = document.createElement("script");
+    script.type = "text/javascript";
 
-      script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyABrkGgdfKYcuUmSE_VZ9cgThiFKHkfYiQ";
+    script.onload = onLoad;
 
-      document.getElementsByTagName("head")[0].appendChild(script);
-      console.log("Script is adding");
+    script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyABrkGgdfKYcuUmSE_VZ9cgThiFKHkfYiQ";
+
+    document.getElementsByTagName("head")[0].appendChild(script);
+    console.log("Script is adding");
     }, []);
 
     //This function closes the modal
@@ -290,7 +278,7 @@ function MapHousing() {
 
 function Neighborhood() {
   const [name, setName] = React.useState("");
-  const [desc, setDesc] = React.useState('');
+  const [desc, setDesc] = React.useState("");
   const [medianHomePrice, setMedianHomePrice] = React.useState();
   const [medianRental, setMedianRental] = React.useState();
   const [sqFtPrice, setSqFtPrice] = React.useState();
@@ -497,8 +485,6 @@ function FindHousing(props) {
   const [postList, setPostList] = React.useState(["loading..."]);
   const [neighborhoodName, setNeighborhoodName] = React.useState(["loading..."]);
 
-
-
     //Get neighborhood name based on neighborhood_id
   React.useEffect(() => {
     fetch(`/api/neighborhood/${neighborhood_id}`)
@@ -507,7 +493,6 @@ function FindHousing(props) {
         setNeighborhoodName(data.name);
       })
     }, [])
-
 
   React.useEffect(() => {
     fetch(`/api/housing/${neighborhood_id}`)
@@ -827,7 +812,7 @@ function DeletePosting(props) {
       if (data) {
       }
     });
-   }
+  }
 
   return (
     <form action="/profile">
@@ -873,7 +858,7 @@ function CreateUser() {
   const redirectToProfile = () => {
     localStorage.setItem('logged_in_user', email);
     history.push('/profile');
-   }
+  }
 
   return(
     <React.Fragment>
@@ -986,7 +971,6 @@ function Login() {
 
   const handleClose = () => setIsOpen2(false);
 
-
   return (
     <React.Fragment>
       <Jumbotron className="login-background">
@@ -1040,7 +1024,6 @@ function Login() {
               </Card.Body>
           </Card>
           </Row>
-
       </Jumbotron>
     </React.Fragment>
   );
@@ -1091,9 +1074,9 @@ function UserProfile() {
       history.push("/post-housing");
     }
 
-  if(postList.length === 0) {
-    setPostList("You have no housing posted.")
-  }
+    if(postList.length === 0) {
+      setPostList("You have no housing posted.")
+    }
 
   return (
     <React.Fragment>
@@ -1164,6 +1147,7 @@ function NavigationBar() {
       </Nav>
     </Navbar>
     )
+
   } else {
     return (
       <Navbar bg="light" sticky="top">

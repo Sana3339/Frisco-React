@@ -117,8 +117,10 @@ def get_restaurant_website(place_id):
 
     converted_res = res.json()
     result = converted_res["result"]
+
     if result.get('website')!=None:
         website = converted_res["result"]["website"]
+
     else:
         website = ""
 
@@ -255,8 +257,10 @@ def login_user():
         return jsonify({'message': "No account exists for that email. Please create an account."})
 
     if user != None:
+
         if user.password != password:
             return jsonify({'message': "Incorrect password."})
+
         else:
             return jsonify({'message': "You are now logged in.",
                             'email': email})
